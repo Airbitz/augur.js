@@ -168,7 +168,7 @@ module.exports = {
     },
 
     parseMarketInfo: function (rawInfo) {
-        var EVENTS_FIELDS = 8;
+        var EVENTS_FIELDS = 9;
         var OUTCOMES_FIELDS = 3;
         var info = {};
         if (rawInfo && rawInfo.length > 14 && rawInfo[0] && rawInfo[4] && rawInfo[7] && rawInfo[8]) {
@@ -217,16 +217,17 @@ module.exports = {
             if (parseInt(rawInfo[index + 2], 16) !== 0) {
                 outcome = abi.unfix(abi.hex(rawInfo[index + 2], true), "string");
             }
-            if (parseInt(rawInfo[index + 7], 16) !== 0) {
-                proportionCorrect = abi.unfix(rawInfo[index + 7], "string");
+            if (parseInt(rawInfo[index + 8], 16) !== 0) {
+                proportionCorrect = abi.unfix(rawInfo[index + 8], "string");
             }
             var event = {
-                id: rawInfo[index],
+                id: abi.format_int256(rawInfo[index]),
                 endDate: parseInt(rawInfo[index + 1], 16),
                 minValue: abi.unfix(abi.hex(rawInfo[index + 3], true), "string"),
                 maxValue: abi.unfix(abi.hex(rawInfo[index + 4], true), "string"),
                 numOutcomes: parseInt(rawInfo[index + 5], 16),
-                isEthical: abi.unfix(abi.hex(rawInfo[index + 6], true), "number") || undefined
+                bond: abi.unfix(abi.hex(rawInfo[index + 6], true), "string"),
+                isEthical: abi.unfix(abi.hex(rawInfo[index + 7], true), "number") || undefined
             };
             info.reportedOutcome = outcome;
             info.proportionCorrect = proportionCorrect;
@@ -249,7 +250,7 @@ module.exports = {
                 info.outcomes[i] = {
                     id: i + 1,
                     outstandingShares: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index], "string"),
-                    price: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index + 1], "string"),
+                    price: abi.unfix(abi.hex(rawInfo[i*OUTCOMES_FIELDS + index + 1], true), "string"),
                     sharesPurchased: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index + 2], "string")
                 };
             }
@@ -354,7 +355,7 @@ module.exports = {
             amount = amount.times(constants.PRECISION.multiple).floor().dividedBy(constants.PRECISION.multiple).toFixed();
         }
 
-        var price = abi.unfix(trade[4]);
+        var price = abi.unfix(abi.hex(trade[4], true));
         if (price.lt(constants.PRECISION.zero)) return null;
         if (price.lt(constants.PRECISION.limit)) {
             price = price.toPrecision(constants.PRECISION.decimals, roundingMode);
@@ -368,7 +369,7 @@ module.exports = {
             market: trade[2],
             amount: amount,
             price: price,
-            fullPrecisionPrice: abi.unfix(trade[4], "string"),
+            fullPrecisionPrice: abi.unfix(abi.hex(trade[4], true), "string"),
             owner: abi.format_address(trade[5]),
             block: parseInt(trade[6], 16),
             outcome: abi.string(trade[7])

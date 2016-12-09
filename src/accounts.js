@@ -10,7 +10,7 @@ var async = require("async");
 var BigNumber = require("bignumber.js");
 var EthTx = require("ethereumjs-tx");
 var keys = require("keythereum");
-var uuid = require("node-uuid");
+var uuid = require("uuid");
 var clone = require("clone");
 var locks = require("locks");
 var request = (NODE_JS) ? require("request") : require("browser-request");
@@ -19,7 +19,7 @@ var errors = require("augur-contracts").errors;
 var constants = require("./constants");
 var utils = require("./utilities");
 
-request = request.defaults({timeout: 240000});
+request = request.defaults({timeout: 999999});
 
 keys.constants.pbkdf2.c = constants.ROUNDS;
 keys.constants.scrypt.n = constants.ROUNDS;
@@ -447,7 +447,12 @@ module.exports = function () {
             var self = this;
 
             // if this is just a call, use ethrpc's regular invoke method
-            if (!payload.send) return augur.rpc.fire(payload, cb);
+            if (!payload.send) {
+                if (augur.rpc.debug.broadcast) {
+                    console.log("[augur.js] eth_call payload:", payload);
+                }
+                return augur.rpc.fire(payload, cb);
+            }
 
             cb = cb || utils.pass;
             if (!this.account.address || !this.account.privateKey) {
@@ -462,9 +467,9 @@ module.exports = function () {
             packaged.from = this.account.address;
             packaged.nonce = payload.nonce || 0;
             packaged.value = payload.value || "0x0";
-            packaged.gasLimit = payload.gas || constants.DEFAULT_GAS;
+            packaged.gasLimit = payload.gasLimit || (augur.rpc.block && augur.rpc.block.gasLimit) || constants.DEFAULT_GAS;
             if (augur.rpc.debug.broadcast) {
-                console.log("[augur.js] payload:", JSON.stringify(payload, null, 2));
+                console.log("[augur.js] payload:", payload);
             }
             if (payload.gasPrice && abi.number(payload.gasPrice) > 0) {
                 packaged.gasPrice = payload.gasPrice;

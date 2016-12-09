@@ -28,17 +28,17 @@ var modules = [
     require("./modules/collectFees"),
     require("./modules/createMarket"),
     require("./modules/compositeGetters"),
-    require("./modules/whitelist"),
     require("./modules/logs"),
     require("./modules/abacus"),
     require("./modules/reporting"),
+    require("./modules/payout"),
     require("./modules/tradingActions"),
     require("./modules/positions"),
     require("./modules/register")
 ];
 
 function Augur() {
-    this.version = "3.1.8";
+    this.version = "3.3.4";
 
     this.options = {
         debug: {

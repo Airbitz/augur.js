@@ -12,7 +12,7 @@ var utils = require("../utilities");
 
 module.exports = {
 
-    createSingleEventMarket: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, takerFee, tags, makerFee, extraInfo, onSent, onSuccess, onFailed, onConfirmed) {
+    createSingleEventMarket: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, takerFee, tags, makerFee, extraInfo, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description;         // string
@@ -28,7 +28,6 @@ module.exports = {
             onSent = branchId.onSent;                   // function
             onSuccess = branchId.onSuccess;             // function
             onFailed = branchId.onFailed;               // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;               // sha256 hash
         }
         var formattedTags = this.formatTags(tags);
@@ -52,6 +51,7 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
             extraInfo || ""
         ];
+        tx.description = description.split("~|>")[0];
         if (!utils.is_function(onSent)) {
             var gasPrice = this.rpc.getGasPrice();
             tx.gasPrice = gasPrice;
@@ -61,11 +61,11 @@ module.exports = {
         this.rpc.getGasPrice(function (gasPrice) {
             tx.gasPrice = gasPrice;
             tx.value = self.calculateRequiredMarketValue(gasPrice);
-            self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+            self.transact(tx, onSent, onSuccess, onFailed);
         });
     },
 
-    createEvent: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, onSent, onSuccess, onFailed, onConfirmed) {
+    createEvent: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, onSent, onSuccess, onFailed) {
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description;         // string
             minValue = branchId.minValue;               // integer (1 for binary)
@@ -76,7 +76,6 @@ module.exports = {
             onSent = branchId.onSent;                   // function
             onSuccess = branchId.onSuccess;             // function
             onFailed = branchId.onFailed;               // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;               // sha256 hash
         }
         var tx = clone(this.tx.CreateMarket.createEvent);
@@ -91,10 +90,11 @@ module.exports = {
             numOutcomes,
             resolution || ""
         ];
-        return this.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+        tx.description = description.split("~|>")[0];
+        return this.transact(tx, onSent, onSuccess, onFailed);
     },
 
-    createMarket: function (branchId, description, takerFee, events, tags, makerFee, extraInfo, onSent, onSuccess, onFailed, onConfirmed) {
+    createMarket: function (branchId, description, takerFee, events, tags, makerFee, extraInfo, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description; // string
@@ -106,7 +106,6 @@ module.exports = {
             onSent = branchId.onSent;           // function
             onSuccess = branchId.onSuccess;     // function
             onFailed = branchId.onFailed;       // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;       // sha256 hash
         }
         onSent = onSent || utils.noop;
@@ -127,6 +126,7 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
             extraInfo || ""
         ];
+        tx.description = description.split("~|>")[0];
         if (!utils.is_function(onSent)) {
             var gasPrice = this.rpc.getGasPrice();
             tx.gasPrice = gasPrice;
@@ -136,11 +136,11 @@ module.exports = {
         this.rpc.getGasPrice(function (gasPrice) {
             tx.gasPrice = gasPrice;
             tx.value = self.calculateRequiredMarketValue(gasPrice);
-            self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+            self.transact(tx, onSent, onSuccess, onFailed);
         });
     },
 
-    updateTradingFee: function (branchId, market, takerFee, makerFee, onSent, onSuccess, onFailed, onConfirmed) {
+    updateTradingFee: function (branchId, market, takerFee, makerFee, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             market = branchId.market;         // string
@@ -149,7 +149,6 @@ module.exports = {
             onSent = branchId.onSent;         // function
             onSuccess = branchId.onSuccess;   // function
             onFailed = branchId.onFailed;     // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;     // sha256 hash
         }
         var tx = clone(this.tx.CreateMarket.updateTradingFee);
@@ -161,6 +160,6 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
         ];
         if (!utils.is_function(onSent)) return this.transact(tx);
-        self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+        self.transact(tx, onSent, onSuccess, onFailed);
     }
 };

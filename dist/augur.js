@@ -7080,7 +7080,7 @@ CipherBase.prototype._toString = function (value, enc, final) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":116,"inherits":37,"stream":225,"string_decoder":226}],8:[function(require,module,exports){
+},{"buffer":116,"inherits":37,"stream":224,"string_decoder":225}],8:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 var inherits = require('inherits')
@@ -16572,6 +16572,33 @@ module.exports={
       "name": "marketCreated(int256)", 
       "signature": "0x63f140d7adcc464732c9379020aa9e5ce1b1e350796814d780ea3ca41d62a36b"
     }, 
+    "payout": {
+      "contract": "Payout", 
+      "inputs": [
+        {
+          "indexed": true, 
+          "name": "sender", 
+          "type": "int256"
+        }, 
+        {
+          "indexed": true, 
+          "name": "market", 
+          "type": "int256"
+        }, 
+        {
+          "indexed": false, 
+          "name": "payoutValue", 
+          "type": "int256"
+        }, 
+        {
+          "indexed": false, 
+          "name": "shares", 
+          "type": "int256"
+        }
+      ], 
+      "name": "payout(int256,int256,int256,int256)", 
+      "signature": "0xa2462be94780bd0b9f754c0a57d1174c8770114065de61be36b5e28953301a38"
+    }, 
     "penalize": {
       "contract": "Consensus", 
       "inputs": [
@@ -16702,6 +16729,7 @@ module.exports={
           "event", 
           "amount"
         ], 
+        "label": "Adj Fork Bond Paid", 
         "method": "adjForkBondPaid", 
         "returns": "int256", 
         "signature": [
@@ -16714,6 +16742,7 @@ module.exports={
           "sender", 
           "event"
         ], 
+        "label": "Do Round Two Refund", 
         "method": "doRoundTwoRefund", 
         "returns": "int256", 
         "signature": [
@@ -16725,6 +16754,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Bond Amount", 
         "method": "getBondAmount", 
         "returns": "int256", 
         "signature": [
@@ -16735,6 +16765,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Bond Paid", 
         "method": "getBondPaid", 
         "returns": "int256", 
         "signature": [
@@ -16745,6 +16776,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Bond Poster", 
         "method": "getBondPoster", 
         "returns": "address", 
         "signature": [
@@ -16755,6 +16787,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Bond Returned", 
         "method": "getBondReturned", 
         "returns": "int256", 
         "signature": [
@@ -16765,6 +16798,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Final", 
         "method": "getFinal", 
         "returns": "number", 
         "signature": [
@@ -16775,6 +16809,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Fork Bond Paid", 
         "method": "getForkBondPaid", 
         "returns": "int256", 
         "signature": [
@@ -16785,6 +16820,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Fork Bond Poster", 
         "method": "getForkBondPoster", 
         "returns": "int256", 
         "signature": [
@@ -16795,6 +16831,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Forked Over Ethicality", 
         "method": "getForkedOverEthicality", 
         "returns": "int256", 
         "signature": [
@@ -16805,6 +16842,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Moved", 
         "method": "getMoved", 
         "returns": "int256", 
         "signature": [
@@ -16815,6 +16853,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Original Branch", 
         "method": "getOriginalBranch", 
         "returns": "int256", 
         "signature": [
@@ -16825,6 +16864,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Original Ethicality", 
         "method": "getOriginalEthicality", 
         "returns": "int256", 
         "signature": [
@@ -16835,6 +16875,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Original Outcome", 
         "method": "getOriginalOutcome", 
         "returns": "int256", 
         "signature": [
@@ -16845,6 +16886,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Original Vote Period", 
         "method": "getOriginalVotePeriod", 
         "returns": "number", 
         "signature": [
@@ -16856,6 +16898,7 @@ module.exports={
           "branch", 
           "forkPeriod"
         ], 
+        "label": "Get Resolved", 
         "method": "getResolved", 
         "returns": "int256", 
         "signature": [
@@ -16867,6 +16910,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Round Two", 
         "method": "getRoundTwo", 
         "returns": "number", 
         "signature": [
@@ -16878,6 +16922,7 @@ module.exports={
           "event", 
           "amount"
         ], 
+        "label": "Increase Bond Paid", 
         "method": "increaseBondPaid", 
         "returns": "int256", 
         "send": true, 
@@ -16891,6 +16936,7 @@ module.exports={
           "event", 
           "amount"
         ], 
+        "label": "Set Bond Amount", 
         "method": "setBondAmount", 
         "returns": "int256", 
         "send": true, 
@@ -16904,6 +16950,7 @@ module.exports={
           "event", 
           "bondPoster"
         ], 
+        "label": "Set Bond Poster", 
         "method": "setBondPoster", 
         "returns": "number", 
         "send": true, 
@@ -16916,6 +16963,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Bond Returned", 
         "method": "setBondReturned", 
         "returns": "int256", 
         "send": true, 
@@ -16927,6 +16975,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Final", 
         "method": "setFinal", 
         "returns": "number", 
         "send": true, 
@@ -16939,6 +16988,7 @@ module.exports={
           "event", 
           "poster"
         ], 
+        "label": "Set Fork Bond Poster", 
         "method": "setForkBondPoster", 
         "returns": "int256", 
         "send": true, 
@@ -16951,6 +17001,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Forked Over Ethicality", 
         "method": "setForkedOverEthicality", 
         "returns": "int256", 
         "send": true, 
@@ -16962,6 +17013,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Moved", 
         "method": "setMoved", 
         "returns": "int256", 
         "send": true, 
@@ -16974,6 +17026,7 @@ module.exports={
           "event", 
           "branch"
         ], 
+        "label": "Set Original Branch", 
         "method": "setOriginalBranch", 
         "returns": "int256", 
         "send": true, 
@@ -16987,6 +17040,7 @@ module.exports={
           "event", 
           "ethicality"
         ], 
+        "label": "Set Original Ethicality", 
         "method": "setOriginalEthicality", 
         "returns": "number", 
         "send": true, 
@@ -17000,6 +17054,7 @@ module.exports={
           "event", 
           "originalOutcome"
         ], 
+        "label": "Set Original Outcome", 
         "method": "setOriginalOutcome", 
         "returns": "number", 
         "send": true, 
@@ -17013,6 +17068,7 @@ module.exports={
           "event", 
           "period"
         ], 
+        "label": "Set Original Vote Period", 
         "method": "setOriginalVotePeriod", 
         "returns": "number", 
         "send": true, 
@@ -17027,6 +17083,7 @@ module.exports={
           "forkPeriod", 
           "winner"
         ], 
+        "label": "Set Resolved", 
         "method": "setResolved", 
         "returns": "int256", 
         "send": true, 
@@ -17041,6 +17098,7 @@ module.exports={
           "event", 
           "roundTwo"
         ], 
+        "label": "Set Round Two", 
         "method": "setRoundTwo", 
         "returns": "number", 
         "send": true, 
@@ -17054,6 +17112,7 @@ module.exports={
           "event", 
           "amt"
         ], 
+        "label": "Set Round Two Refund", 
         "method": "setRoundTwoRefund", 
         "returns": "int256", 
         "send": true, 
@@ -17069,6 +17128,7 @@ module.exports={
           "branch", 
           "market"
         ], 
+        "label": "Add Market To Branch", 
         "method": "addMarketToBranch", 
         "returns": "int256", 
         "send": true, 
@@ -17081,6 +17141,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Base Reporters", 
         "method": "getBaseReporters", 
         "returns": "int256", 
         "signature": [
@@ -17091,6 +17152,7 @@ module.exports={
         "inputs": [
           "branchNumber"
         ], 
+        "label": "Get Branch By Num", 
         "method": "getBranchByNum", 
         "returns": "hash", 
         "signature": [
@@ -17098,6 +17160,7 @@ module.exports={
         ]
       }, 
       "getBranches": {
+        "label": "Get Branches", 
         "method": "getBranches", 
         "returns": "hash[]"
       }, 
@@ -17105,6 +17168,7 @@ module.exports={
         "inputs": [
           "ID"
         ], 
+        "label": "Get Creation Date", 
         "method": "getCreationDate", 
         "returns": "int256", 
         "signature": [
@@ -17115,7 +17179,9 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Event Forked Over", 
         "method": "getEventForkedOver", 
+        "parser": "parseMarket", 
         "returns": "int256", 
         "signature": [
           "int256"
@@ -17125,6 +17191,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Fork Period", 
         "method": "getForkPeriod", 
         "returns": "int256", 
         "signature": [
@@ -17136,6 +17203,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Initial Balance", 
         "method": "getInitialBalance", 
         "returns": "int256", 
         "signature": [
@@ -17147,7 +17215,9 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Markets In Branch", 
         "method": "getMarketsInBranch", 
+        "parser": "parseMarkets", 
         "returns": "hash[]", 
         "signature": [
           "int256"
@@ -17157,6 +17227,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Min Trading Fee", 
         "method": "getMinTradingFee", 
         "returns": "unfix", 
         "signature": [
@@ -17164,6 +17235,7 @@ module.exports={
         ]
       }, 
       "getNumBranches": {
+        "label": "Get Num Branches", 
         "method": "getNumBranches", 
         "returns": "number"
       }, 
@@ -17171,6 +17243,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Num Markets Branch", 
         "method": "getNumMarketsBranch", 
         "returns": "number", 
         "signature": [
@@ -17181,6 +17254,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Oracle Only", 
         "method": "getOracleOnly", 
         "returns": "int256", 
         "signature": [
@@ -17191,6 +17265,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Parent", 
         "method": "getParent", 
         "returns": "int256", 
         "signature": [
@@ -17201,6 +17276,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Parent Period", 
         "method": "getParentPeriod", 
         "returns": "int256", 
         "signature": [
@@ -17211,6 +17287,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Period Length", 
         "method": "getPeriodLength", 
         "returns": "int", 
         "signature": [
@@ -17223,6 +17300,7 @@ module.exports={
           "initial", 
           "last"
         ], 
+        "label": "Get Some Markets In Branch", 
         "method": "getSomeMarketsInBranch", 
         "returns": "int256[]", 
         "signature": [
@@ -17235,6 +17313,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Vote Period", 
         "method": "getVotePeriod", 
         "returns": "int", 
         "signature": [
@@ -17245,6 +17324,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Increment Period", 
         "method": "incrementPeriod", 
         "returns": "number", 
         "send": true, 
@@ -17253,6 +17333,7 @@ module.exports={
         ]
       }, 
       "initDefaultBranch": {
+        "label": "Init Default Branch", 
         "method": "initDefaultBranch", 
         "returns": "number", 
         "send": true
@@ -17267,6 +17348,7 @@ module.exports={
           "parentPeriod", 
           "parent"
         ], 
+        "label": "Initialize Branch", 
         "method": "initializeBranch", 
         "returns": "int256", 
         "send": true, 
@@ -17285,6 +17367,7 @@ module.exports={
           "branch", 
           "num"
         ], 
+        "label": "Set Base Reporters", 
         "method": "setBaseReporters", 
         "returns": "int256", 
         "send": true, 
@@ -17298,6 +17381,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Set Event Forked Over", 
         "method": "setEventForkedOver", 
         "returns": "int256", 
         "send": true, 
@@ -17310,6 +17394,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Set Fork Period", 
         "method": "setForkPeriod", 
         "returns": "int256", 
         "send": true, 
@@ -17323,6 +17408,7 @@ module.exports={
           "period", 
           "balance"
         ], 
+        "label": "Set Initial Balance", 
         "method": "setInitialBalance", 
         "returns": "int256", 
         "send": true, 
@@ -17342,6 +17428,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Bid", 
         "method": "buy", 
         "mutable": true, 
         "returns": "int256", 
@@ -17358,6 +17445,7 @@ module.exports={
         "inputs": [
           "trade_id"
         ], 
+        "label": "Cancel", 
         "method": "cancel", 
         "mutable": true, 
         "returns": "number", 
@@ -17374,6 +17462,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Ask", 
         "method": "sell", 
         "mutable": true, 
         "returns": "int256", 
@@ -17393,6 +17482,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Short Ask", 
         "method": "shortAsk", 
         "mutable": true, 
         "returns": "int256", 
@@ -17413,6 +17503,7 @@ module.exports={
           "ID", 
           "amount"
         ], 
+        "label": "Add Cash", 
         "method": "addCash", 
         "returns": "number", 
         "send": true, 
@@ -17425,6 +17516,7 @@ module.exports={
         "inputs": [
           "address"
         ], 
+        "label": "Balance", 
         "method": "balance", 
         "returns": "unfix", 
         "signature": [
@@ -17432,6 +17524,8 @@ module.exports={
         ]
       }, 
       "depositEther": {
+        "description": "Convert Ether to tradeable Ether token", 
+        "label": "Deposit Ether", 
         "method": "depositEther", 
         "returns": "number", 
         "send": true
@@ -17440,6 +17534,7 @@ module.exports={
         "inputs": [
           "account"
         ], 
+        "label": "Initiate Owner", 
         "method": "initiateOwner", 
         "returns": "number", 
         "send": true, 
@@ -17455,6 +17550,7 @@ module.exports={
           "recver", 
           "value"
         ], 
+        "label": "Send Tokens", 
         "method": "send", 
         "returns": "unfix", 
         "send": true, 
@@ -17472,6 +17568,7 @@ module.exports={
           "value", 
           "from"
         ], 
+        "label": "Send Tokens", 
         "method": "sendFrom", 
         "returns": "unfix", 
         "send": true, 
@@ -17489,6 +17586,7 @@ module.exports={
           "address", 
           "balance"
         ], 
+        "label": "Set Cash", 
         "method": "setCash", 
         "returns": "number", 
         "send": true, 
@@ -17502,6 +17600,7 @@ module.exports={
           "ID", 
           "amount"
         ], 
+        "label": "Subtract Cash", 
         "method": "subtractCash", 
         "returns": "int256", 
         "signature": [
@@ -17510,6 +17609,7 @@ module.exports={
         ]
       }, 
       "withdrawEther": {
+        "description": "Convert tradeable Ether token to Ether", 
         "fixed": [
           1
         ], 
@@ -17517,6 +17617,7 @@ module.exports={
           "to", 
           "value"
         ], 
+        "label": "Withdraw Ether", 
         "method": "withdrawEther", 
         "returns": "number", 
         "send": true, 
@@ -17532,6 +17633,7 @@ module.exports={
           "branch", 
           "market"
         ], 
+        "label": "Claim Trading Payout", 
         "method": "claimProceeds", 
         "returns": "number", 
         "send": true, 
@@ -17546,6 +17648,7 @@ module.exports={
           "market", 
           "sender"
         ], 
+        "label": "Close Market", 
         "method": "closeMarket", 
         "mutable": true, 
         "returns": "number", 
@@ -17557,50 +17660,14 @@ module.exports={
         ]
       }
     }, 
-    "CloseMarketOne": {
-      "oneOutcome": {
-        "inputs": [
-          "market", 
-          "winningOutcome", 
-          "sender", 
-          "categoricalPointFive", 
-          "numOutcomes"
-        ], 
-        "method": "oneOutcome", 
-        "returns": "int256", 
-        "signature": [
-          "int256", 
-          "int256", 
-          "int256", 
-          "int256", 
-          "int256"
-        ]
-      }
-    }, 
-    "CloseMarketTwo": {
-      "twoOutcomes": {
-        "inputs": [
-          "market", 
-          "winningOutcome", 
-          "event", 
-          "sender"
-        ], 
-        "method": "twoOutcomes", 
-        "returns": "int256", 
-        "signature": [
-          "int256", 
-          "int256[]", 
-          "int256", 
-          "int256"
-        ]
-      }
-    }, 
     "CollectFees": {
       "collectFees": {
+        "description": "Collect Reporting fees for previous Reporting cycle", 
         "inputs": [
           "branch", 
           "sender"
         ], 
+        "label": "Collect Reporting Fees", 
         "method": "collectFees", 
         "returns": "number", 
         "send": true, 
@@ -17620,6 +17687,7 @@ module.exports={
           "market", 
           "amount"
         ], 
+        "label": "Buy Complete Sets", 
         "method": "buyCompleteSets", 
         "mutable": true, 
         "returns": "hash[]", 
@@ -17638,6 +17706,7 @@ module.exports={
           "market", 
           "amount"
         ], 
+        "label": "Sell Complete Sets", 
         "method": "sellCompleteSets", 
         "mutable": true, 
         "returns": "hash[]", 
@@ -17654,6 +17723,7 @@ module.exports={
           "marketIDs", 
           "account"
         ], 
+        "label": "Batch Get Market Info", 
         "method": "batchGetMarketInfo", 
         "returns": "hash[]", 
         "signature": [
@@ -17666,6 +17736,7 @@ module.exports={
           "marketID", 
           "account"
         ], 
+        "label": "Get Account Order Book", 
         "method": "getAccountOrderBook", 
         "returns": "int256[]", 
         "signature": [
@@ -17679,7 +17750,9 @@ module.exports={
           "period", 
           "reporter"
         ], 
+        "label": "Get Events With Submitted Report", 
         "method": "getEventsWithSubmittedReport", 
+        "parser": "parseMarkets", 
         "returns": "int256[]", 
         "signature": [
           "int256", 
@@ -17691,6 +17764,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Market Creator Fees Collected", 
         "method": "getMarketCreatorFeesCollected", 
         "returns": "unfix", 
         "signature": [
@@ -17702,6 +17776,7 @@ module.exports={
           "marketID", 
           "account"
         ], 
+        "label": "Get Market Info", 
         "method": "getMarketInfo", 
         "parser": "validateMarketInfo", 
         "returns": "hash[]", 
@@ -17717,7 +17792,9 @@ module.exports={
           "initial", 
           "last"
         ], 
+        "label": "Get Markets Created By Market Creator", 
         "method": "getMarketsCreatedByMarketCreator", 
+        "parser": "parseMarkets", 
         "returns": "int256[]", 
         "signature": [
           "int256", 
@@ -17734,6 +17811,7 @@ module.exports={
           "volumeMin", 
           "volumeMax"
         ], 
+        "label": "Get Markets Info", 
         "method": "getMarketsInfo", 
         "returns": "hash[]", 
         "signature": [
@@ -17750,6 +17828,7 @@ module.exports={
           "offset", 
           "numTradesToLoad"
         ], 
+        "label": "Get Order Book", 
         "method": "getOrderBook", 
         "parser": "parseOrderBook", 
         "returns": "hash[]", 
@@ -17764,6 +17843,7 @@ module.exports={
           "market", 
           "account"
         ], 
+        "label": "Get Position In Market", 
         "method": "getPositionInMarket", 
         "parser": "parsePositionInMarket", 
         "returns": "int256[]", 
@@ -17775,9 +17855,11 @@ module.exports={
     }, 
     "Consensus": {
       "incrementPeriodAfterReporting": {
+        "description": "Advance to the next Reporting cycle", 
         "inputs": [
           "branch"
         ], 
+        "label": "Next Reporting Cycle", 
         "method": "incrementPeriodAfterReporting", 
         "returns": "number", 
         "send": true, 
@@ -17790,6 +17872,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Compare Report To Consensus", 
         "method": "penalizeWrong", 
         "mutable": true, 
         "returns": "number", 
@@ -17806,6 +17889,7 @@ module.exports={
           "sender", 
           "refunder"
         ], 
+        "label": "Do Refund", 
         "method": "doRefund", 
         "returns": "int256", 
         "signature": [
@@ -17817,6 +17901,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Base Reporters Last Period", 
         "method": "getBaseReportersLastPeriod", 
         "returns": "int256", 
         "signature": [
@@ -17828,6 +17913,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Denominator", 
         "method": "getDenominator", 
         "returns": "int256", 
         "signature": [
@@ -17840,6 +17926,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Fee First", 
         "method": "getFeeFirst", 
         "returns": "int256", 
         "signature": [
@@ -17853,6 +17940,7 @@ module.exports={
           "address", 
           "period"
         ], 
+        "label": "Get Fees Collected", 
         "method": "getFeesCollected", 
         "returns": "number", 
         "signature": [
@@ -17867,6 +17955,7 @@ module.exports={
           "address", 
           "period"
         ], 
+        "label": "Get Not Enough Penalized", 
         "method": "getNotEnoughPenalized", 
         "returns": "int256", 
         "signature": [
@@ -17882,6 +17971,7 @@ module.exports={
           "sender", 
           "event"
         ], 
+        "label": "Get Penalized", 
         "method": "getPenalized", 
         "returns": "int256", 
         "signature": [
@@ -17897,6 +17987,7 @@ module.exports={
           "period", 
           "sender"
         ], 
+        "label": "Get Penalized Num", 
         "method": "getPenalizedNum", 
         "returns": "int256", 
         "signature": [
@@ -17910,6 +18001,7 @@ module.exports={
           "branch", 
           "sender"
         ], 
+        "label": "Get Penalized Up To", 
         "method": "getPenalizedUpTo", 
         "returns": "int", 
         "signature": [
@@ -17922,6 +18014,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Period Balance", 
         "method": "getPeriodBalance", 
         "returns": "int256", 
         "signature": [
@@ -17934,6 +18027,7 @@ module.exports={
           "branch", 
           "reporter"
         ], 
+        "label": "Get Rep Redistribution Done", 
         "method": "getRepRedistributionDone", 
         "returns": "number", 
         "signature": [
@@ -17947,6 +18041,7 @@ module.exports={
           "votePeriod", 
           "reporter"
         ], 
+        "label": "Get Slashed", 
         "method": "getSlashed", 
         "returns": "int256", 
         "signature": [
@@ -17961,6 +18056,7 @@ module.exports={
           "period", 
           "amount"
         ], 
+        "label": "Increase Denominator", 
         "method": "increaseDenominator", 
         "returns": "int256", 
         "signature": [
@@ -17976,6 +18072,7 @@ module.exports={
           "sender", 
           "amount"
         ], 
+        "label": "Increase Penalized Num", 
         "method": "increasePenalizedNum", 
         "returns": "int256", 
         "signature": [
@@ -17990,6 +18087,7 @@ module.exports={
           "branch", 
           "amount"
         ], 
+        "label": "Set Base Reporters Last Period", 
         "method": "setBaseReportersLastPeriod", 
         "returns": "int256", 
         "send": true, 
@@ -18004,6 +18102,7 @@ module.exports={
           "period", 
           "val"
         ], 
+        "label": "Set Fee First", 
         "method": "setFeeFirst", 
         "returns": "int256", 
         "send": true, 
@@ -18019,6 +18118,7 @@ module.exports={
           "address", 
           "period"
         ], 
+        "label": "Set Fees Collected", 
         "method": "setFeesCollected", 
         "returns": "int256", 
         "send": true, 
@@ -18034,6 +18134,7 @@ module.exports={
           "address", 
           "period"
         ], 
+        "label": "Set Not Enough Penalized", 
         "method": "setNotEnoughPenalized", 
         "returns": "int256", 
         "send": true, 
@@ -18050,6 +18151,7 @@ module.exports={
           "sender", 
           "event"
         ], 
+        "label": "Set Penalized", 
         "method": "setPenalized", 
         "returns": "int256", 
         "send": true, 
@@ -18066,6 +18168,7 @@ module.exports={
           "sender", 
           "period"
         ], 
+        "label": "Set Penalized Up To", 
         "method": "setPenalizedUpTo", 
         "returns": "number", 
         "send": true, 
@@ -18081,6 +18184,7 @@ module.exports={
           "period", 
           "balance"
         ], 
+        "label": "Set Period Balance", 
         "method": "setPeriodBalance", 
         "send": true, 
         "signature": [
@@ -18094,6 +18198,7 @@ module.exports={
           "refunder", 
           "amt"
         ], 
+        "label": "Set Refund", 
         "method": "setRefund", 
         "returns": "int256", 
         "send": true, 
@@ -18108,6 +18213,7 @@ module.exports={
           "votePeriod", 
           "reporter"
         ], 
+        "label": "Set Slashed", 
         "method": "setSlashed", 
         "returns": "int256", 
         "send": true, 
@@ -18127,6 +18233,7 @@ module.exports={
           "minTradingFee", 
           "oracleOnly"
         ], 
+        "label": "Fork Reputation", 
         "method": "createSubbranch", 
         "returns": "hash", 
         "send": true, 
@@ -18150,6 +18257,7 @@ module.exports={
           "numOutcomes", 
           "resolution"
         ], 
+        "label": "Create Event", 
         "method": "createEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18175,6 +18283,7 @@ module.exports={
           "makerFees", 
           "extraInfo"
         ], 
+        "label": "Create Market", 
         "method": "createMarket", 
         "mutable": true, 
         "returns": "int256", 
@@ -18207,6 +18316,7 @@ module.exports={
           "makerFees", 
           "extraInfo"
         ], 
+        "label": "Create Market", 
         "method": "createSingleEventMarket", 
         "mutable": true, 
         "returns": "hash", 
@@ -18232,6 +18342,7 @@ module.exports={
           "branch", 
           "market"
         ], 
+        "label": "Push Market Forward", 
         "method": "pushMarketForward", 
         "returns": "number", 
         "send": true, 
@@ -18247,6 +18358,7 @@ module.exports={
           "tradingFee", 
           "makerFees"
         ], 
+        "label": "Update Trading Fee", 
         "method": "updateTradingFee", 
         "returns": "number", 
         "send": true, 
@@ -18263,6 +18375,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Determine Winning Outcomes", 
         "method": "determineWinningOutcomes", 
         "returns": "int256[]", 
         "send": true, 
@@ -18277,6 +18390,7 @@ module.exports={
           "branch", 
           "votingPeriodEvent"
         ], 
+        "label": "Resolve Binary", 
         "method": "resolveBinary", 
         "returns": "int256", 
         "send": true, 
@@ -18296,6 +18410,7 @@ module.exports={
           "branch", 
           "votingPeriodEvent"
         ], 
+        "label": "Resolve Categorical Or Scalar", 
         "method": "resolveCategoricalOrScalar", 
         "returns": "int256", 
         "send": true, 
@@ -18315,6 +18430,7 @@ module.exports={
           "event", 
           "marketID"
         ], 
+        "label": "Add Market", 
         "method": "addMarket", 
         "returns": "int256", 
         "send": true, 
@@ -18327,6 +18443,7 @@ module.exports={
         "inputs": [
           "period"
         ], 
+        "label": "Add Past24", 
         "method": "addPast24", 
         "returns": "int256", 
         "send": true, 
@@ -18338,6 +18455,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Bond", 
         "method": "getBond", 
         "returns": "int256", 
         "signature": [
@@ -18348,6 +18466,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Branch", 
         "method": "getBranch", 
         "returns": "int256", 
         "signature": [
@@ -18358,6 +18477,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Ethical", 
         "method": "getEthical", 
         "returns": "int256", 
         "signature": [
@@ -18368,6 +18488,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Ethics", 
         "method": "getEthics", 
         "returns": "int256", 
         "signature": [
@@ -18378,6 +18499,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Event Branch", 
         "method": "getEventBranch", 
         "returns": "hash", 
         "signature": [
@@ -18388,6 +18510,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Event Info", 
         "method": "getEventInfo", 
         "parser": "parseEventInfo", 
         "returns": "hash[]", 
@@ -18399,6 +18522,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Event Pushed Up", 
         "method": "getEventPushedUp", 
         "returns": "int256", 
         "signature": [
@@ -18409,6 +18533,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Expiration", 
         "method": "getExpiration", 
         "returns": "number", 
         "signature": [
@@ -18419,6 +18544,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Fork Ethicality", 
         "method": "getForkEthicality", 
         "returns": "int256", 
         "signature": [
@@ -18429,6 +18555,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Fork Outcome", 
         "method": "getForkOutcome", 
         "returns": "int256", 
         "signature": [
@@ -18439,6 +18566,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Forked", 
         "method": "getForked", 
         "returns": "int256", 
         "signature": [
@@ -18449,6 +18577,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Forked Done", 
         "method": "getForkedDone", 
         "returns": "int256", 
         "signature": [
@@ -18460,6 +18589,7 @@ module.exports={
           "event", 
           "marketIndex"
         ], 
+        "label": "Get Market", 
         "method": "getMarket", 
         "parser": "parseMarket", 
         "returns": "int256", 
@@ -18472,6 +18602,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Markets", 
         "method": "getMarkets", 
         "parser": "parseMarkets", 
         "returns": "hash[]", 
@@ -18483,6 +18614,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Max Value", 
         "method": "getMaxValue", 
         "returns": "unfix", 
         "signature": [
@@ -18493,6 +18625,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Min Value", 
         "method": "getMinValue", 
         "returns": "unfix", 
         "signature": [
@@ -18503,6 +18636,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Num Markets", 
         "method": "getNumMarkets", 
         "returns": "number", 
         "signature": [
@@ -18513,6 +18647,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Num Outcomes", 
         "method": "getNumOutcomes", 
         "returns": "number", 
         "signature": [
@@ -18523,6 +18658,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Original Expiration", 
         "method": "getOriginalExpiration", 
         "returns": "int256", 
         "signature": [
@@ -18533,6 +18669,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Outcome", 
         "method": "getOutcome", 
         "returns": "unfix", 
         "signature": [
@@ -18543,6 +18680,7 @@ module.exports={
         "inputs": [
           "period"
         ], 
+        "label": "Get Past24", 
         "method": "getPast24", 
         "returns": "int256", 
         "signature": [
@@ -18553,6 +18691,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Rejected", 
         "method": "getRejected", 
         "returns": "int256", 
         "signature": [
@@ -18563,6 +18702,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Rejected Period", 
         "method": "getRejectedPeriod", 
         "returns": "int256", 
         "signature": [
@@ -18573,6 +18713,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Reporting Threshold", 
         "method": "getReportingThreshold", 
         "returns": "unfix", 
         "signature": [
@@ -18583,6 +18724,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Resolution", 
         "method": "getResolution", 
         "returns": "string", 
         "signature": [
@@ -18593,6 +18735,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Resolution Length", 
         "method": "getResolutionLength", 
         "returns": "int", 
         "signature": [
@@ -18603,6 +18746,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Uncaught Outcome", 
         "method": "getUncaughtOutcome", 
         "returns": "unfix", 
         "signature": [
@@ -18613,6 +18757,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Getmode", 
         "method": "getmode", 
         "returns": "unfix", 
         "signature": [
@@ -18629,6 +18774,7 @@ module.exports={
           "numOutcomes", 
           "resolution"
         ], 
+        "label": "Initialize Event", 
         "method": "initializeEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18647,6 +18793,7 @@ module.exports={
           "event", 
           "bond"
         ], 
+        "label": "Set Bond", 
         "method": "setBond", 
         "returns": "int256", 
         "send": true, 
@@ -18660,6 +18807,7 @@ module.exports={
           "event", 
           "branch"
         ], 
+        "label": "Set Branch", 
         "method": "setBranch", 
         "returns": "int256", 
         "send": true, 
@@ -18673,6 +18821,7 @@ module.exports={
           "event", 
           "ethicality"
         ], 
+        "label": "Set Ethics", 
         "method": "setEthics", 
         "returns": "int256", 
         "send": true, 
@@ -18686,6 +18835,7 @@ module.exports={
           "event", 
           "val"
         ], 
+        "label": "Set Event Pushed Up", 
         "method": "setEventPushedUp", 
         "returns": "int256", 
         "send": true, 
@@ -18699,6 +18849,7 @@ module.exports={
           "event", 
           "date"
         ], 
+        "label": "Set Expiration", 
         "method": "setExpiration", 
         "returns": "int256", 
         "send": true, 
@@ -18711,6 +18862,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Fork Done", 
         "method": "setForkDone", 
         "returns": "int256", 
         "send": true, 
@@ -18723,6 +18875,7 @@ module.exports={
           "event", 
           "value"
         ], 
+        "label": "Set Fork Ethicality", 
         "method": "setForkEthicality", 
         "returns": "int256", 
         "send": true, 
@@ -18736,6 +18889,7 @@ module.exports={
           "event", 
           "value"
         ], 
+        "label": "Set Fork Outcome", 
         "method": "setForkOutcome", 
         "returns": "int256", 
         "send": true, 
@@ -18748,6 +18902,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Forked", 
         "method": "setForked", 
         "returns": "int256", 
         "send": true, 
@@ -18760,6 +18915,7 @@ module.exports={
           "event", 
           "date"
         ], 
+        "label": "Set Original Expiration", 
         "method": "setOriginalExpiration", 
         "returns": "int256", 
         "send": true, 
@@ -18773,6 +18929,7 @@ module.exports={
           "ID", 
           "outcome"
         ], 
+        "label": "Set Outcome", 
         "method": "setOutcome", 
         "returns": "number", 
         "send": true, 
@@ -18786,6 +18943,7 @@ module.exports={
           "event", 
           "period"
         ], 
+        "label": "Set Rejected", 
         "method": "setRejected", 
         "returns": "int256", 
         "send": true, 
@@ -18799,6 +18957,7 @@ module.exports={
           "event", 
           "threshold"
         ], 
+        "label": "Set Threshold", 
         "method": "setThreshold", 
         "returns": "int256", 
         "send": true, 
@@ -18812,6 +18971,7 @@ module.exports={
           "event", 
           "outcome"
         ], 
+        "label": "Set Uncaught Outcome", 
         "method": "setUncaughtOutcome", 
         "returns": "int256", 
         "send": true, 
@@ -18825,6 +18985,7 @@ module.exports={
           "event", 
           "mode"
         ], 
+        "label": "Setmode", 
         "method": "setmode", 
         "returns": "int256", 
         "send": true, 
@@ -18842,6 +19003,7 @@ module.exports={
           "eventID", 
           "subsidy"
         ], 
+        "label": "Add Event", 
         "method": "addEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18859,6 +19021,7 @@ module.exports={
           "event", 
           "amount"
         ], 
+        "label": "Add Rep Event", 
         "method": "addRepEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18876,6 +19039,7 @@ module.exports={
           "eventID", 
           "sender"
         ], 
+        "label": "Add Report To Event", 
         "method": "addReportToEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18891,6 +19055,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Add Reporters Paid So Far", 
         "method": "addReportersPaidSoFar", 
         "returns": "int256", 
         "send": true, 
@@ -18904,6 +19069,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Add Round Two", 
         "method": "addRoundTwo", 
         "returns": "int256", 
         "send": true, 
@@ -18919,6 +19085,7 @@ module.exports={
           "report", 
           "amount"
         ], 
+        "label": "Add To Weight Of Report", 
         "method": "addToWeightOfReport", 
         "returns": "int256", 
         "send": true, 
@@ -18935,6 +19102,7 @@ module.exports={
           "expIndex", 
           "amount"
         ], 
+        "label": "Adjust Period Share Value Outstanding", 
         "method": "adjustPeriodShareValueOutstanding", 
         "returns": "int256", 
         "send": true, 
@@ -18950,6 +19118,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Delete Event", 
         "method": "deleteEvent", 
         "returns": "int256", 
         "send": true, 
@@ -18965,6 +19134,7 @@ module.exports={
           "period", 
           "sender"
         ], 
+        "label": "Get After Rep", 
         "method": "getAfterRep", 
         "returns": "unfix", 
         "signature": [
@@ -18979,6 +19149,7 @@ module.exports={
           "period", 
           "sender"
         ], 
+        "label": "Get Before Rep", 
         "method": "getBeforeRep", 
         "returns": "unfix", 
         "signature": [
@@ -18992,6 +19163,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Get Current Mode", 
         "method": "getCurrentMode", 
         "returns": "int256", 
         "signature": [
@@ -19004,6 +19176,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Get Current Mode Items", 
         "method": "getCurrentModeItems", 
         "returns": "int256", 
         "signature": [
@@ -19018,6 +19191,7 @@ module.exports={
           "reporter", 
           "event"
         ], 
+        "label": "Get Encrypted Report", 
         "method": "getEncryptedReport", 
         "returns": "int256[]", 
         "signature": [
@@ -19034,6 +19208,7 @@ module.exports={
           "event", 
           "sender"
         ], 
+        "label": "Get Ethic Report", 
         "method": "getEthicReport", 
         "returns": "unfix", 
         "signature": [
@@ -19049,7 +19224,9 @@ module.exports={
           "expDateIndex", 
           "eventIndex"
         ], 
+        "label": "Get Event", 
         "method": "getEvent", 
+        "parser": "parseMarket", 
         "returns": "hash", 
         "signature": [
           "int256", 
@@ -19062,6 +19239,7 @@ module.exports={
           "period", 
           "eventID"
         ], 
+        "label": "Get Event Index", 
         "method": "getEventIndex", 
         "returns": "number", 
         "signature": [
@@ -19074,7 +19252,9 @@ module.exports={
           "branch", 
           "expDateIndex"
         ], 
+        "label": "Get Events", 
         "method": "getEvents", 
+        "parser": "parseMarkets", 
         "returns": "hash[]", 
         "signature": [
           "int256", 
@@ -19088,7 +19268,9 @@ module.exports={
           "start", 
           "end"
         ], 
+        "label": "Get Events Range", 
         "method": "getEventsRange", 
+        "parser": "parseMarkets", 
         "returns": "int256[]", 
         "signature": [
           "int256", 
@@ -19103,6 +19285,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Get Lesser Report Num", 
         "method": "getLesserReportNum", 
         "returns": "unfix", 
         "signature": [
@@ -19116,6 +19299,7 @@ module.exports={
           "branch", 
           "expDateIndex"
         ], 
+        "label": "Get Num Events To Report On", 
         "method": "getNumEventsToReportOn", 
         "returns": "int256", 
         "signature": [
@@ -19128,6 +19312,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Num Removed", 
         "method": "getNumRemoved", 
         "returns": "int256", 
         "signature": [
@@ -19141,6 +19326,7 @@ module.exports={
           "votePeriod", 
           "sender"
         ], 
+        "label": "Get Num Reports Actual", 
         "method": "getNumReportsActual", 
         "returns": "number", 
         "signature": [
@@ -19155,6 +19341,7 @@ module.exports={
           "votePeriod", 
           "eventID"
         ], 
+        "label": "Get Num Reports Event", 
         "method": "getNumReportsEvent", 
         "returns": "int256", 
         "signature": [
@@ -19168,6 +19355,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Num Required", 
         "method": "getNumRequired", 
         "returns": "int256", 
         "signature": [
@@ -19180,6 +19368,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Get Num Round Two", 
         "method": "getNumRoundTwo", 
         "returns": "int256", 
         "signature": [
@@ -19192,6 +19381,7 @@ module.exports={
           "branch", 
           "expDateIndex"
         ], 
+        "label": "Get Number Events", 
         "method": "getNumberEvents", 
         "returns": "number", 
         "signature": [
@@ -19205,6 +19395,7 @@ module.exports={
           "period", 
           "sender"
         ], 
+        "label": "Get Period Dormant Rep", 
         "method": "getPeriodDormantRep", 
         "returns": "int256", 
         "signature": [
@@ -19219,6 +19410,7 @@ module.exports={
           "votePeriod", 
           "sender"
         ], 
+        "label": "Get Period Rep Constant", 
         "method": "getPeriodRepConstant", 
         "returns": "unfix", 
         "signature": [
@@ -19233,6 +19425,7 @@ module.exports={
           "votePeriod", 
           "event"
         ], 
+        "label": "Get Rep Event", 
         "method": "getRepEvent", 
         "returns": "int256", 
         "signature": [
@@ -19248,6 +19441,7 @@ module.exports={
           "event", 
           "sender"
         ], 
+        "label": "Get Report", 
         "method": "getReport", 
         "returns": "int256", 
         "signature": [
@@ -19264,6 +19458,7 @@ module.exports={
           "reporter", 
           "event"
         ], 
+        "label": "Get Report Hash", 
         "method": "getReportHash", 
         "returns": "int256", 
         "signature": [
@@ -19278,6 +19473,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Get Reporters Paid So Far", 
         "method": "getReportersPaidSoFar", 
         "returns": "int256", 
         "signature": [
@@ -19289,6 +19485,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Get Required", 
         "method": "getRequired", 
         "returns": "int256", 
         "signature": [
@@ -19300,6 +19497,7 @@ module.exports={
           "branch", 
           "expIndex"
         ], 
+        "label": "Get Share Value", 
         "method": "getShareValue", 
         "returns": "int256", 
         "signature": [
@@ -19313,6 +19511,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Get Subsidy", 
         "method": "getSubsidy", 
         "returns": "int256", 
         "signature": [
@@ -19327,6 +19526,7 @@ module.exports={
           "event", 
           "report"
         ], 
+        "label": "Get Weight Of Report", 
         "method": "getWeightOfReport", 
         "returns": "int256", 
         "signature": [
@@ -19340,6 +19540,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Move Event", 
         "method": "moveEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19353,6 +19554,7 @@ module.exports={
           "to", 
           "value"
         ], 
+        "label": "Refund Cost", 
         "method": "refundCost", 
         "returns": "int256", 
         "send": true, 
@@ -19366,6 +19568,7 @@ module.exports={
           "branch", 
           "period"
         ], 
+        "label": "Remove Event", 
         "method": "removeEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19381,6 +19584,7 @@ module.exports={
           "rep", 
           "sender"
         ], 
+        "label": "Set After Rep", 
         "method": "setAfterRep", 
         "returns": "int256", 
         "send": true, 
@@ -19398,6 +19602,7 @@ module.exports={
           "rep", 
           "sender"
         ], 
+        "label": "Set Before Rep", 
         "method": "setBeforeRep", 
         "returns": "int256", 
         "send": true, 
@@ -19414,6 +19619,7 @@ module.exports={
           "event", 
           "mode"
         ], 
+        "label": "Set Current Mode", 
         "method": "setCurrentMode", 
         "returns": "int256", 
         "send": true, 
@@ -19429,6 +19635,7 @@ module.exports={
           "event", 
           "modeReport"
         ], 
+        "label": "Set Current Mode Items", 
         "method": "setCurrentModeItems", 
         "returns": "int256", 
         "send": true, 
@@ -19448,6 +19655,7 @@ module.exports={
           "ethics", 
           "event"
         ], 
+        "label": "Set Encrypted Report", 
         "method": "setEncryptedReport", 
         "returns": "number", 
         "send": true, 
@@ -19469,6 +19677,7 @@ module.exports={
           "ethics", 
           "sender"
         ], 
+        "label": "Set Ethic Report", 
         "method": "setEthicReport", 
         "returns": "int256", 
         "send": true, 
@@ -19486,6 +19695,7 @@ module.exports={
           "period", 
           "event"
         ], 
+        "label": "Set Event Required", 
         "method": "setEventRequired", 
         "returns": "int256", 
         "send": true, 
@@ -19502,6 +19712,7 @@ module.exports={
           "event", 
           "num"
         ], 
+        "label": "Set Lesser Report Num", 
         "method": "setLesserReportNum", 
         "returns": "int256", 
         "send": true, 
@@ -19516,6 +19727,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Set Num Events To Report On", 
         "method": "setNumEventsToReportOn", 
         "returns": "int256", 
         "send": true, 
@@ -19530,6 +19742,7 @@ module.exports={
           "eventID", 
           "num"
         ], 
+        "label": "Set Num Reports Event", 
         "method": "setNumReportsEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19547,6 +19760,7 @@ module.exports={
           "rep", 
           "sender"
         ], 
+        "label": "Set Period Dormant Rep", 
         "method": "setPeriodDormantRep", 
         "returns": "int256", 
         "send": true, 
@@ -19564,6 +19778,7 @@ module.exports={
           "sender", 
           "value"
         ], 
+        "label": "Set Period Rep Constant", 
         "method": "setPeriodRepConstant", 
         "returns": "int256", 
         "send": true, 
@@ -19582,6 +19797,7 @@ module.exports={
           "report", 
           "sender"
         ], 
+        "label": "Set Report", 
         "method": "setReport", 
         "returns": "int256", 
         "send": true, 
@@ -19601,6 +19817,7 @@ module.exports={
           "reportHash", 
           "event"
         ], 
+        "label": "Set Report Hash", 
         "method": "setReportHash", 
         "returns": "int256", 
         "send": true, 
@@ -19615,6 +19832,7 @@ module.exports={
     }, 
     "Faucets": {
       "cashFaucet": {
+        "label": "Cash Faucet", 
         "method": "cashFaucet", 
         "returns": "number", 
         "send": true
@@ -19624,6 +19842,7 @@ module.exports={
           "parent", 
           "branch"
         ], 
+        "label": "Claim Initial Rep", 
         "method": "claimInitialRep", 
         "returns": "int256", 
         "send": true, 
@@ -19636,6 +19855,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Fund Account", 
         "method": "fundNewAccount", 
         "returns": "number", 
         "send": true, 
@@ -19647,6 +19867,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Reputation Faucet", 
         "method": "reputationFaucet", 
         "returns": "number", 
         "send": true, 
@@ -19661,6 +19882,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Penalize On Forked Event", 
         "method": "penalizeOnForkedEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19673,6 +19895,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Proportion Correct Fork Event", 
         "method": "proportionCorrectForkEvent", 
         "returns": "unfix", 
         "signature": [
@@ -19685,6 +19908,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Exchange Rate", 
         "method": "exchangeRate", 
         "returns": "int256", 
         "signature": [
@@ -19697,6 +19921,7 @@ module.exports={
           "branch", 
           "forkedOverEthicality"
         ], 
+        "label": "Fork", 
         "method": "fork", 
         "returns": "int256", 
         "send": true, 
@@ -19710,6 +19935,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Move event", 
         "method": "move_event", 
         "returns": "int256", 
         "send": true, 
@@ -19722,6 +19948,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Resolve Fork Event", 
         "method": "resolveForkEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19735,6 +19962,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Resolve Forked Event", 
         "method": "resolveForkedEvent", 
         "returns": "int256", 
         "send": true, 
@@ -19747,6 +19975,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Resolve fork", 
         "method": "resolve_fork", 
         "returns": "int256", 
         "send": true, 
@@ -19760,6 +19989,7 @@ module.exports={
         "inputs": [
           "x"
         ], 
+        "label": "Fx exp", 
         "method": "fx_exp", 
         "returns": "int256", 
         "signature": [
@@ -19770,6 +20000,7 @@ module.exports={
         "inputs": [
           "x"
         ], 
+        "label": "Fx log", 
         "method": "fx_log", 
         "returns": "int256", 
         "signature": [
@@ -19780,6 +20011,7 @@ module.exports={
         "inputs": [
           "n"
         ], 
+        "label": "Sqrt", 
         "method": "sqrt", 
         "returns": "int256", 
         "signature": [
@@ -19792,6 +20024,7 @@ module.exports={
         "inputs": [
           "ID"
         ], 
+        "label": "Get Creation Fee", 
         "method": "getCreationFee", 
         "returns": "unfix", 
         "signature": [
@@ -19802,6 +20035,7 @@ module.exports={
         "inputs": [
           "ID"
         ], 
+        "label": "Get Creator", 
         "method": "getCreator", 
         "returns": "address", 
         "signature": [
@@ -19812,6 +20046,7 @@ module.exports={
         "inputs": [
           "ID"
         ], 
+        "label": "Get Description", 
         "method": "getDescription", 
         "returns": "string", 
         "signature": [
@@ -19822,6 +20057,7 @@ module.exports={
         "inputs": [
           "ID"
         ], 
+        "label": "Get Description Length", 
         "method": "getDescriptionLength", 
         "returns": "int", 
         "signature": [
@@ -19835,6 +20071,7 @@ module.exports={
           "creator", 
           "fee"
         ], 
+        "label": "Set Info", 
         "method": "setInfo", 
         "returns": "number", 
         "send": true, 
@@ -19855,6 +20092,7 @@ module.exports={
           "eventID", 
           "sender"
         ], 
+        "label": "Make Hash", 
         "method": "makeHash", 
         "returns": "hash", 
         "signature": [
@@ -19874,6 +20112,7 @@ module.exports={
           "report", 
           "ethics"
         ], 
+        "label": "Reveal Report", 
         "method": "submitReport", 
         "mutable": true, 
         "returns": "number", 
@@ -19893,6 +20132,7 @@ module.exports={
           "encryptedSalt", 
           "ethics"
         ], 
+        "label": "Commit Report", 
         "method": "submitReportHash", 
         "returns": "number", 
         "send": true, 
@@ -19919,6 +20159,7 @@ module.exports={
           "roundTwo", 
           "balance"
         ], 
+        "label": "Validate Report", 
         "method": "validateReport", 
         "returns": "number", 
         "signature": [
@@ -19939,6 +20180,7 @@ module.exports={
           "market", 
           "amount"
         ], 
+        "label": "Add Fees", 
         "method": "addFees", 
         "returns": "int256", 
         "send": true, 
@@ -19952,6 +20194,7 @@ module.exports={
           "branch", 
           "newHash"
         ], 
+        "label": "Add To Markets Hash", 
         "method": "addToMarketsHash", 
         "returns": "int256", 
         "send": true, 
@@ -19966,6 +20209,7 @@ module.exports={
           "trade_id", 
           "last_id"
         ], 
+        "label": "Add Trade", 
         "method": "addTrade", 
         "returns": "int256", 
         "send": true, 
@@ -19979,6 +20223,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Bonds Man", 
         "method": "getBondsMan", 
         "returns": "int256", 
         "signature": [
@@ -19989,6 +20234,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Branch ID", 
         "method": "getBranchID", 
         "returns": "hash", 
         "signature": [
@@ -19999,6 +20245,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Creation Time", 
         "method": "getCreationTime", 
         "returns": "number", 
         "signature": [
@@ -20009,6 +20256,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Cum Scale", 
         "method": "getCumScale", 
         "returns": "unfix", 
         "signature": [
@@ -20019,6 +20267,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Extra Info", 
         "method": "getExtraInfo", 
         "returns": "string", 
         "signature": [
@@ -20029,6 +20278,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Extra Info Length", 
         "method": "getExtraInfoLength", 
         "returns": "int", 
         "signature": [
@@ -20039,6 +20289,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Fees", 
         "method": "getFees", 
         "returns": "unfix", 
         "signature": [
@@ -20049,6 +20300,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Last Exp Date", 
         "method": "getLastExpDate", 
         "returns": "number", 
         "signature": [
@@ -20060,6 +20312,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Get Last Outcome Price", 
         "method": "getLastOutcomePrice", 
         "returns": "int256", 
         "signature": [
@@ -20071,6 +20324,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Last Trade", 
         "method": "getLastTrade", 
         "returns": "int256", 
         "signature": [
@@ -20081,6 +20335,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Maker Fees", 
         "method": "getMakerFees", 
         "returns": "unfix", 
         "signature": [
@@ -20092,7 +20347,9 @@ module.exports={
           "market", 
           "index"
         ], 
+        "label": "Get Market Event", 
         "method": "getMarketEvent", 
+        "parser": "parseMarket", 
         "returns": "int256", 
         "signature": [
           "int256", 
@@ -20103,7 +20360,9 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Market Events", 
         "method": "getMarketEvents", 
+        "parser": "parseMarkets", 
         "returns": "hash[]", 
         "signature": [
           "int256"
@@ -20113,6 +20372,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Market Num Outcomes", 
         "method": "getMarketNumOutcomes", 
         "returns": "number", 
         "signature": [
@@ -20123,6 +20383,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Markets Hash", 
         "method": "getMarketsHash", 
         "returns": "int256", 
         "signature": [
@@ -20133,6 +20394,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Num Events", 
         "method": "getNumEvents", 
         "returns": "number", 
         "signature": [
@@ -20144,6 +20406,7 @@ module.exports={
           "market", 
           "num"
         ], 
+        "label": "Get One Winning Outcome", 
         "method": "getOneWinningOutcome", 
         "returns": "int256", 
         "signature": [
@@ -20155,6 +20418,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Original Trading Period", 
         "method": "getOriginalTradingPeriod", 
         "returns": "int256", 
         "signature": [
@@ -20167,6 +20431,7 @@ module.exports={
           "trader", 
           "outcome"
         ], 
+        "label": "Get Participant Shares Purchased", 
         "method": "getParticipantSharesPurchased", 
         "returns": "unfix", 
         "signature": [
@@ -20179,6 +20444,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Pushed Forward", 
         "method": "getPushedForward", 
         "returns": "int256", 
         "signature": [
@@ -20186,6 +20452,7 @@ module.exports={
         ]
       }, 
       "getSender": {
+        "label": "Get Sender", 
         "method": "getSender", 
         "returns": "int256"
       }, 
@@ -20194,6 +20461,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Get Shares Purchased", 
         "method": "getSharesPurchased", 
         "returns": "unfix", 
         "signature": [
@@ -20205,6 +20473,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Shares Value", 
         "method": "getSharesValue", 
         "returns": "unfix", 
         "signature": [
@@ -20215,6 +20484,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Total Shares Purchased", 
         "method": "getTotalSharesPurchased", 
         "returns": "unfix", 
         "signature": [
@@ -20225,6 +20495,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Trading Fee", 
         "method": "getTradingFee", 
         "returns": "unfix", 
         "signature": [
@@ -20235,6 +20506,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Trading Period", 
         "method": "getTradingPeriod", 
         "returns": "number", 
         "signature": [
@@ -20245,6 +20517,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Volume", 
         "method": "getVolume", 
         "returns": "unfix", 
         "signature": [
@@ -20255,6 +20528,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Get Winning Outcomes", 
         "method": "getWinningOutcomes", 
         "returns": "number[]", 
         "signature": [
@@ -20265,6 +20539,7 @@ module.exports={
         "inputs": [
           "market_id"
         ], 
+        "label": "Get total trades", 
         "method": "get_total_trades", 
         "returns": "number", 
         "signature": [
@@ -20275,6 +20550,7 @@ module.exports={
         "inputs": [
           "market_id"
         ], 
+        "label": "Get trade ids", 
         "method": "get_trade_ids", 
         "returns": "hash[]", 
         "signature": [
@@ -20285,6 +20561,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Getgas Subsidy", 
         "method": "getgasSubsidy", 
         "returns": "int", 
         "signature": [
@@ -20309,6 +20586,7 @@ module.exports={
           "creationFee", 
           "lastExpDate"
         ], 
+        "label": "Initialize Market", 
         "method": "initializeMarket", 
         "returns": "int256", 
         "send": true, 
@@ -20338,6 +20616,7 @@ module.exports={
           "amount", 
           "cancel"
         ], 
+        "label": "Modify Participant Shares", 
         "method": "modifyParticipantShares", 
         "returns": "int256", 
         "signature": [
@@ -20354,6 +20633,7 @@ module.exports={
           "outcome", 
           "amount"
         ], 
+        "label": "Modify Shares", 
         "method": "modifyShares", 
         "returns": "number", 
         "send": true, 
@@ -20368,6 +20648,7 @@ module.exports={
           "marketID", 
           "amount"
         ], 
+        "label": "Modify Shares Value", 
         "method": "modifySharesValue", 
         "returns": "int256", 
         "signature": [
@@ -20380,6 +20661,7 @@ module.exports={
           "market", 
           "to"
         ], 
+        "label": "Refund Closing", 
         "method": "refundClosing", 
         "returns": "int256", 
         "signature": [
@@ -20392,6 +20674,7 @@ module.exports={
           "market_id", 
           "trade_id"
         ], 
+        "label": "Remove trade from market", 
         "method": "remove_trade_from_market", 
         "returns": "int256", 
         "send": true, 
@@ -20404,6 +20687,7 @@ module.exports={
         "inputs": [
           "market"
         ], 
+        "label": "Return Tags", 
         "method": "returnTags", 
         "returns": "hash[]", 
         "signature": [
@@ -20415,6 +20699,7 @@ module.exports={
           "market", 
           "makerFees"
         ], 
+        "label": "Set Maker Fees", 
         "method": "setMakerFees", 
         "returns": "int256", 
         "send": true, 
@@ -20429,6 +20714,7 @@ module.exports={
           "outcome", 
           "price"
         ], 
+        "label": "Set Price", 
         "method": "setPrice", 
         "returns": "int256", 
         "send": true, 
@@ -20444,6 +20730,7 @@ module.exports={
           "bool", 
           "sender"
         ], 
+        "label": "Set Pushed Forward", 
         "method": "setPushedForward", 
         "returns": "int256", 
         "send": true, 
@@ -20458,6 +20745,7 @@ module.exports={
           "market", 
           "fee"
         ], 
+        "label": "Set Trading Fee", 
         "method": "setTradingFee", 
         "returns": "int256", 
         "send": true, 
@@ -20471,6 +20759,7 @@ module.exports={
           "market", 
           "period"
         ], 
+        "label": "Set Trading Period", 
         "method": "setTradingPeriod", 
         "returns": "int256", 
         "send": true, 
@@ -20484,6 +20773,7 @@ module.exports={
           "market", 
           "outcomes"
         ], 
+        "label": "Set Winning Outcomes", 
         "method": "setWinningOutcomes", 
         "returns": "int256", 
         "send": true, 
@@ -20493,12 +20783,51 @@ module.exports={
         ]
       }
     }, 
+    "Payout": {
+      "oneOutcome": {
+        "inputs": [
+          "market", 
+          "winningOutcome", 
+          "sender", 
+          "categoricalPointFive", 
+          "numOutcomes"
+        ], 
+        "label": "One Outcome", 
+        "method": "oneOutcome", 
+        "returns": "int256", 
+        "signature": [
+          "int256", 
+          "int256", 
+          "int256", 
+          "int256", 
+          "int256"
+        ]
+      }, 
+      "twoOutcomes": {
+        "inputs": [
+          "market", 
+          "winningOutcome", 
+          "event", 
+          "sender"
+        ], 
+        "label": "Two Outcomes", 
+        "method": "twoOutcomes", 
+        "returns": "int256", 
+        "signature": [
+          "int256", 
+          "int256[]", 
+          "int256", 
+          "int256"
+        ]
+      }
+    }, 
     "PenalizationCatchup": {
       "penalizationCatchup": {
         "inputs": [
           "branch", 
           "sender"
         ], 
+        "label": "Reporting Cycle Catch-Up", 
         "method": "penalizationCatchup", 
         "returns": "number", 
         "send": true, 
@@ -20515,6 +20844,7 @@ module.exports={
           "reporter", 
           "eventExample"
         ], 
+        "label": "Prove Reporter Didnt Report Enough", 
         "method": "proveReporterDidntReportEnough", 
         "returns": "number", 
         "send": true, 
@@ -20530,6 +20860,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Proportion Correct", 
         "method": "proportionCorrect", 
         "returns": "unfix", 
         "signature": [
@@ -20539,6 +20870,8 @@ module.exports={
     }, 
     "Register": {
       "register": {
+        "description": "Write registration timestamp to the blockchain", 
+        "label": "Save Registration Timestamp", 
         "method": "register", 
         "returns": "number", 
         "send": true
@@ -20551,6 +20884,7 @@ module.exports={
           "index", 
           "value"
         ], 
+        "label": "Add Dormant Rep", 
         "method": "addDormantRep", 
         "returns": "number", 
         "send": true, 
@@ -20566,6 +20900,7 @@ module.exports={
           "index", 
           "value"
         ], 
+        "label": "Add Rep", 
         "method": "addRep", 
         "returns": "number", 
         "send": true, 
@@ -20583,6 +20918,7 @@ module.exports={
           "dormant", 
           "repToBonderOrBranch"
         ], 
+        "label": "Add Reporter", 
         "method": "addReporter", 
         "returns": "number", 
         "send": true, 
@@ -20599,6 +20935,7 @@ module.exports={
           "branch", 
           "amount"
         ], 
+        "label": "Adjust Active Rep", 
         "method": "adjustActiveRep", 
         "returns": "number", 
         "send": true, 
@@ -20612,6 +20949,7 @@ module.exports={
           "branch", 
           "address"
         ], 
+        "label": "Balance Of", 
         "method": "balanceOf", 
         "returns": "unfix", 
         "signature": [
@@ -20624,6 +20962,7 @@ module.exports={
           "contract", 
           "address"
         ], 
+        "label": "Check Contract Whitelist", 
         "method": "checkContractWhitelist", 
         "returns": "int256", 
         "signature": [
@@ -20635,6 +20974,7 @@ module.exports={
         "inputs": [
           "address"
         ], 
+        "label": "Check Whitelist", 
         "method": "checkWhitelist", 
         "returns": "int256", 
         "signature": [
@@ -20645,6 +20985,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Active Rep", 
         "method": "getActiveRep", 
         "returns": "unfix", 
         "signature": [
@@ -20656,6 +20997,7 @@ module.exports={
           "branch", 
           "repIndex"
         ], 
+        "label": "Get Dormant Rep By Index", 
         "method": "getDormantRepByIndex", 
         "returns": "unfix", 
         "signature": [
@@ -20667,6 +21009,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Fork", 
         "method": "getFork", 
         "returns": "number", 
         "signature": [
@@ -20677,6 +21020,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Number Reporters", 
         "method": "getNumberReporters", 
         "returns": "number", 
         "signature": [
@@ -20688,6 +21032,7 @@ module.exports={
           "branch", 
           "address"
         ], 
+        "label": "Get Rep Balance", 
         "method": "getRepBalance", 
         "returns": "unfix", 
         "signature": [
@@ -20700,6 +21045,7 @@ module.exports={
           "branch", 
           "repIndex"
         ], 
+        "label": "Get Rep By Index", 
         "method": "getRepByIndex", 
         "returns": "unfix", 
         "signature": [
@@ -20712,6 +21058,7 @@ module.exports={
           "branch", 
           "index"
         ], 
+        "label": "Get Reporter ID", 
         "method": "getReporterID", 
         "returns": "hash", 
         "signature": [
@@ -20723,6 +21070,7 @@ module.exports={
         "inputs": [
           "address"
         ], 
+        "label": "Get Reputation", 
         "method": "getReputation", 
         "returns": "hash[]", 
         "signature": [
@@ -20733,6 +21081,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Get Total Rep", 
         "method": "getTotalRep", 
         "returns": "unfix", 
         "signature": [
@@ -20744,6 +21093,7 @@ module.exports={
           "branch", 
           "repID"
         ], 
+        "label": "Rep ID To Index", 
         "method": "repIDToIndex", 
         "returns": "number", 
         "signature": [
@@ -20755,6 +21105,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Set Fork", 
         "method": "setFork", 
         "returns": "number", 
         "send": true, 
@@ -20767,6 +21118,7 @@ module.exports={
           "parent", 
           "branchID"
         ], 
+        "label": "Set Initial Reporters", 
         "method": "setInitialReporters", 
         "returns": "number", 
         "send": true, 
@@ -20781,6 +21133,7 @@ module.exports={
           "index", 
           "newRep"
         ], 
+        "label": "Set Rep", 
         "method": "setRep", 
         "returns": "number", 
         "send": true, 
@@ -20796,6 +21149,7 @@ module.exports={
           "balances", 
           "branchID"
         ], 
+        "label": "Set Sale Distribution", 
         "method": "setSaleDistribution", 
         "returns": "number", 
         "send": true, 
@@ -20810,6 +21164,7 @@ module.exports={
           "contract", 
           "addresses"
         ], 
+        "label": "Set Whitelist", 
         "method": "setWhitelist", 
         "returns": "string", 
         "send": true, 
@@ -20824,6 +21179,7 @@ module.exports={
           "index", 
           "value"
         ], 
+        "label": "Subtract Dormant Rep", 
         "method": "subtractDormantRep", 
         "returns": "number", 
         "send": true, 
@@ -20839,6 +21195,7 @@ module.exports={
           "index", 
           "value"
         ], 
+        "label": "Subtract Rep", 
         "method": "subtractRep", 
         "returns": "number", 
         "send": true, 
@@ -20852,6 +21209,7 @@ module.exports={
         "inputs": [
           "branch"
         ], 
+        "label": "Total Supply", 
         "method": "totalSupply", 
         "returns": "unfix", 
         "signature": [
@@ -20867,6 +21225,7 @@ module.exports={
           "votePeriod", 
           "sender"
         ], 
+        "label": "Calculate Report Target For Event", 
         "method": "calculateReportTargetForEvent", 
         "returns": "int256", 
         "signature": [
@@ -20883,6 +21242,7 @@ module.exports={
           "votePeriod", 
           "sender"
         ], 
+        "label": "Calculate Reporting Threshold", 
         "method": "calculateReportingThreshold", 
         "returns": "int256", 
         "signature": [
@@ -20899,6 +21259,7 @@ module.exports={
           "reporter", 
           "event"
         ], 
+        "label": "Get Event Can Report On", 
         "method": "getEventCanReportOn", 
         "returns": "number", 
         "signature": [
@@ -20915,7 +21276,9 @@ module.exports={
           "sender", 
           "start"
         ], 
+        "label": "Get Events To Report On", 
         "method": "getEventsToReportOn", 
+        "parser": "parseMarkets", 
         "returns": "int256[]", 
         "signature": [
           "int256", 
@@ -20928,6 +21291,7 @@ module.exports={
         "inputs": [
           "event"
         ], 
+        "label": "Set Reporting Threshold", 
         "method": "setReportingThreshold", 
         "returns": "int256", 
         "send": true, 
@@ -20942,6 +21306,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Resolve", 
         "method": "resolve", 
         "returns": "number", 
         "send": true, 
@@ -20957,6 +21322,7 @@ module.exports={
           "eventIndex", 
           "votePeriod"
         ], 
+        "label": "Round Two Post Bond", 
         "method": "roundTwoPostBond", 
         "returns": "number", 
         "send": true, 
@@ -20974,6 +21340,7 @@ module.exports={
           "eventIndex", 
           "sender"
         ], 
+        "label": "Round Two Resolve", 
         "method": "roundTwoResolve", 
         "returns": "number", 
         "send": true, 
@@ -20991,6 +21358,7 @@ module.exports={
           "branch", 
           "event"
         ], 
+        "label": "Penalize Round Two Wrong", 
         "method": "penalizeRoundTwoWrong", 
         "returns": "int256", 
         "signature": [
@@ -21005,6 +21373,7 @@ module.exports={
           "owner", 
           "spender"
         ], 
+        "label": "Allowance", 
         "method": "allowance", 
         "returns": "int256", 
         "signature": [
@@ -21018,6 +21387,7 @@ module.exports={
           "spender", 
           "value"
         ], 
+        "label": "Approve", 
         "method": "approve", 
         "returns": "int256", 
         "signature": [
@@ -21031,6 +21401,7 @@ module.exports={
           "branch", 
           "value"
         ], 
+        "label": "Convert To Active Rep", 
         "method": "convertToActiveRep", 
         "returns": "int256", 
         "signature": [
@@ -21043,6 +21414,7 @@ module.exports={
           "branch", 
           "value"
         ], 
+        "label": "Convert To Dormant Rep", 
         "method": "convertToDormantRep", 
         "returns": "int256", 
         "signature": [
@@ -21056,6 +21428,7 @@ module.exports={
           "recver", 
           "value"
         ], 
+        "label": "Send Reputation", 
         "method": "sendReputation", 
         "returns": "unfix", 
         "send": true, 
@@ -21071,6 +21444,7 @@ module.exports={
           "recver", 
           "value"
         ], 
+        "label": "Transfer", 
         "method": "transfer", 
         "returns": "int256", 
         "signature": [
@@ -21086,6 +21460,7 @@ module.exports={
           "recver", 
           "value"
         ], 
+        "label": "Transfer From", 
         "method": "transferFrom", 
         "returns": "int256", 
         "signature": [
@@ -21098,6 +21473,7 @@ module.exports={
     }, 
     "SlashRep": {
       "slashRep": {
+        "description": "Punish Reporter for insufficient Reports submitted", 
         "inputs": [
           "branch", 
           "salt", 
@@ -21105,6 +21481,7 @@ module.exports={
           "reporter", 
           "eventID"
         ], 
+        "label": "Punish Reporter", 
         "method": "slashRep", 
         "returns": "number", 
         "send": true, 
@@ -21124,6 +21501,7 @@ module.exports={
           "buyer_trade_id", 
           "max_amount"
         ], 
+        "label": "Short sell", 
         "method": "short_sell", 
         "mutable": true, 
         "returns": "hash[]", 
@@ -21140,6 +21518,7 @@ module.exports={
           "max_amount", 
           "trade_ids"
         ], 
+        "label": "Trade", 
         "method": "trade", 
         "mutable": true, 
         "returns": "hash[]", 
@@ -21157,6 +21536,7 @@ module.exports={
           "tradeHash", 
           "sender"
         ], 
+        "label": "Check Hash", 
         "method": "checkHash", 
         "returns": "number", 
         "signature": [
@@ -21169,6 +21549,7 @@ module.exports={
         "inputs": [
           "hash"
         ], 
+        "label": "Commit Trade", 
         "method": "commitTrade", 
         "returns": "number", 
         "send": true, 
@@ -21184,6 +21565,7 @@ module.exports={
           "id", 
           "fill"
         ], 
+        "label": "Fill trade", 
         "method": "fill_trade", 
         "returns": "number", 
         "send": true, 
@@ -21197,6 +21579,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Get Best Ask ID", 
         "method": "getBestAskID", 
         "returns": "int256", 
         "signature": [
@@ -21209,6 +21592,7 @@ module.exports={
           "market", 
           "outcome"
         ], 
+        "label": "Get Best Bid ID", 
         "method": "getBestBidID", 
         "returns": "int256", 
         "signature": [
@@ -21220,6 +21604,7 @@ module.exports={
         "inputs": [
           "tradeID"
         ], 
+        "label": "Get ID", 
         "method": "getID", 
         "returns": "hash", 
         "signature": [
@@ -21230,6 +21615,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Get Trade Owner", 
         "method": "getTradeOwner", 
         "returns": "int256", 
         "signature": [
@@ -21240,6 +21626,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Get amount", 
         "method": "get_amount", 
         "returns": "unfix", 
         "signature": [
@@ -21250,6 +21637,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Get price", 
         "method": "get_price", 
         "returns": "unfix", 
         "signature": [
@@ -21260,6 +21648,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Get trade", 
         "method": "get_trade", 
         "parser": "parseTradeInfo", 
         "returns": "hash[]", 
@@ -21271,6 +21660,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Get trade block", 
         "method": "get_trade_block", 
         "returns": "int256", 
         "signature": [
@@ -21283,6 +21673,7 @@ module.exports={
           "max_amount", 
           "trade_ids"
         ], 
+        "label": "Make Trade Hash", 
         "method": "makeTradeHash", 
         "returns": "hash", 
         "signature": [
@@ -21295,6 +21686,7 @@ module.exports={
         "inputs": [
           "id"
         ], 
+        "label": "Remove trade", 
         "method": "remove_trade", 
         "returns": "number", 
         "send": true, 
@@ -21316,6 +21708,7 @@ module.exports={
           "sender", 
           "outcome"
         ], 
+        "label": "Save Trade", 
         "method": "saveTrade", 
         "returns": "number", 
         "send": true, 
@@ -21337,6 +21730,7 @@ module.exports={
           "id", 
           "price"
         ], 
+        "label": "Update trade", 
         "method": "update_trade", 
         "send": true, 
         "signature": [
@@ -21345,6 +21739,7 @@ module.exports={
         ]
       }, 
       "zeroHash": {
+        "label": "Zero Hash", 
         "method": "zeroHash", 
         "returns": "number", 
         "send": true
@@ -21355,42 +21750,41 @@ module.exports={
 },{}],56:[function(require,module,exports){
 module.exports={
     "10101": {
-        "Backstops": "0x8c19616de17acdfbc933b99d9f529a689d22098f", 
+        "Backstops": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df", 
         "Branches": "0x8f2c2267687cb0f047b28a1b6f945da6e101a0d7", 
-        "BuyAndSellShares": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79", 
+        "BuyAndSellShares": "0x3f3276849a878a176b2f02dd48a483e8182a49e4", 
         "Cash": "0x708fdfe18bf28afe861a69e95419d183ace003eb", 
-        "CloseMarket": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2", 
-        "CloseMarketOne": "0x482c57abdce592b39434e3f619ffc3db62ab6d01", 
-        "CloseMarketTwo": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645", 
+        "CloseMarket": "0x8c19616de17acdfbc933b99d9f529a689d22098f", 
         "CollectFees": "0x5069d883e31429c6dd1325d961f443007747c7a2", 
         "CompleteSets": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6", 
-        "CompositeGetters": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df", 
-        "Consensus": "0x9308cf21b5a11f182f9707ca284bbb71bb84f893", 
+        "CompositeGetters": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68", 
+        "Consensus": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2", 
         "ConsensusData": "0x0fbddb6bfb81c8d0965a894567cf4061446072c2", 
-        "CreateBranch": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7", 
-        "CreateMarket": "0xcd6c7bc634257f82903b182142aae7156d72a200", 
-        "EventResolution": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea", 
-        "Events": "0xe4714fcbdcdba49629bc408183ef40d120700b8d", 
-        "ExpiringEvents": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667", 
-        "Faucets": "0x7d4b581a0868204b7481c316b430a97fd292a2fb", 
-        "ForkPenalize": "0xcece47d6c0a6a1c90521f38ec5bf7550df983804", 
-        "Forking": "0xd2e9f7c2fd4635199b8cc9e8128fc4d27c693945", 
+        "CreateBranch": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea", 
+        "CreateMarket": "0x7d4b581a0868204b7481c316b430a97fd292a2fb", 
+        "EventResolution": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d", 
+        "Events": "0x482c57abdce592b39434e3f619ffc3db62ab6d01", 
+        "ExpiringEvents": "0xe4714fcbdcdba49629bc408183ef40d120700b8d", 
+        "Faucets": "0x9308cf21b5a11f182f9707ca284bbb71bb84f893", 
+        "ForkPenalize": "0xd2e9f7c2fd4635199b8cc9e8128fc4d27c693945", 
+        "Forking": "0x031d9d02520cc708ea3c865278508c9cdb92bd51", 
         "FxpFunctions": "0xa34c9f6fc047cea795f69b34a063d32e6cb6288c", 
-        "Info": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d", 
-        "MakeReports": "0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f", 
+        "Info": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3", 
+        "MakeReports": "0xcd6c7bc634257f82903b182142aae7156d72a200", 
         "Markets": "0x8a4e2993a9972ee035453bb5674816fc3a698718", 
+        "Payout": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645", 
         "PenalizationCatchup": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd", 
         "PenalizeNotEnoughReports": "0x81a7621e9a286d061b3dea040888a51c96693b1c", 
-        "ProportionCorrect": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3", 
-        "Register": "0x35152caa07026203a1add680771afb690d872d7d", 
+        "ProportionCorrect": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7", 
+        "Register": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7", 
         "Reporting": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55", 
         "ReportingThreshold": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e", 
-        "RoundTwo": "0xd70c6e1f3857d23bd96c3e4d2ec346fa7c3931f3", 
-        "RoundTwoPenalize": "0x031d9d02520cc708ea3c865278508c9cdb92bd51", 
-        "SendReputation": "0x448c01a2e1fd6c2ef133402c403d2f48c99993e7", 
-        "SlashRep": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7", 
-        "Trade": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68", 
-        "Trades": "0x3f3276849a878a176b2f02dd48a483e8182a49e4"
+        "RoundTwo": "0x448c01a2e1fd6c2ef133402c403d2f48c99993e7", 
+        "RoundTwoPenalize": "0xd70c6e1f3857d23bd96c3e4d2ec346fa7c3931f3", 
+        "SendReputation": "0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f", 
+        "SlashRep": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667", 
+        "Trade": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79", 
+        "Trades": "0x35152caa07026203a1add680771afb690d872d7d"
     }, 
     "2": {
         "Backstops": "0xe7b15def7af9b21efaf23107aa674068a887f91b", 
@@ -21430,43 +21824,79 @@ module.exports={
         "Trade": "0xf22f08f6a893725c0161fb30667b902781aa9dc8", 
         "Trades": "0xa546d6e0913b4e47962fd0efcf0cbe3112aee11b"
     }, 
+    "3": {
+        "Backstops": "0xef3d033131d68d76751312bc0fddef0dd93f7c58", 
+        "Branches": "0x72076d58f9dc3497dfd2651276203577f0b73ffd", 
+        "BuyAndSellShares": "0xf83a94aeb0e9c1759175747a07a0eaa3a66c8413", 
+        "Cash": "0x35aee3b08a76dc0720669abecd45e1522a9e371a", 
+        "CloseMarket": "0x3d2137f0381633fb0d67d3d4d51d34c0e45d61df", 
+        "CollectFees": "0x700ce2e391a468c77b1bcc12e1856a38f8a746a8", 
+        "CompleteSets": "0xd94e26c9a40dd8b6da51beefdb9bf75604253961", 
+        "CompositeGetters": "0x0487ba3f2ed9a8f1ffdb83a905928bf034522c27", 
+        "Consensus": "0x6bbadd9139a10cfe570ff8f76857203a45be8872", 
+        "ConsensusData": "0x59274e6b6c48af5ee765b243193903402cccbc92", 
+        "CreateBranch": "0x06910856a574cc0639424347162a220432ba81d0", 
+        "CreateMarket": "0x1e737ca17dd53bcc5049ea3da9cb7cd1cdbb38ea", 
+        "EventResolution": "0x2b6a64fd2f690d6a3bec6aee0cfcceb1009b1cf5", 
+        "Events": "0xc26a6b4b627e02d3f135d5170df0784e4b5fc90d", 
+        "ExpiringEvents": "0x59a4c3ef956c91698fb394ec64d5d061e7cd29e8", 
+        "Faucets": "0xe534ba5728c1424d5beedc94d79fb300293c5b4e", 
+        "ForkPenalize": "0x9e0a18659b2009dbcf18ddec9f8ba549abd12838", 
+        "Forking": "0x9767c778ba6bc37a36220c03b969036ba1911c1f", 
+        "FxpFunctions": "0xb835608ce2b9627c4716def7276da475f4149c8a", 
+        "Info": "0x528fd68e5de47dd67d58973bea1aa87863de6d98", 
+        "MakeReports": "0x071673f94931ddf91aeda55a323b247901312696", 
+        "Markets": "0xa8321eebdbc05d3cee6d33630e4ae0a7093ce8ad", 
+        "Payout": "0x220c7a35487d983a92568d3d3cc079cc2b3479b6", 
+        "PenalizationCatchup": "0x65849e17e67f6a1424bd823e81087b9b48667988", 
+        "PenalizeNotEnoughReports": "0xce437f4c9eec83e8d1f18e6ed9c6e6bdd6601dcf", 
+        "ProportionCorrect": "0x0847e1ef34cdef8f711aa33a2e970617ba0c6b59", 
+        "Register": "0x49c79589489986bc9f77d51f47d88a59d36056bc", 
+        "Reporting": "0xf3ec11337f7bcf4b1551824455b5688ba0bcbc52", 
+        "ReportingThreshold": "0xefee212e657ebcdd8cb674227cd7c388e2572e1b", 
+        "RoundTwo": "0xc0067acd61af75f27e8969db0ab1bcbf9bc0c925", 
+        "RoundTwoPenalize": "0x76da057d965a638d84329ebda4a62a15e2cf228d", 
+        "SendReputation": "0x3ca8fb47766eb834d154c8f0f473193a85db6e52", 
+        "SlashRep": "0xe0b8c389c45a220ec650e3d8cbf567dfabc5e1d0", 
+        "Trade": "0xfb8dad7dac521005a3eb6c91da9d10bbb28aa4d2", 
+        "Trades": "0x510f336f3f8d786e478e3f28740505c4ac2e7009"
+    }, 
     "9000": {
-        "Backstops": "0x8c19616de17acdfbc933b99d9f529a689d22098f", 
+        "Backstops": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df", 
         "Branches": "0x8f2c2267687cb0f047b28a1b6f945da6e101a0d7", 
-        "BuyAndSellShares": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79", 
+        "BuyAndSellShares": "0x3f3276849a878a176b2f02dd48a483e8182a49e4", 
         "Cash": "0x708fdfe18bf28afe861a69e95419d183ace003eb", 
-        "CloseMarket": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2", 
-        "CloseMarketOne": "0x482c57abdce592b39434e3f619ffc3db62ab6d01", 
-        "CloseMarketTwo": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645", 
+        "CloseMarket": "0x8c19616de17acdfbc933b99d9f529a689d22098f", 
         "CollectFees": "0x5069d883e31429c6dd1325d961f443007747c7a2", 
         "CompleteSets": "0x77c424f86a1b80f1e303d1c2651acd6aba653cb6", 
-        "CompositeGetters": "0x5f67ab9ff79be97b27ac8f26ef9f4b429b82e2df", 
-        "Consensus": "0x9308cf21b5a11f182f9707ca284bbb71bb84f893", 
+        "CompositeGetters": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68", 
+        "Consensus": "0x70a893eb9569041e97a3787f0c76a1eb6378d8b2", 
         "ConsensusData": "0x0fbddb6bfb81c8d0965a894567cf4061446072c2", 
-        "CreateBranch": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7", 
-        "CreateMarket": "0xcd6c7bc634257f82903b182142aae7156d72a200", 
-        "EventResolution": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea", 
-        "Events": "0xe4714fcbdcdba49629bc408183ef40d120700b8d", 
-        "ExpiringEvents": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667", 
-        "Faucets": "0x7d4b581a0868204b7481c316b430a97fd292a2fb", 
-        "ForkPenalize": "0xcece47d6c0a6a1c90521f38ec5bf7550df983804", 
-        "Forking": "0xd2e9f7c2fd4635199b8cc9e8128fc4d27c693945", 
+        "CreateBranch": "0x60cb05deb51f92ee25ce99f67181ecaeb0b743ea", 
+        "CreateMarket": "0x7d4b581a0868204b7481c316b430a97fd292a2fb", 
+        "EventResolution": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d", 
+        "Events": "0x482c57abdce592b39434e3f619ffc3db62ab6d01", 
+        "ExpiringEvents": "0xe4714fcbdcdba49629bc408183ef40d120700b8d", 
+        "Faucets": "0x9308cf21b5a11f182f9707ca284bbb71bb84f893", 
+        "ForkPenalize": "0xd2e9f7c2fd4635199b8cc9e8128fc4d27c693945", 
+        "Forking": "0x031d9d02520cc708ea3c865278508c9cdb92bd51", 
         "FxpFunctions": "0xa34c9f6fc047cea795f69b34a063d32e6cb6288c", 
-        "Info": "0x8caf2c0ce7cdc2e81b58f74322cefdef440b3f8d", 
-        "MakeReports": "0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f", 
+        "Info": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3", 
+        "MakeReports": "0xcd6c7bc634257f82903b182142aae7156d72a200", 
         "Markets": "0x8a4e2993a9972ee035453bb5674816fc3a698718", 
+        "Payout": "0x9fe69262bbaa47f013b7dbd6ca5f01e17446c645", 
         "PenalizationCatchup": "0xabe47f122a496a732d6c4b38b3ca376d597d75dd", 
         "PenalizeNotEnoughReports": "0x81a7621e9a286d061b3dea040888a51c96693b1c", 
-        "ProportionCorrect": "0xe5b327630cfa7f4b2324f9066c897dceecfd88a3", 
-        "Register": "0x35152caa07026203a1add680771afb690d872d7d", 
+        "ProportionCorrect": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7", 
+        "Register": "0x52ccb0490bc81a2ae363fccbb2b367bca546cec7", 
         "Reporting": "0xbd19195b9e8a2d8ed14fc3a2823856b5c16f7f55", 
         "ReportingThreshold": "0xc21cfa6688dbfd2eca2548d894aa55fd0bbf1c7e", 
-        "RoundTwo": "0xd70c6e1f3857d23bd96c3e4d2ec346fa7c3931f3", 
-        "RoundTwoPenalize": "0x031d9d02520cc708ea3c865278508c9cdb92bd51", 
-        "SendReputation": "0x448c01a2e1fd6c2ef133402c403d2f48c99993e7", 
-        "SlashRep": "0xd15a6cfc462ae76b9ec590cab8b34bfa8e1302d7", 
-        "Trade": "0x6c4c9fa11d6d8ed2c7a08ddcf4d4654c85194f68", 
-        "Trades": "0x3f3276849a878a176b2f02dd48a483e8182a49e4"
+        "RoundTwo": "0x448c01a2e1fd6c2ef133402c403d2f48c99993e7", 
+        "RoundTwoPenalize": "0xd70c6e1f3857d23bd96c3e4d2ec346fa7c3931f3", 
+        "SendReputation": "0x2e5a882aa53805f1a9da3cf18f73673bca98fa0f", 
+        "SlashRep": "0x4a61f3db785f1e2a23ffefeafaceeef2df551667", 
+        "Trade": "0xc1c4e2f32e4b84a60b8b7983b6356af4269aab79", 
+        "Trades": "0x35152caa07026203a1add680771afb690d872d7d"
     }
 }
 },{}],57:[function(require,module,exports){
@@ -21562,7 +21992,6 @@ module.exports={
         "-1": "need to penalize in round 2 penalize function",
         "-2": "already past first half of new period and needed to penalize before then",
         "-4": "in fork period only thing that rbcr is done on is the round 2 event in the original branch via round 2 penalize",
-        "-5": "already done for all events in this period",
         "-6": "forked events should be penalized using the fork penalization function",
         "-7": "no outcome"
     },
@@ -21595,6 +22024,16 @@ module.exports={
         "-1": "Your reputation account was just created! Earn some reputation before you can send to others",
         "-2": "Receiving address doesn't exist"
     },
+    "shortAsk": {
+        "0": "market doesn't exist",
+        "-1": "amount/price bad",
+        "-2": "oracle only branch",
+        "-3": "bad outcome to trade",
+        "-4": "not enough shares",
+        "-5": "best bid exceeds ask price",
+        "10": "insufficient balance",
+        "21": "trade already exists"
+    },
     "short_sell": {
         "-1": "trade doesn't exist",
         "-2": "invalid trade hash/commitment",
@@ -21611,7 +22050,8 @@ module.exports={
         "-2": "reporter doesn't exist"
     },
     "submitReportHash": {
-        "-1": "invalid event"
+        "-1": "invalid event",
+        "-3": "not eligible to report on this event"
     },
     "submitReport": {
         "0": "reporter doesn't exist or has <1 rep",
@@ -21994,7 +22434,7 @@ var augur = global.augur || require("./src/index");
 global.augur = augur;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./src/index":240}],62:[function(require,module,exports){
+},{"./src/index":241}],62:[function(require,module,exports){
 'use strict';
 module.exports = function () {
 	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
@@ -22141,7 +22581,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":64,"inherits":170,"vm":232}],66:[function(require,module,exports){
+},{"../asn1":64,"inherits":170,"vm":233}],66:[function(require,module,exports){
 var inherits = require('inherits');
 var Reporter = require('../base').Reporter;
 var Buffer = require('buffer').Buffer;
@@ -24152,7 +24592,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":231}],79:[function(require,module,exports){
+},{"util/":230}],79:[function(require,module,exports){
 (function (process,global){
 /*!
  * async
@@ -25421,7 +25861,7 @@ var objectKeys = Object.keys || function (obj) {
 }());
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":192}],80:[function(require,module,exports){
+},{"_process":191}],80:[function(require,module,exports){
 // base-x encoding
 // Forked from https://github.com/cryptocoinjs/bs58
 // Originally written by Mike Hearn for BitcoinJ
@@ -30797,7 +31237,7 @@ function getr(priv) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"bn.js":84,"buffer":116,"randombytes":199}],107:[function(require,module,exports){
+},{"bn.js":84,"buffer":116,"randombytes":198}],107:[function(require,module,exports){
 arguments[4][6][0].apply(exports,arguments)
 },{"buffer":116,"dup":6,"js-sha3":173}],108:[function(require,module,exports){
 (function (Buffer){
@@ -30982,7 +31422,7 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./algos":108,"./sign":111,"./verify":112,"buffer":116,"create-hash":122,"inherits":170,"stream":225}],110:[function(require,module,exports){
+},{"./algos":108,"./sign":111,"./verify":112,"buffer":116,"create-hash":122,"inherits":170,"stream":224}],110:[function(require,module,exports){
 'use strict'
 exports['1.3.132.0.10'] = 'secp256k1'
 
@@ -31185,7 +31625,7 @@ module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":110,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hmac":125,"elliptic":137,"parse-asn1":188}],112:[function(require,module,exports){
+},{"./curves":110,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hmac":125,"elliptic":137,"parse-asn1":187}],112:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var curves = require('./curves')
@@ -31292,7 +31732,7 @@ function checkValue (b, q) {
 module.exports = verify
 
 }).call(this,require("buffer").Buffer)
-},{"./curves":110,"bn.js":84,"buffer":116,"elliptic":137,"parse-asn1":188}],113:[function(require,module,exports){
+},{"./curves":110,"bn.js":84,"buffer":116,"elliptic":137,"parse-asn1":187}],113:[function(require,module,exports){
 arguments[4][87][0].apply(exports,arguments)
 },{"dup":87}],114:[function(require,module,exports){
 var basex = require('base-x')
@@ -32990,9 +33430,9 @@ module.exports.stripColor = stripAnsi;
 module.exports.supportsColor = supportsColor;
 
 }).call(this,require('_process'))
-},{"_process":192,"ansi-styles":63,"escape-string-regexp":154,"has-ansi":161,"strip-ansi":227,"supports-color":228}],118:[function(require,module,exports){
+},{"_process":191,"ansi-styles":63,"escape-string-regexp":154,"has-ansi":161,"strip-ansi":226,"supports-color":227}],118:[function(require,module,exports){
 arguments[4][7][0].apply(exports,arguments)
-},{"buffer":116,"dup":7,"inherits":170,"stream":225,"string_decoder":226}],119:[function(require,module,exports){
+},{"buffer":116,"dup":7,"inherits":170,"stream":224,"string_decoder":225}],119:[function(require,module,exports){
 arguments[4][59][0].apply(exports,arguments)
 },{"buffer":116,"dup":59}],120:[function(require,module,exports){
 (function (Buffer){
@@ -33233,7 +33673,7 @@ function formatReturnValue(bn, enc, len) {
 }).call(this,require("buffer").Buffer)
 },{"bn.js":84,"buffer":116,"elliptic":137}],122:[function(require,module,exports){
 arguments[4][8][0].apply(exports,arguments)
-},{"./md5":124,"buffer":116,"cipher-base":118,"dup":8,"inherits":170,"ripemd160":210,"sha.js":218}],123:[function(require,module,exports){
+},{"./md5":124,"buffer":116,"cipher-base":118,"dup":8,"inherits":170,"ripemd160":209,"sha.js":217}],123:[function(require,module,exports){
 arguments[4][9][0].apply(exports,arguments)
 },{"buffer":116,"dup":9}],124:[function(require,module,exports){
 arguments[4][10][0].apply(exports,arguments)
@@ -33309,7 +33749,7 @@ module.exports = function createHmac(alg, key) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":116,"create-hash/browser":122,"inherits":170,"stream":225}],126:[function(require,module,exports){
+},{"buffer":116,"create-hash/browser":122,"inherits":170,"stream":224}],126:[function(require,module,exports){
 'use strict'
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = require('randombytes')
@@ -33388,7 +33828,7 @@ var publicEncrypt = require('public-encrypt')
   }
 })
 
-},{"browserify-cipher":103,"browserify-sign":109,"browserify-sign/algos":108,"create-ecdh":121,"create-hash":122,"create-hmac":125,"diffie-hellman":133,"pbkdf2":190,"public-encrypt":193,"randombytes":199}],127:[function(require,module,exports){
+},{"browserify-cipher":103,"browserify-sign":109,"browserify-sign/algos":108,"create-ecdh":121,"create-hash":122,"create-hmac":125,"diffie-hellman":133,"pbkdf2":189,"public-encrypt":192,"randombytes":198}],127:[function(require,module,exports){
 'use strict';
 
 exports.utils = require('./des/utils');
@@ -34281,7 +34721,7 @@ function formatReturnValue(bn, enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":135,"bn.js":84,"buffer":116,"miller-rabin":182,"randombytes":199}],135:[function(require,module,exports){
+},{"./generatePrime":135,"bn.js":84,"buffer":116,"miller-rabin":182,"randombytes":198}],135:[function(require,module,exports){
 var randomBytes = require('randombytes');
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -34388,7 +34828,7 @@ function findPrime(bits, gen) {
 
 }
 
-},{"bn.js":84,"miller-rabin":182,"randombytes":199}],136:[function(require,module,exports){
+},{"bn.js":84,"miller-rabin":182,"randombytes":198}],136:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -35755,7 +36195,7 @@ exports.defineProperties = function (self, fields, data) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"assert":78,"bn.js":84,"buffer":116,"create-hash":122,"keccakjs":174,"rlp":211,"secp256k1":212}],159:[function(require,module,exports){
+},{"assert":78,"bn.js":84,"buffer":116,"create-hash":122,"keccakjs":174,"rlp":210,"secp256k1":211}],159:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -38166,282 +38606,6 @@ assert.equal = function assertEqual(l, r, msg) {
 };
 
 },{}],184:[function(require,module,exports){
-(function (Buffer){
-//     uuid.js
-//
-//     Copyright (c) 2010-2012 Robert Kieffer
-//     MIT License - http://opensource.org/licenses/mit-license.php
-
-/*global window, require, define */
-(function(_window) {
-  'use strict';
-
-  // Unique ID creation requires a high quality random # generator.  We feature
-  // detect to determine the best RNG source, normalizing to a function that
-  // returns 128-bits of randomness, since that's what's usually required
-  var _rng, _mathRNG, _nodeRNG, _whatwgRNG, _previousRoot;
-
-  function setupBrowser() {
-    // Allow for MSIE11 msCrypto
-    var _crypto = _window.crypto || _window.msCrypto;
-
-    if (!_rng && _crypto && _crypto.getRandomValues) {
-      // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
-      //
-      // Moderately fast, high quality
-      try {
-        var _rnds8 = new Uint8Array(16);
-        _whatwgRNG = _rng = function whatwgRNG() {
-          _crypto.getRandomValues(_rnds8);
-          return _rnds8;
-        };
-        _rng();
-      } catch(e) {}
-    }
-
-    if (!_rng) {
-      // Math.random()-based (RNG)
-      //
-      // If all else fails, use Math.random().  It's fast, but is of unspecified
-      // quality.
-      var  _rnds = new Array(16);
-      _mathRNG = _rng = function() {
-        for (var i = 0, r; i < 16; i++) {
-          if ((i & 0x03) === 0) { r = Math.random() * 0x100000000; }
-          _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
-        }
-
-        return _rnds;
-      };
-      if ('undefined' !== typeof console && console.warn) {
-        console.warn("[SECURITY] node-uuid: crypto not usable, falling back to insecure Math.random()");
-      }
-    }
-  }
-
-  function setupNode() {
-    // Node.js crypto-based RNG - http://nodejs.org/docs/v0.6.2/api/crypto.html
-    //
-    // Moderately fast, high quality
-    if ('function' === typeof require) {
-      try {
-        var _rb = require('crypto').randomBytes;
-        _nodeRNG = _rng = _rb && function() {return _rb(16);};
-        _rng();
-      } catch(e) {}
-    }
-  }
-
-  if (_window) {
-    setupBrowser();
-  } else {
-    setupNode();
-  }
-
-  // Buffer class to use
-  var BufferClass = ('function' === typeof Buffer) ? Buffer : Array;
-
-  // Maps for number <-> hex string conversion
-  var _byteToHex = [];
-  var _hexToByte = {};
-  for (var i = 0; i < 256; i++) {
-    _byteToHex[i] = (i + 0x100).toString(16).substr(1);
-    _hexToByte[_byteToHex[i]] = i;
-  }
-
-  // **`parse()` - Parse a UUID into it's component bytes**
-  function parse(s, buf, offset) {
-    var i = (buf && offset) || 0, ii = 0;
-
-    buf = buf || [];
-    s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
-      if (ii < 16) { // Don't overflow!
-        buf[i + ii++] = _hexToByte[oct];
-      }
-    });
-
-    // Zero out remaining bytes if string was short
-    while (ii < 16) {
-      buf[i + ii++] = 0;
-    }
-
-    return buf;
-  }
-
-  // **`unparse()` - Convert UUID byte array (ala parse()) into a string**
-  function unparse(buf, offset) {
-    var i = offset || 0, bth = _byteToHex;
-    return  bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]];
-  }
-
-  // **`v1()` - Generate time-based UUID**
-  //
-  // Inspired by https://github.com/LiosK/UUID.js
-  // and http://docs.python.org/library/uuid.html
-
-  // random #'s we need to init node and clockseq
-  var _seedBytes = _rng();
-
-  // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-  var _nodeId = [
-    _seedBytes[0] | 0x01,
-    _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
-  ];
-
-  // Per 4.2.2, randomize (14 bit) clockseq
-  var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
-
-  // Previous uuid creation time
-  var _lastMSecs = 0, _lastNSecs = 0;
-
-  // See https://github.com/broofa/node-uuid for API details
-  function v1(options, buf, offset) {
-    var i = buf && offset || 0;
-    var b = buf || [];
-
-    options = options || {};
-
-    var clockseq = (options.clockseq != null) ? options.clockseq : _clockseq;
-
-    // UUID timestamps are 100 nano-second units since the Gregorian epoch,
-    // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
-    // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
-    // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-    var msecs = (options.msecs != null) ? options.msecs : new Date().getTime();
-
-    // Per 4.2.1.2, use count of uuid's generated during the current clock
-    // cycle to simulate higher resolution clock
-    var nsecs = (options.nsecs != null) ? options.nsecs : _lastNSecs + 1;
-
-    // Time since last uuid creation (in msecs)
-    var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
-
-    // Per 4.2.1.2, Bump clockseq on clock regression
-    if (dt < 0 && options.clockseq == null) {
-      clockseq = clockseq + 1 & 0x3fff;
-    }
-
-    // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
-    // time interval
-    if ((dt < 0 || msecs > _lastMSecs) && options.nsecs == null) {
-      nsecs = 0;
-    }
-
-    // Per 4.2.1.2 Throw error if too many uuids are requested
-    if (nsecs >= 10000) {
-      throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
-    }
-
-    _lastMSecs = msecs;
-    _lastNSecs = nsecs;
-    _clockseq = clockseq;
-
-    // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
-    msecs += 12219292800000;
-
-    // `time_low`
-    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
-    b[i++] = tl >>> 24 & 0xff;
-    b[i++] = tl >>> 16 & 0xff;
-    b[i++] = tl >>> 8 & 0xff;
-    b[i++] = tl & 0xff;
-
-    // `time_mid`
-    var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
-    b[i++] = tmh >>> 8 & 0xff;
-    b[i++] = tmh & 0xff;
-
-    // `time_high_and_version`
-    b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
-    b[i++] = tmh >>> 16 & 0xff;
-
-    // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
-    b[i++] = clockseq >>> 8 | 0x80;
-
-    // `clock_seq_low`
-    b[i++] = clockseq & 0xff;
-
-    // `node`
-    var node = options.node || _nodeId;
-    for (var n = 0; n < 6; n++) {
-      b[i + n] = node[n];
-    }
-
-    return buf ? buf : unparse(b);
-  }
-
-  // **`v4()` - Generate random UUID**
-
-  // See https://github.com/broofa/node-uuid for API details
-  function v4(options, buf, offset) {
-    // Deprecated - 'format' argument, as supported in v1.2
-    var i = buf && offset || 0;
-
-    if (typeof(options) === 'string') {
-      buf = (options === 'binary') ? new BufferClass(16) : null;
-      options = null;
-    }
-    options = options || {};
-
-    var rnds = options.random || (options.rng || _rng)();
-
-    // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-    rnds[6] = (rnds[6] & 0x0f) | 0x40;
-    rnds[8] = (rnds[8] & 0x3f) | 0x80;
-
-    // Copy bytes to buffer, if provided
-    if (buf) {
-      for (var ii = 0; ii < 16; ii++) {
-        buf[i + ii] = rnds[ii];
-      }
-    }
-
-    return buf || unparse(rnds);
-  }
-
-  // Export public API
-  var uuid = v4;
-  uuid.v1 = v1;
-  uuid.v4 = v4;
-  uuid.parse = parse;
-  uuid.unparse = unparse;
-  uuid.BufferClass = BufferClass;
-  uuid._rng = _rng;
-  uuid._mathRNG = _mathRNG;
-  uuid._nodeRNG = _nodeRNG;
-  uuid._whatwgRNG = _whatwgRNG;
-
-  if (('undefined' !== typeof module) && module.exports) {
-    // Publish as node.js module
-    module.exports = uuid;
-  } else if (typeof define === 'function' && define.amd) {
-    // Publish as AMD module
-    define(function() {return uuid;});
-
-
-  } else {
-    // Publish as global (in browsers)
-    _previousRoot = _window.uuid;
-
-    // **`noConflict()` - (browser only) to reset global 'uuid' var**
-    uuid.noConflict = function() {
-      _window.uuid = _previousRoot;
-      return uuid;
-    };
-
-    _window.uuid = uuid;
-  }
-})('undefined' !== typeof window ? window : null);
-
-}).call(this,require("buffer").Buffer)
-},{"buffer":116,"crypto":126}],185:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -38455,7 +38619,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],186:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -38574,7 +38738,7 @@ exports.signature = asn1.define('signature', function () {
   )
 })
 
-},{"asn1.js":64}],187:[function(require,module,exports){
+},{"asn1.js":64}],186:[function(require,module,exports){
 (function (Buffer){
 // adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\r?\nDEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\r?\n\r?\n([0-9A-z\n\r\+\/\=]+)\r?\n/m
@@ -38608,7 +38772,7 @@ module.exports = function (okey, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"browserify-aes":90,"buffer":116,"evp_bytestokey":160}],188:[function(require,module,exports){
+},{"browserify-aes":90,"buffer":116,"evp_bytestokey":160}],187:[function(require,module,exports){
 (function (Buffer){
 var asn1 = require('./asn1')
 var aesid = require('./aesid.json')
@@ -38713,7 +38877,7 @@ function decrypt (data, password) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./aesid.json":185,"./asn1":186,"./fixProc":187,"browserify-aes":90,"buffer":116,"pbkdf2":190}],189:[function(require,module,exports){
+},{"./aesid.json":184,"./asn1":185,"./fixProc":186,"browserify-aes":90,"buffer":116,"pbkdf2":189}],188:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -38941,7 +39105,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":192}],190:[function(require,module,exports){
+},{"_process":191}],189:[function(require,module,exports){
 (function (Buffer){
 var createHmac = require('create-hmac')
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -39025,7 +39189,7 @@ function pbkdf2Sync (password, salt, iterations, keylen, digest) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":116,"create-hmac":125}],191:[function(require,module,exports){
+},{"buffer":116,"create-hmac":125}],190:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -39072,7 +39236,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":192}],192:[function(require,module,exports){
+},{"_process":191}],191:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -39206,7 +39370,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],193:[function(require,module,exports){
+},{}],192:[function(require,module,exports){
 exports.publicEncrypt = require('./publicEncrypt');
 exports.privateDecrypt = require('./privateDecrypt');
 
@@ -39217,7 +39381,7 @@ exports.privateEncrypt = function privateEncrypt(key, buf) {
 exports.publicDecrypt = function publicDecrypt(key, buf) {
   return exports.privateDecrypt(key, buf, true);
 };
-},{"./privateDecrypt":195,"./publicEncrypt":196}],194:[function(require,module,exports){
+},{"./privateDecrypt":194,"./publicEncrypt":195}],193:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('create-hash');
 module.exports = function (seed, len) {
@@ -39236,7 +39400,7 @@ function i2ops(c) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":116,"create-hash":122}],195:[function(require,module,exports){
+},{"buffer":116,"create-hash":122}],194:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var mgf = require('./mgf');
@@ -39347,7 +39511,7 @@ function compare(a, b){
   return dif;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":194,"./withPublic":197,"./xor":198,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hash":122,"parse-asn1":188}],196:[function(require,module,exports){
+},{"./mgf":193,"./withPublic":196,"./xor":197,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hash":122,"parse-asn1":187}],195:[function(require,module,exports){
 (function (Buffer){
 var parseKeys = require('parse-asn1');
 var randomBytes = require('randombytes');
@@ -39445,7 +39609,7 @@ function nonZero(len, crypto) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"./mgf":194,"./withPublic":197,"./xor":198,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hash":122,"parse-asn1":188,"randombytes":199}],197:[function(require,module,exports){
+},{"./mgf":193,"./withPublic":196,"./xor":197,"bn.js":84,"browserify-rsa":106,"buffer":116,"create-hash":122,"parse-asn1":187,"randombytes":198}],196:[function(require,module,exports){
 (function (Buffer){
 var bn = require('bn.js');
 function withPublic(paddedMsg, key) {
@@ -39458,7 +39622,7 @@ function withPublic(paddedMsg, key) {
 
 module.exports = withPublic;
 }).call(this,require("buffer").Buffer)
-},{"bn.js":84,"buffer":116}],198:[function(require,module,exports){
+},{"bn.js":84,"buffer":116}],197:[function(require,module,exports){
 module.exports = function xor(a, b) {
   var len = a.length;
   var i = -1;
@@ -39467,7 +39631,7 @@ module.exports = function xor(a, b) {
   }
   return a
 };
-},{}],199:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 (function (process,global,Buffer){
 'use strict'
 
@@ -39507,10 +39671,10 @@ function randomBytes (size, cb) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"_process":192,"buffer":116}],200:[function(require,module,exports){
+},{"_process":191,"buffer":116}],199:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":201}],201:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":200}],200:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -39586,7 +39750,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":203,"./_stream_writable":205,"core-util-is":120,"inherits":170,"process-nextick-args":191}],202:[function(require,module,exports){
+},{"./_stream_readable":202,"./_stream_writable":204,"core-util-is":120,"inherits":170,"process-nextick-args":190}],201:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -39613,7 +39777,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":204,"core-util-is":120,"inherits":170}],203:[function(require,module,exports){
+},{"./_stream_transform":203,"core-util-is":120,"inherits":170}],202:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -40496,7 +40660,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":201,"_process":192,"buffer":116,"core-util-is":120,"events":159,"inherits":170,"isarray":172,"process-nextick-args":191,"string_decoder/":226,"util":87}],204:[function(require,module,exports){
+},{"./_stream_duplex":200,"_process":191,"buffer":116,"core-util-is":120,"events":159,"inherits":170,"isarray":172,"process-nextick-args":190,"string_decoder/":225,"util":87}],203:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -40677,7 +40841,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":201,"core-util-is":120,"inherits":170}],205:[function(require,module,exports){
+},{"./_stream_duplex":200,"core-util-is":120,"inherits":170}],204:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -41196,10 +41360,10 @@ function CorkedRequest(state) {
   };
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":201,"_process":192,"buffer":116,"core-util-is":120,"events":159,"inherits":170,"process-nextick-args":191,"util-deprecate":229}],206:[function(require,module,exports){
+},{"./_stream_duplex":200,"_process":191,"buffer":116,"core-util-is":120,"events":159,"inherits":170,"process-nextick-args":190,"util-deprecate":228}],205:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":202}],207:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":201}],206:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -41213,19 +41377,19 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":201,"./lib/_stream_passthrough.js":202,"./lib/_stream_readable.js":203,"./lib/_stream_transform.js":204,"./lib/_stream_writable.js":205}],208:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":200,"./lib/_stream_passthrough.js":201,"./lib/_stream_readable.js":202,"./lib/_stream_transform.js":203,"./lib/_stream_writable.js":204}],207:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":204}],209:[function(require,module,exports){
+},{"./lib/_stream_transform.js":203}],208:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":205}],210:[function(require,module,exports){
+},{"./lib/_stream_writable.js":204}],209:[function(require,module,exports){
 arguments[4][40][0].apply(exports,arguments)
-},{"buffer":116,"dup":40}],211:[function(require,module,exports){
+},{"buffer":116,"dup":40}],210:[function(require,module,exports){
 arguments[4][41][0].apply(exports,arguments)
-},{"assert":78,"buffer":116,"dup":41}],212:[function(require,module,exports){
+},{"assert":78,"buffer":116,"dup":41}],211:[function(require,module,exports){
 arguments[4][42][0].apply(exports,arguments)
-},{"./lib":215,"./lib/elliptic":214,"dup":42}],213:[function(require,module,exports){
+},{"./lib":214,"./lib/elliptic":213,"dup":42}],212:[function(require,module,exports){
 (function (Buffer){
 'use strict'
 var toString = Object.prototype.toString
@@ -41273,29 +41437,29 @@ exports.isNumberInInterval = function (number, x, y, message) {
 }
 
 }).call(this,{"isBuffer":require("../../is-buffer/index.js")})
-},{"../../is-buffer/index.js":171}],214:[function(require,module,exports){
+},{"../../is-buffer/index.js":171}],213:[function(require,module,exports){
 arguments[4][44][0].apply(exports,arguments)
-},{"../messages.json":216,"bn.js":84,"buffer":116,"create-hash":122,"dup":44,"elliptic":137}],215:[function(require,module,exports){
+},{"../messages.json":215,"bn.js":84,"buffer":116,"create-hash":122,"dup":44,"elliptic":137}],214:[function(require,module,exports){
 arguments[4][45][0].apply(exports,arguments)
-},{"./assert":213,"./messages.json":216,"bip66":83,"buffer":116,"dup":45}],216:[function(require,module,exports){
+},{"./assert":212,"./messages.json":215,"bip66":83,"buffer":116,"dup":45}],215:[function(require,module,exports){
 arguments[4][46][0].apply(exports,arguments)
-},{"dup":46}],217:[function(require,module,exports){
+},{"dup":46}],216:[function(require,module,exports){
 arguments[4][47][0].apply(exports,arguments)
-},{"buffer":116,"dup":47}],218:[function(require,module,exports){
+},{"buffer":116,"dup":47}],217:[function(require,module,exports){
 arguments[4][48][0].apply(exports,arguments)
-},{"./sha":219,"./sha1":220,"./sha224":221,"./sha256":222,"./sha384":223,"./sha512":224,"dup":48}],219:[function(require,module,exports){
+},{"./sha":218,"./sha1":219,"./sha224":220,"./sha256":221,"./sha384":222,"./sha512":223,"dup":48}],218:[function(require,module,exports){
 arguments[4][49][0].apply(exports,arguments)
-},{"./hash":217,"buffer":116,"dup":49,"inherits":170}],220:[function(require,module,exports){
+},{"./hash":216,"buffer":116,"dup":49,"inherits":170}],219:[function(require,module,exports){
 arguments[4][50][0].apply(exports,arguments)
-},{"./hash":217,"buffer":116,"dup":50,"inherits":170}],221:[function(require,module,exports){
+},{"./hash":216,"buffer":116,"dup":50,"inherits":170}],220:[function(require,module,exports){
 arguments[4][51][0].apply(exports,arguments)
-},{"./hash":217,"./sha256":222,"buffer":116,"dup":51,"inherits":170}],222:[function(require,module,exports){
+},{"./hash":216,"./sha256":221,"buffer":116,"dup":51,"inherits":170}],221:[function(require,module,exports){
 arguments[4][52][0].apply(exports,arguments)
-},{"./hash":217,"buffer":116,"dup":52,"inherits":170}],223:[function(require,module,exports){
+},{"./hash":216,"buffer":116,"dup":52,"inherits":170}],222:[function(require,module,exports){
 arguments[4][53][0].apply(exports,arguments)
-},{"./hash":217,"./sha512":224,"buffer":116,"dup":53,"inherits":170}],224:[function(require,module,exports){
+},{"./hash":216,"./sha512":223,"buffer":116,"dup":53,"inherits":170}],223:[function(require,module,exports){
 arguments[4][54][0].apply(exports,arguments)
-},{"./hash":217,"buffer":116,"dup":54,"inherits":170}],225:[function(require,module,exports){
+},{"./hash":216,"buffer":116,"dup":54,"inherits":170}],224:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -41424,7 +41588,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":159,"inherits":170,"readable-stream/duplex.js":200,"readable-stream/passthrough.js":206,"readable-stream/readable.js":207,"readable-stream/transform.js":208,"readable-stream/writable.js":209}],226:[function(require,module,exports){
+},{"events":159,"inherits":170,"readable-stream/duplex.js":199,"readable-stream/passthrough.js":205,"readable-stream/readable.js":206,"readable-stream/transform.js":207,"readable-stream/writable.js":208}],225:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -41647,7 +41811,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":116}],227:[function(require,module,exports){
+},{"buffer":116}],226:[function(require,module,exports){
 'use strict';
 var ansiRegex = require('ansi-regex')();
 
@@ -41655,7 +41819,7 @@ module.exports = function (str) {
 	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
 };
 
-},{"ansi-regex":62}],228:[function(require,module,exports){
+},{"ansi-regex":62}],227:[function(require,module,exports){
 (function (process){
 'use strict';
 var argv = process.argv;
@@ -41709,7 +41873,7 @@ module.exports = (function () {
 })();
 
 }).call(this,require('_process'))
-},{"_process":192}],229:[function(require,module,exports){
+},{"_process":191}],228:[function(require,module,exports){
 (function (global){
 
 /**
@@ -41780,14 +41944,14 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],230:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],231:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -42377,7 +42541,202 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":230,"_process":192,"inherits":170}],232:[function(require,module,exports){
+},{"./support/isBuffer":229,"_process":191,"inherits":170}],231:[function(require,module,exports){
+(function (global){
+
+var rng;
+
+var crypto = global.crypto || global.msCrypto; // for IE 11
+if (crypto && crypto.getRandomValues) {
+  // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
+  // Moderately fast, high quality
+  var _rnds8 = new Uint8Array(16);
+  rng = function whatwgRNG() {
+    crypto.getRandomValues(_rnds8);
+    return _rnds8;
+  };
+}
+
+if (!rng) {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var  _rnds = new Array(16);
+  rng = function() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return _rnds;
+  };
+}
+
+module.exports = rng;
+
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],232:[function(require,module,exports){
+// Unique ID creation requires a high quality random # generator.  We feature
+// detect to determine the best RNG source, normalizing to a function that
+// returns 128-bits of randomness, since that's what's usually required
+var _rng = require('./lib/rng');
+
+// Maps for number <-> hex string conversion
+var _byteToHex = [];
+var _hexToByte = {};
+for (var i = 0; i < 256; ++i) {
+  _byteToHex[i] = (i + 0x100).toString(16).substr(1);
+  _hexToByte[_byteToHex[i]] = i;
+}
+
+function buff_to_string(buf, offset) {
+  var i = offset || 0;
+  var bth = _byteToHex;
+  return  bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] + '-' +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]] +
+          bth[buf[i++]] + bth[buf[i++]];
+}
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+// random #'s we need to init node and clockseq
+var _seedBytes = _rng();
+
+// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+var _nodeId = [
+  _seedBytes[0] | 0x01,
+  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+];
+
+// Per 4.2.2, randomize (14 bit) clockseq
+var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+
+// Previous uuid creation time
+var _lastMSecs = 0, _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  var node = options.node || _nodeId;
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : buff_to_string(b);
+}
+
+// **`v4()` - Generate random UUID**
+
+// See https://github.com/broofa/node-uuid for API details
+function v4(options, buf, offset) {
+  // Deprecated - 'format' argument, as supported in v1.2
+  var i = buf && offset || 0;
+
+  if (typeof(options) == 'string') {
+    buf = options == 'binary' ? new Array(16) : null;
+    options = null;
+  }
+  options = options || {};
+
+  var rnds = options.random || (options.rng || _rng)();
+
+  // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+  rnds[6] = (rnds[6] & 0x0f) | 0x40;
+  rnds[8] = (rnds[8] & 0x3f) | 0x80;
+
+  // Copy bytes to buffer, if provided
+  if (buf) {
+    for (var ii = 0; ii < 16; ++ii) {
+      buf[i + ii] = rnds[ii];
+    }
+  }
+
+  return buf || buff_to_string(rnds);
+}
+
+// Export public API
+var uuid = v4;
+uuid.v1 = v1;
+uuid.v4 = v4;
+
+module.exports = uuid;
+
+},{"./lib/rng":231}],233:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -42517,7 +42876,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":169}],233:[function(require,module,exports){
+},{"indexof":169}],234:[function(require,module,exports){
 (function (process,Buffer){
 /**
  * Client-side accounts
@@ -42531,7 +42890,7 @@ var async = require("async");
 var BigNumber = require("bignumber.js");
 var EthTx = require("ethereumjs-tx");
 var keys = require("keythereum");
-var uuid = require("node-uuid");
+var uuid = require("uuid");
 var clone = require("clone");
 var locks = require("locks");
 var request = (NODE_JS) ? require("request") : require("browser-request");
@@ -42540,7 +42899,7 @@ var errors = require("augur-contracts").errors;
 var constants = require("./constants");
 var utils = require("./utilities");
 
-request = request.defaults({timeout: 240000});
+request = request.defaults({timeout: 999999});
 
 keys.constants.pbkdf2.c = constants.ROUNDS;
 keys.constants.scrypt.n = constants.ROUNDS;
@@ -42968,7 +43327,12 @@ module.exports = function () {
             var self = this;
 
             // if this is just a call, use ethrpc's regular invoke method
-            if (!payload.send) return augur.rpc.fire(payload, cb);
+            if (!payload.send) {
+                if (augur.rpc.debug.broadcast) {
+                    console.log("[augur.js] eth_call payload:", payload);
+                }
+                return augur.rpc.fire(payload, cb);
+            }
 
             cb = cb || utils.pass;
             if (!this.account.address || !this.account.privateKey) {
@@ -42983,9 +43347,9 @@ module.exports = function () {
             packaged.from = this.account.address;
             packaged.nonce = payload.nonce || 0;
             packaged.value = payload.value || "0x0";
-            packaged.gasLimit = payload.gas || constants.DEFAULT_GAS;
+            packaged.gasLimit = payload.gasLimit || (augur.rpc.block && augur.rpc.block.gasLimit) || constants.DEFAULT_GAS;
             if (augur.rpc.debug.broadcast) {
-                console.log("[augur.js] payload:", JSON.stringify(payload, null, 2));
+                console.log("[augur.js] payload:", payload);
             }
             if (payload.gasPrice && abi.number(payload.gasPrice) > 0) {
                 packaged.gasPrice = payload.gasPrice;
@@ -43004,7 +43368,7 @@ module.exports = function () {
 };
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./constants":237,"./utilities":261,"_process":192,"async":79,"augur-abi":1,"augur-contracts":58,"bignumber.js":82,"browser-request":86,"buffer":116,"clone":119,"ethereumjs-tx":157,"keythereum":272,"locks":175,"node-uuid":184,"request":87}],234:[function(require,module,exports){
+},{"./constants":238,"./utilities":262,"_process":191,"async":79,"augur-abi":1,"augur-contracts":58,"bignumber.js":82,"browser-request":86,"buffer":116,"clone":119,"ethereumjs-tx":157,"keythereum":273,"locks":175,"request":87,"uuid":232}],235:[function(require,module,exports){
 (function (process){
 /**
  * Augur JavaScript API
@@ -43101,7 +43465,7 @@ module.exports  = function () {
 };
 
 }).call(this,require('_process'))
-},{"_process":192,"browser-request":86,"request":87}],235:[function(require,module,exports){
+},{"_process":191,"browser-request":86,"request":87}],236:[function(require,module,exports){
 /**
  * Batch interface:
  * var b = augur.createBatch();
@@ -43137,7 +43501,7 @@ module.exports = function () {
     return new Batch(this.tx, this.rpc);
 };
 
-},{"clone":119}],236:[function(require,module,exports){
+},{"clone":119}],237:[function(require,module,exports){
 "use strict";
 
 var abi = require("augur-abi");
@@ -43231,7 +43595,7 @@ module.exports = function () {
     };
 };
 
-},{"augur-abi":1}],237:[function(require,module,exports){
+},{"augur-abi":1}],238:[function(require,module,exports){
 /** 
  * augur.js constants
  */
@@ -43315,7 +43679,7 @@ module.exports = {
     FAUCET: "https://faucet.augur.net/faucet/"
 };
 
-},{"bignumber.js":82}],238:[function(require,module,exports){
+},{"bignumber.js":82}],239:[function(require,module,exports){
 /**
  * Filters / logging
  */
@@ -43368,8 +43732,11 @@ module.exports = function () {
                 fmt.type = this.format_trade_type(msg.type);
                 fmt.taker = abi.format_address(msg.sender);
                 fmt.maker = abi.format_address(msg.owner);
-                fmt.price = abi.unfix(msg.price, "string");
-                fmt.shares = abi.unfix(msg.shares, "string");
+                fmt.amount = abi.unfix(msg.amount, "string");
+                fmt.price = abi.unfix(abi.hex(msg.price, true), "string");
+                fmt.takerFee = abi.unfix(msg.takerFee, "string");
+                fmt.makerFee = abi.unfix(msg.makerFee, "string");
+                fmt.onChainPrice = abi.unfix(abi.hex(msg.onChainPrice, true), "string");
                 fmt.outcome = parseInt(msg.outcome, 16);
                 fmt.timestamp = parseInt(msg.timestamp, 16);
                 delete fmt.sender;
@@ -43379,7 +43746,7 @@ module.exports = function () {
                 fmt = clone(msg);
                 fmt.type = this.format_trade_type(msg.type);
                 fmt.maker = abi.format_address(msg.sender);
-                fmt.price = abi.unfix(msg.price, "string");
+                fmt.price = abi.unfix(abi.hex(msg.price, true), "string");
                 fmt.amount = abi.unfix(msg.amount, "string");
                 fmt.outcome = parseInt(msg.outcome, 16);
                 delete fmt.sender;
@@ -43687,7 +44054,6 @@ module.exports = function () {
                 if (err) console.error(err);
                 augur.rpc.customSubscriptionCallback = cb;
                 augur.rpc.resetCustomSubscription = function () {
-                    console.log("re-listening:", augur.rpc.customSubscriptionCallback);
                     self.listen(augur.rpc.customSubscriptionCallback);
                 }.bind(self);
                 if (utils.is_function(setup_complete)) setup_complete(self.filter);
@@ -43766,7 +44132,7 @@ module.exports = function () {
     };
 };
 
-},{"./constants":237,"./utilities":261,"async":79,"augur-abi":1,"augur-contracts":58,"clone":119}],239:[function(require,module,exports){
+},{"./constants":238,"./utilities":262,"async":79,"augur-abi":1,"augur-contracts":58,"clone":119}],240:[function(require,module,exports){
 /**
  * generateOrderBook: convenience method for generating an initial order book
  * for a newly created market. generateOrderBook calculates the number of
@@ -44005,7 +44371,7 @@ module.exports = function (p, cb) {
     });
 };
 
-},{"./constants":237,"async":79,"augur-abi":1,"bignumber.js":82}],240:[function(require,module,exports){
+},{"./constants":238,"async":79,"augur-abi":1,"bignumber.js":82}],241:[function(require,module,exports){
 (function (process){
 /**
  * Augur JavaScript API
@@ -44037,17 +44403,17 @@ var modules = [
     require("./modules/collectFees"),
     require("./modules/createMarket"),
     require("./modules/compositeGetters"),
-    require("./modules/whitelist"),
     require("./modules/logs"),
     require("./modules/abacus"),
     require("./modules/reporting"),
+    require("./modules/payout"),
     require("./modules/tradingActions"),
     require("./modules/positions"),
     require("./modules/register")
 ];
 
 function Augur() {
-    this.version = "3.1.8";
+    this.version = "3.3.4";
 
     this.options = {
         debug: {
@@ -44100,7 +44466,7 @@ Augur.prototype.AugurNode = require("./augurNode");
 module.exports = new Augur();
 
 }).call(this,require('_process'))
-},{"../test/tools":263,"./accounts":233,"./augurNode":234,"./batch":235,"./chat":236,"./constants":237,"./filters":238,"./generateOrderBook":239,"./modules/abacus":241,"./modules/buyAndSellShares":242,"./modules/cash":243,"./modules/collectFees":244,"./modules/compositeGetters":245,"./modules/connect":246,"./modules/createBranch":247,"./modules/createMarket":248,"./modules/events":249,"./modules/logs":250,"./modules/makeReports":251,"./modules/markets":252,"./modules/positions":253,"./modules/register":254,"./modules/reporting":255,"./modules/sendReputation":256,"./modules/trade":257,"./modules/tradingActions":258,"./modules/transact":259,"./modules/whitelist":260,"./utilities":261,"_process":192,"augur-abi":1,"augur-contracts":58,"bignumber.js":82,"ethrpc":266}],241:[function(require,module,exports){
+},{"../test/tools":264,"./accounts":234,"./augurNode":235,"./batch":236,"./chat":237,"./constants":238,"./filters":239,"./generateOrderBook":240,"./modules/abacus":242,"./modules/buyAndSellShares":243,"./modules/cash":244,"./modules/collectFees":245,"./modules/compositeGetters":246,"./modules/connect":247,"./modules/createBranch":248,"./modules/createMarket":249,"./modules/events":250,"./modules/logs":251,"./modules/makeReports":252,"./modules/markets":253,"./modules/payout":254,"./modules/positions":255,"./modules/register":256,"./modules/reporting":257,"./modules/sendReputation":258,"./modules/trade":259,"./modules/tradingActions":260,"./modules/transact":261,"./utilities":262,"_process":191,"augur-abi":1,"augur-contracts":58,"bignumber.js":82,"ethrpc":267}],242:[function(require,module,exports){
 (function (Buffer){
 /**
  * Utility functions that do a local calculation (i.e., these functions do not
@@ -44272,7 +44638,7 @@ module.exports = {
     },
 
     parseMarketInfo: function (rawInfo) {
-        var EVENTS_FIELDS = 8;
+        var EVENTS_FIELDS = 9;
         var OUTCOMES_FIELDS = 3;
         var info = {};
         if (rawInfo && rawInfo.length > 14 && rawInfo[0] && rawInfo[4] && rawInfo[7] && rawInfo[8]) {
@@ -44321,16 +44687,17 @@ module.exports = {
             if (parseInt(rawInfo[index + 2], 16) !== 0) {
                 outcome = abi.unfix(abi.hex(rawInfo[index + 2], true), "string");
             }
-            if (parseInt(rawInfo[index + 7], 16) !== 0) {
-                proportionCorrect = abi.unfix(rawInfo[index + 7], "string");
+            if (parseInt(rawInfo[index + 8], 16) !== 0) {
+                proportionCorrect = abi.unfix(rawInfo[index + 8], "string");
             }
             var event = {
-                id: rawInfo[index],
+                id: abi.format_int256(rawInfo[index]),
                 endDate: parseInt(rawInfo[index + 1], 16),
                 minValue: abi.unfix(abi.hex(rawInfo[index + 3], true), "string"),
                 maxValue: abi.unfix(abi.hex(rawInfo[index + 4], true), "string"),
                 numOutcomes: parseInt(rawInfo[index + 5], 16),
-                isEthical: abi.unfix(abi.hex(rawInfo[index + 6], true), "number") || undefined
+                bond: abi.unfix(abi.hex(rawInfo[index + 6], true), "string"),
+                isEthical: abi.unfix(abi.hex(rawInfo[index + 7], true), "number") || undefined
             };
             info.reportedOutcome = outcome;
             info.proportionCorrect = proportionCorrect;
@@ -44353,7 +44720,7 @@ module.exports = {
                 info.outcomes[i] = {
                     id: i + 1,
                     outstandingShares: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index], "string"),
-                    price: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index + 1], "string"),
+                    price: abi.unfix(abi.hex(rawInfo[i*OUTCOMES_FIELDS + index + 1], true), "string"),
                     sharesPurchased: abi.unfix(rawInfo[i*OUTCOMES_FIELDS + index + 2], "string")
                 };
             }
@@ -44458,7 +44825,7 @@ module.exports = {
             amount = amount.times(constants.PRECISION.multiple).floor().dividedBy(constants.PRECISION.multiple).toFixed();
         }
 
-        var price = abi.unfix(trade[4]);
+        var price = abi.unfix(abi.hex(trade[4], true));
         if (price.lt(constants.PRECISION.zero)) return null;
         if (price.lt(constants.PRECISION.limit)) {
             price = price.toPrecision(constants.PRECISION.decimals, roundingMode);
@@ -44472,7 +44839,7 @@ module.exports = {
             market: trade[2],
             amount: amount,
             price: price,
-            fullPrecisionPrice: abi.unfix(trade[4], "string"),
+            fullPrecisionPrice: abi.unfix(abi.hex(trade[4], true), "string"),
             owner: abi.format_address(trade[5]),
             block: parseInt(trade[6], 16),
             outcome: abi.string(trade[7])
@@ -44499,7 +44866,7 @@ module.exports = {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../constants":237,"../utilities":261,"async":79,"augur-abi":1,"bignumber.js":82,"bs58":114,"buffer":116,"clone":119}],242:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"async":79,"augur-abi":1,"bignumber.js":82,"bs58":114,"buffer":116,"clone":119}],243:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -44530,6 +44897,7 @@ module.exports = {
         onFailed = onFailed || utils.noop;
         var tx = clone(this.tx.BuyAndSellShares.cancel);
         tx.params = trade_id;
+        tx.description = "Cancel order " + trade_id;
         if (this.options.debug.trading) {
             console.log("cancel tx:", JSON.stringify(tx, null, 2));
         }
@@ -44585,6 +44953,7 @@ module.exports = {
         }
         var tx = clone(this.tx.BuyAndSellShares.buy);
         tx.params = [abi.fix(amount, "hex"), abi.fix(price, "hex"), market, outcome];
+        tx.description = "Bid " + amount + " Shares @ " + price + " ETH";
         if (this.options.debug.trading) {
             console.log("buy tx:", JSON.stringify(tx, null, 2));
         }
@@ -44613,6 +44982,7 @@ module.exports = {
         }
         var tx = clone(this.tx.BuyAndSellShares.sell);
         tx.params = [abi.fix(amount, "hex"), abi.fix(price, "hex"), market, outcome];
+        tx.description = "Ask " + amount + " Shares @ " + price + " ETH";
         if (this.options.debug.trading) {
             console.log("sell tx:", JSON.stringify(tx, null, 2));
         }
@@ -44641,6 +45011,7 @@ module.exports = {
         }
         var tx = clone(this.tx.BuyAndSellShares.shortAsk);
         tx.params = [abi.fix(amount, "hex"), abi.fix(price, "hex"), market, outcome];
+        tx.description = "Short Ask " + amount + " Shares @ " + price + " ETH";
         if (this.options.debug.trading) {
             console.log("shortAsk tx:", JSON.stringify(tx, null, 2));
         }
@@ -44648,7 +45019,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"clone":119}],243:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"clone":119}],244:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -44664,9 +45035,9 @@ var constants = require("../constants");
 module.exports = {
 
     sendEther: function (to, value, from, onSent, onSuccess, onFailed) {
-        if (to && to.constructor === Object && to.value) {
+        if (to && to.constructor === Object) {
             value = to.value;
-            if (to.from) from = to.from;
+            from = to.from;
             if (to.onSent) onSent = to.onSent;
             if (to.onSuccess) onSuccess = to.onSuccess;
             if (to.onFailed) onFailed = to.onFailed;
@@ -44678,16 +45049,16 @@ module.exports = {
             value: abi.fix(value, "hex"),
             returns: "null",
             gas: "0xcf08"
-        }, onSent, onSuccess);
+        }, onSent, onSuccess, onFailed);
     },
-    
+
     depositEther: function (value, onSent, onSuccess, onFailed) {
         var tx = clone(this.tx.Cash.depositEther);
         var unpacked = utils.unpack(value, utils.labels(this.depositEther), arguments);
         tx.value = abi.fix(unpacked.params[0], "hex");
         return this.transact.apply(this, [tx].concat(unpacked.cb));
     },
-    
+
     getCashBalance: function (account, callback) {
         return this.Cash.balance(account, callback);
     },
@@ -44701,7 +45072,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"clone":119}],244:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"clone":119}],245:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -44718,7 +45089,7 @@ module.exports = {
 
     collectFees: function (branch, sender, periodLength, onSent, onSuccess, onFailed) {
         var self = this;
-        if (branch && branch.branch) {
+        if (branch && branch.constructor === Object) {
             sender = branch.sender;
             periodLength = branch.periodLength;
             onSent = branch.onSent;
@@ -44733,41 +45104,46 @@ module.exports = {
         }
         var tx = clone(this.tx.CollectFees.collectFees);
         tx.params = [branch, sender];
-        this.rpc.getGasPrice(function (gasPrice) {
-            tx.gasPrice = gasPrice;
-            tx.value = abi.prefix_hex(new BigNumber("500000", 10).times(new BigNumber(gasPrice, 16)).toString(16));
-            if (self.options.debug.reporting) {
-                console.log("collectFees tx:", JSON.stringify(tx, null, 2));
-            }
-            return self.transact(tx, onSent, utils.compose(function (res, cb) {
+        var lastPeriod = this.getCurrentPeriod(periodLength) - 1;
+        tx.description = "Collect Reporting fees up to cycle " + lastPeriod.toString();
+        this.getVotePeriod(branch, function (period) {
+            self.getFeesCollected(branch, sender, period - 1, function (feesCollected) {
                 if (self.options.debug.reporting) {
-                    console.log("collectFees success:", JSON.stringify(res, null, 2));
+                    console.log("Fees collected:", branch, sender, period - 1, feesCollected);
                 }
-                if (res && (res.callReturn === "1" || res.callReturn === "2")) {
-                    return cb(res);
-                }
-                self.Branches.getVotePeriod(branch, function (period) {
-                    self.ConsensusData.getFeesCollected(branch, sender, period - 1, function (feesCollected) {
-                        if (feesCollected !== "1") {
-                            res.callReturn = "2";
+                if (feesCollected === "1") return onSuccess({callReturn: "2"});
+                self.rpc.getGasPrice(function (gasPrice) {
+                    tx.gasPrice = gasPrice;
+                    tx.value = abi.prefix_hex(new BigNumber("500000", 10).times(new BigNumber(gasPrice, 16)).toString(16));
+                    var prepare = function (res, cb) {
+                        if (res && (res.callReturn === "1" || res.callReturn === "2")) {
                             return cb(res);
                         }
-                        self.ExpiringEvents.getAfterRep(branch, period - 1, sender, function (afterRep) {
-                            if (parseInt(afterRep, 10) <= 1) {
-                                res.callReturn = "2";
-                                return cb(res);
-                            }
-                            res.callReturn = "1";
-                            return cb(res);
+                        self.getVotePeriod(branch, function (period) {
+                            self.getFeesCollected(branch, sender, period - 1, function (feesCollected) {
+                                if (feesCollected !== "1") {
+                                    res.callReturn = "2";
+                                    return cb(res);
+                                }
+                                self.getAfterRep(branch, period - 1, sender, function (afterRep) {
+                                    if (parseInt(afterRep, 10) <= 1) {
+                                        res.callReturn = "2";
+                                        return cb(res);
+                                    }
+                                    res.callReturn = "1";
+                                    return cb(res);
+                                });
+                            });
                         });
-                    });
+                    };
+                    return self.transact(tx, onSent, utils.compose(prepare, onSuccess), onFailed);
                 });
-            }, onSuccess), onFailed);
+            });
         });
     }
 };
 
-},{"../utilities":261,"augur-abi":1,"bignumber.js":82,"clone":119}],245:[function(require,module,exports){
+},{"../utilities":262,"augur-abi":1,"bignumber.js":82,"clone":119}],246:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -45051,7 +45427,7 @@ module.exports = {
                     this.decodeTag(marketsArray[shift + 7])
                 ],
                 endDate: parseInt(marketsArray[shift + 8], 16),
-                eventID: marketsArray[shift + 10],
+                eventID: abi.format_int256(marketsArray[shift + 10]),
                 minValue: minValue,
                 maxValue: maxValue,
                 numOutcomes: numOutcomes,
@@ -45104,7 +45480,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"bignumber.js":82,"clone":119}],246:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"bignumber.js":82,"clone":119}],247:[function(require,module,exports){
 /**
  * Ethereum network connection / contract lookup
  * @author Jack Peterson (jack@tinybike.net)
@@ -45304,7 +45680,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"clone":119,"ethereumjs-connect":264}],247:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"clone":119,"ethereumjs-connect":265}],248:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -45318,7 +45694,7 @@ var utils = require("../utilities");
 
 module.exports = {
 
-    createBranch: function (description, periodLength, parent, minTradingFee, oracleOnly, onSent, onSuccess, onFailed, onConfirmed) {
+    createBranch: function (description, periodLength, parent, minTradingFee, oracleOnly, onSent, onSuccess, onFailed) {
         var self = this;
         if (description && description.parent) {
             periodLength = description.periodLength;
@@ -45328,7 +45704,6 @@ module.exports = {
             onSent = description.onSent;
             onSuccess = description.onSuccess;
             onFailed = description.onFailed;
-            onConfirmed = description.onConfirmed;
             description = description.description;
         }
         oracleOnly = oracleOnly || 0;
@@ -45376,12 +45751,11 @@ module.exports = {
                     onSuccess(response);
                 });
             },
-            onFailed: onFailed,
-            onConfirmed: onConfirmed
+            onFailed: onFailed
         });
     },
 
-    createSubbranch: function (description, periodLength, parent, minTradingFee, oracleOnly, onSent, onSuccess, onFailed, onConfirmed) {
+    createSubbranch: function (description, periodLength, parent, minTradingFee, oracleOnly, onSent, onSuccess, onFailed) {
         if (description && description.parent) {
             periodLength = description.periodLength;
             parent = description.parent;
@@ -45390,7 +45764,6 @@ module.exports = {
             onSent = description.onSent;
             onSuccess = description.onSuccess;
             onFailed = description.onFailed;
-            onConfirmed = description.onConfirmed;
             description = description.description;
         }
         oracleOnly = oracleOnly || 0;
@@ -45402,11 +45775,12 @@ module.exports = {
             abi.fix(minTradingFee, "hex"),
             oracleOnly
         ];
-        return this.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+        tx.description = description.trim();
+        return this.transact(tx, onSent, onSuccess, onFailed);
     }
 };
 
-},{"../utilities":261,"augur-abi":1,"clone":119}],248:[function(require,module,exports){
+},{"../utilities":262,"augur-abi":1,"clone":119}],249:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -45421,7 +45795,7 @@ var utils = require("../utilities");
 
 module.exports = {
 
-    createSingleEventMarket: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, takerFee, tags, makerFee, extraInfo, onSent, onSuccess, onFailed, onConfirmed) {
+    createSingleEventMarket: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, takerFee, tags, makerFee, extraInfo, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description;         // string
@@ -45437,7 +45811,6 @@ module.exports = {
             onSent = branchId.onSent;                   // function
             onSuccess = branchId.onSuccess;             // function
             onFailed = branchId.onFailed;               // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;               // sha256 hash
         }
         var formattedTags = this.formatTags(tags);
@@ -45461,6 +45834,7 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
             extraInfo || ""
         ];
+        tx.description = description.split("~|>")[0];
         if (!utils.is_function(onSent)) {
             var gasPrice = this.rpc.getGasPrice();
             tx.gasPrice = gasPrice;
@@ -45470,11 +45844,11 @@ module.exports = {
         this.rpc.getGasPrice(function (gasPrice) {
             tx.gasPrice = gasPrice;
             tx.value = self.calculateRequiredMarketValue(gasPrice);
-            self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+            self.transact(tx, onSent, onSuccess, onFailed);
         });
     },
 
-    createEvent: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, onSent, onSuccess, onFailed, onConfirmed) {
+    createEvent: function (branchId, description, expDate, minValue, maxValue, numOutcomes, resolution, onSent, onSuccess, onFailed) {
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description;         // string
             minValue = branchId.minValue;               // integer (1 for binary)
@@ -45485,7 +45859,6 @@ module.exports = {
             onSent = branchId.onSent;                   // function
             onSuccess = branchId.onSuccess;             // function
             onFailed = branchId.onFailed;               // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;               // sha256 hash
         }
         var tx = clone(this.tx.CreateMarket.createEvent);
@@ -45500,10 +45873,11 @@ module.exports = {
             numOutcomes,
             resolution || ""
         ];
-        return this.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+        tx.description = description.split("~|>")[0];
+        return this.transact(tx, onSent, onSuccess, onFailed);
     },
 
-    createMarket: function (branchId, description, takerFee, events, tags, makerFee, extraInfo, onSent, onSuccess, onFailed, onConfirmed) {
+    createMarket: function (branchId, description, takerFee, events, tags, makerFee, extraInfo, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             description = branchId.description; // string
@@ -45515,7 +45889,6 @@ module.exports = {
             onSent = branchId.onSent;           // function
             onSuccess = branchId.onSuccess;     // function
             onFailed = branchId.onFailed;       // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;       // sha256 hash
         }
         onSent = onSent || utils.noop;
@@ -45536,6 +45909,7 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
             extraInfo || ""
         ];
+        tx.description = description.split("~|>")[0];
         if (!utils.is_function(onSent)) {
             var gasPrice = this.rpc.getGasPrice();
             tx.gasPrice = gasPrice;
@@ -45545,11 +45919,11 @@ module.exports = {
         this.rpc.getGasPrice(function (gasPrice) {
             tx.gasPrice = gasPrice;
             tx.value = self.calculateRequiredMarketValue(gasPrice);
-            self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+            self.transact(tx, onSent, onSuccess, onFailed);
         });
     },
 
-    updateTradingFee: function (branchId, market, takerFee, makerFee, onSent, onSuccess, onFailed, onConfirmed) {
+    updateTradingFee: function (branchId, market, takerFee, makerFee, onSent, onSuccess, onFailed) {
         var self = this;
         if (branchId.constructor === Object && branchId.branchId) {
             market = branchId.market;         // string
@@ -45558,7 +45932,6 @@ module.exports = {
             onSent = branchId.onSent;         // function
             onSuccess = branchId.onSuccess;   // function
             onFailed = branchId.onFailed;     // function
-            onConfirmed = branchId.onConfirmed;
             branchId = branchId.branchId;     // sha256 hash
         }
         var tx = clone(this.tx.CreateMarket.updateTradingFee);
@@ -45570,11 +45943,11 @@ module.exports = {
             abi.fix(fees.makerProportionOfFee, "hex"),
         ];
         if (!utils.is_function(onSent)) return this.transact(tx);
-        self.transact(tx, onSent, onSuccess, onFailed, onConfirmed);
+        self.transact(tx, onSent, onSuccess, onFailed);
     }
 };
 
-},{"../utilities":261,"augur-abi":1,"bignumber.js":82,"clone":119}],249:[function(require,module,exports){
+},{"../utilities":262,"augur-abi":1,"bignumber.js":82,"clone":119}],250:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -45620,7 +45993,7 @@ module.exports = {
     }
 };
 
-},{"augur-abi":1}],250:[function(require,module,exports){
+},{"augur-abi":1}],251:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -45653,7 +46026,7 @@ module.exports = {
                 if (!trades[marketID][outcomeID]) trades[marketID][outcomeID] = [];
                 trades[marketID][outcomeID].push({
                     type: 2,
-                    price: abi.unfix(logData[0], "string"),
+                    price: abi.unfix(abi.hex(logData[0], true), "string"),
                     shares: abi.unfix(logData[1], "string"),
                     trade_id: logData[2],
                     blockNumber: parseInt(logs[i].blockNumber, 16),
@@ -45722,7 +46095,7 @@ module.exports = {
                         market: market,
                         type: parseInt(parsed[0], 16),
                         user: abi.format_address(logs[i].topics[2]),
-                        price: abi.unfix(parsed[1], "string"),
+                        price: abi.unfix(abi.hex(parsed[1], true), "string"),
                         shares: abi.unfix(parsed[2], "string"),
                         timestamp: parseInt(parsed[5], 16),
                         blockNumber: parseInt(logs[i].blockNumber, 16)
@@ -45908,7 +46281,7 @@ module.exports = {
                         if (!trades[market][outcome]) trades[market][outcome] = [];
                         trades[market][outcome].push({
                             type: 2,
-                            price: abi.unfix(parsed[0], "string"),
+                            price: abi.unfix(abi.hex(parsed[0], true), "string"),
                             shares: abi.unfix(parsed[1], "string"),
                             trade_id: parsed[2],
                             blockNumber: parseInt(logs[i].blockNumber, 16),
@@ -45919,7 +46292,7 @@ module.exports = {
                         if (!trades[market][outcome]) trades[market][outcome] = [];
                         trades[market][outcome].push({
                             type: parseInt(parsed[0], 16),
-                            price: abi.unfix(parsed[1], "string"),
+                            price: abi.unfix(abi.hex(parsed[1], true), "string"),
                             shares: abi.unfix(parsed[2], "string"),
                             trade_id: parsed[3],
                             blockNumber: parseInt(logs[i].blockNumber, 16),
@@ -46007,70 +46380,6 @@ module.exports = {
             }
         }
         return trades;
-    },
-
-    getMarketTrades: function (marketID, options, cb) {
-        var self = this;
-        function parseMarketTrades(logs, callback) {
-            if (!logs || (logs && (logs.constructor !== Array || !logs.length))) {
-                return callback();
-            }
-            if (logs.error) return cb(logs);
-
-            var trades = {};
-
-            for (var i = 0, n = logs.length; i < n; ++i) {
-                if (logs[i] && logs[i].data !== undefined &&
-                    logs[i].data !== null && logs[i].data !== "0x") {
-                    var parsed = self.rpc.unmarshal(logs[i].data);
-                    var outcome = parseInt(parsed[4]);
-                    if (!trades[outcome]) trades[outcome] = [];
-                    trades[outcome].push({
-                        type: parseInt(parsed[0], 16),
-                        price: abi.unfix(parsed[1], "string"),
-                        shares: abi.unfix(parsed[2], "string"),
-                        trade_id: parsed[3],
-                        blockNumber: parseInt(logs[i].blockNumber, 16)
-                    });
-                }
-            }
-            return callback(trades);
-        }
-        if (!cb && utils.is_function(options)) {
-            cb = options;
-            options = null;
-        }
-        options = options || {};
-        if (!marketID || !utils.is_function(cb)) return;
-        this.rpc.getLogs({
-            fromBlock: options.fromBlock || "0x1",
-            toBlock: options.toBlock || "latest",
-            address: this.contracts.Trade,
-            topics: [
-                this.api.events.log_fill_tx.signature,
-                abi.format_int256(marketID)
-            ],
-            timeout: constants.GET_LOGS_TIMEOUT
-        }, function (logs) {
-            parseMarketTrades(logs, function (trades) {
-                if (!trades || Object.keys(trades).length === 0) {
-                    return cb(null);
-                }
-                var marketIDs = Object.keys(trades);
-                var numMarkets = marketIDs.length;
-                var marketTrades, outcomeTrades, outcomeIDs, numOutcomes;
-                for (var i = 0; i < numMarkets; ++i) {
-                    marketTrades = trades[marketIDs[i]];
-                    outcomeIDs = Object.keys(marketTrades);
-                    numOutcomes = outcomeIDs.length;
-                    for (var j = 0; j < numOutcomes; ++j) {
-                        outcomeTrades = marketTrades[outcomeIDs[j]];
-                        outcomeTrades = outcomeTrades.sort(self.sortByBlockNumber);
-                    }
-                }
-                cb(trades);
-            });
-        });
     },
 
     /************************
@@ -46198,7 +46507,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"clone":119}],251:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"clone":119}],252:[function(require,module,exports){
 (function (Buffer){
 /**
  * Augur JavaScript API
@@ -46284,55 +46593,37 @@ module.exports = {
 
     // report in fixed-point
     encryptReport: function (report, key, salt) {
-        if (this.options.debug.reporting) {
-            console.log('encryptReport params:', report, key, salt);
-        }
         if (!Buffer.isBuffer(report)) report = new Buffer(abi.pad_left(abi.hex(report)), "hex");
         if (!Buffer.isBuffer(key)) key = new Buffer(abi.pad_left(abi.hex(key)), "hex");
         if (!salt) salt = new Buffer("11111111111111111111111111111111", "hex");
         if (!Buffer.isBuffer(salt)) salt = new Buffer(abi.pad_left(abi.hex(salt)), "hex");
-        var encryptedReport = abi.prefix_hex(
+        return abi.prefix_hex(
             new Buffer(
                 keys.encrypt(report, key, salt.slice(0, 16), constants.REPORT_CIPHER),
                 "base64"
             ).toString("hex")
         );
-        if (this.options.debug.reporting) {
-            console.log('encryptReport:', encryptedReport);
-        }
-        return encryptedReport;
     },
 
     // returns plaintext fixed-point report
     decryptReport: function (encryptedReport, key, salt) {
-        if (this.options.debug.reporting) {
-            console.log('decryptReport params:', encryptedReport, key, salt);
-        }
         if (!Buffer.isBuffer(encryptedReport)) encryptedReport = new Buffer(abi.pad_left(abi.hex(encryptedReport)), "hex");
         if (!Buffer.isBuffer(key)) key = new Buffer(abi.pad_left(abi.hex(key)), "hex");
         if (!salt) salt = new Buffer("11111111111111111111111111111111", "hex");
         if (!Buffer.isBuffer(salt)) salt = new Buffer(abi.pad_left(abi.hex(salt)), "hex");
-        var decryptedReport = abi.prefix_hex(
+        return abi.prefix_hex(
             keys.decrypt(encryptedReport, key, salt.slice(0, 16), constants.REPORT_CIPHER)
         );
-        if (this.options.debug.reporting) {
-            console.log('decryptedReport:', decryptedReport);
-        }
-        return decryptedReport;
     },
 
     parseAndDecryptReport: function (arr, secret) {
         if (!arr || arr.constructor !== Array || arr.length < 2) return null;
         var salt = this.decryptReport(arr[1], secret.derivedKey, secret.salt);
-        var parsedAndDecryptedReport = {
+        return {
             salt: salt,
             report: this.decryptReport(arr[0], secret.derivedKey, salt),
             ethics: (arr.length >= 2) ? arr[2] : false
         };
-        if (this.options.debug.reporting) {
-            console.log('parseAndDecryptReport:', parsedAndDecryptedReport);
-        }
-        return parsedAndDecryptedReport;
     },
 
     getAndDecryptReport: function (branch, expDateIndex, reporter, event, secret, callback) {
@@ -46347,10 +46638,6 @@ module.exports = {
         }
         var tx = clone(this.tx.ExpiringEvents.getEncryptedReport);
         tx.params = [branch, expDateIndex, reporter, event];
-        if (this.options.debug.reporting) {
-            console.log('getEncryptedReport secret:', secret);
-            console.log('getEncryptedReport params:', tx.params);
-        }
         return this.fire(tx, callback, this.parseAndDecryptReport, secret);
     },
 
@@ -46385,7 +46672,7 @@ module.exports = {
         }
         return this.transact(tx, onSent, function (res) {
             if (self.options.debug.reporting) {
-                console.log('submitReportHash response:', JSON.stringify(res, null, 2));
+                console.log('submitReportHash response:', res.callReturn);
             }
             res.callReturn = abi.bignum(res.callReturn, "string", true);
             if (res.callReturn === "0") {
@@ -46424,8 +46711,9 @@ module.exports = {
                 callback: function (storedReportHash) {
                     if (parseInt(storedReportHash, 16)) {
                         res.callReturn = "1";
+                        return onSuccess(res);
                     }
-                    onSuccess(res);
+                    onFailed({"-2": "not in first half of period (commit phase)"});
                 }
             });
         }, onFailed);
@@ -46465,7 +46753,7 @@ module.exports = {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../constants":237,"../utilities":261,"augur-abi":1,"augur-contracts":58,"buffer":116,"clone":119,"keythereum":272}],252:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"augur-contracts":58,"buffer":116,"clone":119,"keythereum":273}],253:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -46506,7 +46794,138 @@ module.exports = {
     }
 };
 
-},{"../utilities":261,"clone":119}],253:[function(require,module,exports){
+},{"../utilities":262,"clone":119}],254:[function(require,module,exports){
+/**
+ * Cash payouts from closed markets
+ * @author Jack Peterson (jack@tinybike.net)
+ */
+
+"use strict";
+
+var clone = require("clone");
+var abi = require("augur-abi");
+var async = require("async");
+var constants = require("../constants");
+
+module.exports = {
+
+    closeMarket: function (branch, market, sender, description, onSent, onSuccess, onFailed) {
+        if (branch.constructor === Object) {
+            market = branch.market;
+            sender = branch.sender;
+            description = branch.description;
+            onSent = branch.onSent;
+            onSuccess = branch.onSuccess;
+            onFailed = branch.onFailed;
+            branch = branch.branch;
+        }
+        var tx = clone(this.tx.CloseMarket.closeMarket);
+        tx.params = [branch, market, sender];
+        tx.description = description;
+        this.transact(tx, onSent, onSuccess, onFailed);
+    },
+
+    // markets: array of market IDs for which to claim proceeds
+    claimMarketsProceeds: function (branch, markets, callback, onSent, onSuccess) {
+        if (this.options.debug.reporting) {
+            console.log("claimMarketsProceeds:", branch, markets);
+        }
+        var self = this;
+        var claimedMarkets = [];
+        async.eachSeries(markets, function (market, nextMarket) {
+            if (self.options.debug.reporting) {
+                console.log("claimMarketsProceeds", market);
+            }
+            self.getWinningOutcomes(market.id, function (winningOutcomes) {
+                // market not yet resolved
+                if (self.options.debug.reporting) {
+                    console.log("got winning outcomes:", winningOutcomes);
+                }
+                if (!winningOutcomes || !winningOutcomes.length || !winningOutcomes[0] || winningOutcomes[0] === "0") {
+                    if (self.options.debug.reporting) {
+                        console.log("market not yet resolved", market.id);
+                    }
+                    return nextMarket();
+                }
+                self.claimProceeds({
+                    branch: branch,
+                    market: market.id,
+                    description: market.description,
+                    onSent: function (res) {
+                        if (self.options.debug.reporting) {
+                            console.log("claim proceeds sent:", market.id, res);
+                        }
+                        if (onSent) onSent(res.hash, market.id);
+                    },
+                    onSuccess: function (res) {
+                        if (self.options.debug.reporting) {
+                            console.log("claim proceeds success:", market.id, res);
+                        }
+                        if (onSuccess) {
+                            onSuccess(res.hash, market.id, {
+                                cash: res.callReturn.cash,
+                                shares: res.callReturn.shares
+                            });
+                        }
+                        claimedMarkets.push(market.id);
+                        nextMarket();
+                    },
+                    onFailed: nextMarket
+                });
+            });
+        }, function (err) {
+            if (err) return callback(err);
+            callback(null, claimedMarkets);
+        });
+    },
+
+    claimProceeds: function (branch, market, description, onSent, onSuccess, onFailed) {
+        var self = this;
+        if (branch.constructor === Object) {
+            market = branch.market;
+            description = branch.description;
+            onSent = branch.onSent;
+            onSuccess = branch.onSuccess;
+            onFailed = branch.onFailed;
+            branch = branch.branch;
+        }
+        var tx = clone(self.tx.CloseMarket.claimProceeds);
+        tx.params = [branch, market];
+        tx.description = description;
+        if (self.options.debug.reporting) {
+            console.log("claimProceeds:", branch, market, description);
+            console.log("claimProceeds tx:", JSON.stringify(tx, null, 2));
+        }
+        self.transact(tx, onSent, function (res) {
+            if (self.options.debug.reporting) {
+                console.log("claimProceeds success:", market, res);
+            }
+            if (res.callReturn !== "1") return onFailed(res.callReturn);
+            self.rpc.receipt(res.hash, function (receipt) {
+                var logdata;
+                var cashPayout = constants.ZERO;
+                var shares = constants.ZERO;
+                if (receipt && receipt.logs && receipt.logs.constructor === Array && receipt.logs.length) {
+                    var logs = receipt.logs;
+                    var sig = self.api.events.payout.signature;
+                    for (var i = 0, numLogs = logs.length; i < numLogs; ++i) {
+                        if (logs[i].topics[0] === sig) {
+                            logdata = self.rpc.unmarshal(logs[i].data);
+                            if (logdata && logdata.constructor === Array && logdata.length > 1) {
+                                cashPayout = abi.unfix(abi.hex(logdata[0], true));
+                                shares = abi.unfix(logdata[1]);
+                            }
+                        }
+                    }
+                }
+                res.callReturn = {cash: cashPayout.toFixed(), shares: shares.toFixed()};
+                onSuccess(res);
+            });
+        }, onFailed);
+    }
+};
+
+},{"../constants":238,"async":79,"augur-abi":1,"clone":119}],255:[function(require,module,exports){
 /**
  * Tools to adjust positions in Augur markets for display.
  * @author Jack Peterson (jack@tinybike.net)
@@ -47068,7 +47487,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"async":79,"augur-abi":1,"bignumber.js":82}],254:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"async":79,"augur-abi":1,"bignumber.js":82}],256:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -47180,7 +47599,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"augur-abi":1,"clone":119}],255:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"augur-abi":1,"clone":119}],257:[function(require,module,exports){
 /**
  * Reporting time/period toolkit
  * @author Jack Peterson (jack@tinybike.net)
@@ -47188,18 +47607,21 @@ module.exports = {
 
 "use strict";
 
+var clone = require("clone");
 var abi = require("augur-abi");
 var async = require("async");
 var utils = require("../utilities");
+var constants = require("../constants");
 
 module.exports = {
 
-    getCurrentPeriod: function (periodLength) {
-        return Math.floor(new Date().getTime() / 1000 / periodLength);
+    getCurrentPeriod: function (periodLength, timestamp) {
+        var t = timestamp || parseInt(new Date().getTime() / 1000);
+        return Math.floor(t / periodLength);
     },
 
-    getCurrentPeriodProgress: function (periodLength) {
-        var t = parseInt(new Date().getTime() / 1000);
+    getCurrentPeriodProgress: function (periodLength, timestamp) {
+        var t = timestamp || parseInt(new Date().getTime() / 1000);
         return 100 * (t % periodLength) / periodLength;
     },
 
@@ -47225,7 +47647,7 @@ module.exports = {
             if (!rawReport || rawReport.error) {
                 return callback(rawReport || self.errors.REPORT_NOT_FOUND);
             }
-            if (!parseInt(rawReport, 16)) return callback("0");
+            if (!parseInt(rawReport, 16)) return callback({report: "0"});
             var report = self.unfixReport(rawReport, minValue, maxValue, type);
             if (self.options.debug.reporting) {
                 console.log('getReport:', rawReport, report, period, event, sender, minValue, maxValue, type);
@@ -47234,63 +47656,26 @@ module.exports = {
         });
     },
 
-    // markets: array of market IDs for which to claim proceeds
-    claimMarketsProceeds: function (branch, markets, callback) {
-        var self = this;
-        var claimedMarkets = [];
-        async.eachSeries(markets, function (market, nextMarket) {
-            if (self.options.debug.reporting) {
-                console.log('claimMarketsProceeds: getting winning outcomes for market:', market);
-            }
-            self.getWinningOutcomes(market, function (winningOutcomes) {
-                // market not yet resolved
-                if (self.options.debug.reporting) {
-                    console.log('got winning outcomes:', winningOutcomes);
-                }
-                if (!winningOutcomes || !winningOutcomes.length || !winningOutcomes[0] || winningOutcomes[0] === "0") {
-                    if (self.options.debug.reporting) {
-                        console.log("market not yet resolved", market);
-                    }
-                    return nextMarket();
-                }
-                if (self.options.debug.reporting) {
-                    console.log('claimProceeds:', {
-                        branch: branch,
-                        market: market
-                    });
-                }
-                self.claimProceeds({
-                    branch: branch,
-                    market: market,
-                    onSent: function (res) {
-                        if (self.options.debug.reporting) {
-                            console.log("claim proceeds sent:", market, res);
-                        }
-                    },
-                    onSuccess: function (res) {
-                        if (self.options.debug.reporting) {
-                            console.log("claim proceeds success:", market, res.callReturn);
-                        }
-                        if (res.callReturn === "1") {
-                            claimedMarkets.push(market);
-                            return nextMarket();
-                        }
-                        nextMarket(res.callReturn);
-                    },
-                    onFailed: nextMarket
-                });
-            });
-        }, function (err) {
-            if (err) return callback(err);
-            callback(null, claimedMarkets);
-        });
+    penalizeWrong: function (branch, event, description, onSent, onSuccess, onFailed) {
+        if (branch.constructor === Object) {
+            event = branch.event;
+            description = branch.description;
+            onSent = branch.onSent;
+            onSuccess = branch.onSuccess;
+            onFailed = branch.onFailed;
+            branch = branch.branch;
+        }
+        var tx = clone(this.tx.Consensus.penalizeWrong);
+        tx.params = [branch, event];
+        tx.description = description;
+        this.transact(tx, onSent, onSuccess, onFailed);
     },
 
     // Increment vote period until vote period = current period - 1
     checkPeriod: function (branch, periodLength, sender, callback) {
         var self = this;
         if (self.options.debug.reporting) {
-            console.log("[checkPeriod] calling periodCatchUp...", branch, periodLength);
+            console.log("[checkPeriod] calling periodCatchUp...", branch, periodLength, sender);
         }
         this.periodCatchUp(branch, periodLength, function (err, votePeriod) {
             if (self.options.debug.reporting) {
@@ -47300,12 +47685,12 @@ module.exports = {
             if (self.options.debug.reporting) {
                 console.log("[checkPeriod] calling penaltyCatchUp...", branch, votePeriod - 1);
             }
-            self.penaltyCatchUp(branch, votePeriod - 1, sender, function (err, events) {
+            self.penaltyCatchUp(branch, periodLength, votePeriod - 1, sender, function (err, marketsClosed) {
                 if (self.options.debug.reporting) {
-                    console.log("[checkPeriod] penaltyCatchUp:", err, events);
+                    console.log("[checkPeriod] penaltyCatchUp:", err, marketsClosed);
                 }
                 if (err) return callback(err);
-                callback(null, votePeriod);
+                callback(null, votePeriod, marketsClosed);
             });
         });
     },
@@ -47343,8 +47728,11 @@ module.exports = {
         });
     },
 
-    penaltyCatchUp: function (branch, periodToCheck, sender, callback) {
+    penaltyCatchUp: function (branch, periodLength, periodToCheck, sender, callback, onSent, onSuccess) {
         var self = this;
+        if (self.options.debug.reporting) {
+            console.log("[penaltyCatchUp] params:", branch, periodToCheck, sender);
+        }
         self.getPenalizedUpTo(branch, sender, function (lastPeriodPenalized) {
             lastPeriodPenalized = parseInt(lastPeriodPenalized);
             if (self.options.debug.reporting) {
@@ -47356,6 +47744,31 @@ module.exports = {
                     console.log("[penaltyCatchUp] Penalties caught up!");
                 }
                 return callback(null);
+            } else if (lastPeriodPenalized < periodToCheck - 1) {
+                if (self.getCurrentPeriodProgress(periodLength) >= 50) {
+                    if (self.options.debug.reporting) {
+                        console.log("[penaltyCatchUp] not in first half of cycle, cannot call penalizationCatchup");
+                    }
+                    return callback(null);
+                }
+                return self.penalizationCatchup({
+                    branch: branch,
+                    sender: sender,
+                    onSent: function (r) {
+                        if (onSent) onSent(r.hash, null, "penalizationCatchup");
+                    },
+                    onSuccess: function (r) {
+                        if (self.options.debug.reporting) {
+                            console.log("[penaltyCatchUp] penalizationCatchup success:", r.callReturn);
+                        }
+                        if (onSuccess) onSuccess(r.hash, null, "penalizationCatchup");
+                        callback(null);
+                    },
+                    onFailed: function (e) {
+                        console.error("[penaltyCatchUp] penalizationCatchup failed:", e);
+                        callback(e);
+                    }
+                });
             }
             // If reported last period and called collectfees then call the penalization functions in
             // consensus [i.e. penalizeWrong], if didn't report last period or didn't call collectfees
@@ -47364,62 +47777,38 @@ module.exports = {
                 if (!feesCollected || feesCollected.error) {
                     return callback(feesCollected || "couldn't get fees collected");
                 }
-                self.getNumReportsActual(branch, periodToCheck - 1, sender, function (numReportsActual) {
-                    if (!numReportsActual || numReportsActual.error) {
-                        return callback(numReportsActual || "couldn't get num previous period reports");
-                    }
-                    if (self.options.debug.reporting) {
-                        console.log("[penaltyCatchUp] feesCollected:", feesCollected);
-                        console.log("[penaltyCatchUp] numReportsActual:", numReportsActual);
-                    }
-                    if (parseInt(feesCollected) === 0 || parseInt(numReportsActual) === 0) {
-                        return self.penalizationCatchup({
+                if (self.options.debug.reporting) {
+                    console.log("[penaltyCatchUp] feesCollected:", feesCollected);
+                }
+                self.getEvents(branch, periodToCheck, function (events) {
+                    if (!events || events.constructor !== Array || !events.length) {
+                        if (self.options.debug.reporting) {
+                            console.log("[penaltyCatchUp] No events found in period", periodToCheck);
+                        }
+                        self.penalizeWrong({
                             branch: branch,
-                            sender: sender,
-                            onSent: utils.noop,
+                            event: 0,
+                            description: "Empty Reporting cycle",
+                            onSent: function (r) {
+                                if (onSent) onSent(r.hash, 0, "penalizeWrong");
+                            },
                             onSuccess: function (r) {
                                 if (self.options.debug.reporting) {
-                                    console.log("[penaltyCatchUp] penalizationCatchup success:", r.callReturn);
+                                    console.log("[penaltyCatchUp] penalizeWrong(0) success:", r.callReturn);
                                 }
+                                if (onSuccess) onSuccess(r.hash, 0, "penalizeWrong");
                                 callback(null);
                             },
                             onFailed: function (e) {
-                                console.error("[penaltyCatchUp] penalizationCatchup failed:", e);
-                                if (e.error === -32000) {
-                                    return callback(null);
-                                }
-                                callback(e);
+                                console.error("[penaltyCatchUp] penalizeWrong(0) error:", e);
+                                callback(null);
                             }
                         });
-                    }
-                    self.getEvents(branch, periodToCheck, function (events) {
-                        if (!events || events.constructor !== Array || !events.length) {
-                            if (self.options.debug.reporting) {
-                                console.log("[penaltyCatchUp] No events found in period", periodToCheck);
-                            }
-                            return self.penalizeWrong({
-                                branch: branch,
-                                event: 0,
-                                onSent: utils.noop,
-                                onSuccess: function (r) {
-                                    if (self.options.debug.reporting) {
-                                        console.log("[penaltyCatchUp] penalizeWrong(0) success:", r.callReturn);
-                                    }
-                                    callback(null, events);
-                                },
-                                onFailed: function (e) {
-                                    console.error("[penaltyCatchUp] penalizeWrong(0) error:", e);
-                                    callback(null, events);
-                                    // if (e.error === -32000) {
-                                    //     return callback(null, events);
-                                    // }
-                                    // callback(e);
-                                }
-                            });
-                        }
+                    } else {
                         if (self.options.debug.reporting) {
                             console.log("[penaltyCatchUp] Events in period " + periodToCheck + ":", events);
                         }
+                        var marketsClosed = [];
                         async.eachSeries(events, function (event, nextEvent) {
                             self.getEventCanReportOn(branch, periodToCheck, sender, event, function (canReportOn) {
                                 if (self.options.debug.reporting) {
@@ -47429,67 +47818,70 @@ module.exports = {
                                 if (self.options.debug.reporting) {
                                     console.log("[penaltyCatchUp] penalizeWrong:", event);
                                 }
-                                self.penalizeWrong({
-                                    branch: branch,
-                                    event: event,
-                                    onSent: utils.noop,
-                                    onSuccess: function (r) {
-                                        if (self.options.debug.reporting) {
-                                            console.log("[penaltyCatchUp] penalizeWrong success:", abi.bignum(r.callReturn, "string", true));
+                                self.getDescription(event, function (description) {
+                                    description = description.split("~|>")[0];
+                                    self.penalizeWrong({
+                                        branch: branch,
+                                        event: event,
+                                        description: description,
+                                        onSent: function (r) {
+                                            if (onSent) onSent(r.hash, event, "penalizeWrong");
+                                        },
+                                        onSuccess: function (r) {
+                                            if (self.options.debug.reporting) {
+                                                console.log("[penaltyCatchUp] penalizeWrong success:", abi.bignum(r.callReturn, "string", true));
+                                            }
+                                            if (onSuccess) onSuccess(r.hash, event, "penalizeWrong");
+                                            self.closeExtraMarkets(branch, event, description, sender, function (err, markets) {
+                                                if (err) return nextEvent(err);
+                                                marketsClosed = marketsClosed.concat(markets);
+                                                nextEvent(null);
+                                            }, onSent, onSuccess);
+                                        },
+                                        onFailed: function (e) {
+                                            console.error("[penaltyCatchUp] penalizeWrong error:", e);
+                                            nextEvent(null);
                                         }
-                                        self.getNumMarkets(event, function (numMarkets) {
-                                            if (!numMarkets || numMarkets.error) {
-                                                return nextEvent(numMarkets || "couldn't getNumMarkets for event " + event);
-                                            }
-                                            if (parseInt(numMarkets) === 1) {
-                                                return nextEvent(null);
-                                            }
-                                            self.closeExtraMarkets(branch, event, sender, nextEvent);
-                                        });
-                                    },
-                                    onFailed: function (e) {
-                                        console.error("[penaltyCatchUp] penalizeWrong error:", e);
-                                        nextEvent(null);
-                                        // if (e.error === -32000) {
-                                        //     return nextEvent(null);
-                                        // }
-                                        // nextEvent(e);
-                                    }
+                                    });
                                 });
                             });
                         }, function (e) {
                             if (e) return callback(e);
-                            callback(null, events);
+                            callback(null, marketsClosed);
                         });
-                    });
+                    }
                 });
             });
         });
     },
 
-    closeExtraMarkets: function (branch, event, sender, callback) {
+    closeExtraMarkets: function (branch, event, description, sender, callback, onSent, onSuccess) {
         var self = this;
         if (self.options.debug.reporting) {
             console.log("[closeExtraMarkets] Closing extra markets for event", event);
         }
         self.getMarkets(event, function (markets) {
-            if (!markets) return callback("no markets found for " + event);
+            if (!markets || !markets.length) {
+                return callback("no markets found for " + event);
+            }
             if (markets && markets.error) return callback(markets);
-            if (markets.length <= 1) return callback(null);
-            async.eachSeries(markets.slice(1), function (market, nextMarket) {
+            async.eachSeries(markets, function (market, nextMarket) {
                 self.closeMarket({
                     branch: branch,
                     market: market,
                     sender: sender,
+                    description: description,
                     onSent: function (r) {
                         if (self.options.debug.reporting) {
                             console.log("[closeExtraMarkets] closeMarket sent:", market, r);
                         }
+                        if (onSent) onSent(r.hash, market, "closeMarket");
                     },
                     onSuccess: function (r) {
                         if (self.options.debug.reporting) {
                             console.log("[closeExtraMarkets] closeMarket success", market, r.callReturn);
                         }
+                        if (onSuccess) onSuccess(r.hash, market, "closeMarket");
                         nextMarket(null);
                     },
                     onFailed: function (e) {
@@ -47497,7 +47889,10 @@ module.exports = {
                         nextMarket(e);
                     }
                 });
-            }, callback);
+            }, function (e) {
+                if (e) return callback(e);
+                callback(null, markets);
+            });
         });
     },
 
@@ -47555,7 +47950,7 @@ module.exports = {
     }
 };
 
-},{"../utilities":261,"async":79,"augur-abi":1}],256:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"async":79,"augur-abi":1,"clone":119}],258:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -47569,7 +47964,7 @@ var utils = require("../utilities");
 
 module.exports = {
 
-    sendReputation: function (branch, recver, value, onSent, onSuccess, onFailed, onConfirmed) {
+    sendReputation: function (branch, recver, value, onSent, onSuccess, onFailed) {
         // branch: hash id
         // recver: ethereum address of recipient
         // value: number -> fixed-point
@@ -47580,7 +47975,6 @@ module.exports = {
             onSent = branch.onSent;
             onSuccess = branch.onSuccess;
             onFailed = branch.onFailed;
-            onConfirmed = branch.onConfirmed;
             branch = branch.branch;
         }
         var tx = clone(this.tx.SendReputation.sendReputation);
@@ -47604,7 +47998,7 @@ module.exports = {
                     if (!repRedistributionDone || !parseInt(repRedistributionDone, 16)) {
                         return onFailed({error: "-3", message: "cannot send reputation until redistribution is complete"});
                     }
-                    self.sendReputation(branch, recver, value, onSent, onSuccess, onFailed, onConfirmed);
+                    self.sendReputation(branch, recver, value, onSent, onSuccess, onFailed);
                 });
             });
         };
@@ -47612,12 +48006,11 @@ module.exports = {
         this.transact(tx,
             onSent,
             utils.compose(prepare, onSuccess),
-            onFailed,
-            utils.compose(prepare, onConfirmed));
+            onFailed);
     }
 };
 
-},{"../utilities":261,"augur-abi":1,"clone":119}],257:[function(require,module,exports){
+},{"../utilities":262,"augur-abi":1,"clone":119}],259:[function(require,module,exports){
 /**
  * Augur JavaScript API
  * @author Jack Peterson (jack@tinybike.net)
@@ -47744,6 +48137,15 @@ module.exports = {
                         onNextBlock(blockNumber);
                         var tx = clone(self.tx.Trade.trade);
                         tx.params = [abi.fix(max_value, "hex"), abi.fix(max_amount, "hex"), trade_ids];
+                        var hasValue = !abi.bignum(max_value).eq(constants.ZERO);
+                        tx.description = "";
+                        if (!abi.bignum(max_amount).eq(constants.ZERO)) {
+                            tx.description += max_amount.toString() + " Shares to sell";
+                            if (hasValue) tx.description += " and ";
+                        }
+                        if (hasValue) {
+                            tx.description += max_value.toString() + " ETH to spend";
+                        }
                         if (self.options.debug.trading) {
                             console.log("trade tx:", JSON.stringify(tx, null, 2));
                         }
@@ -47777,7 +48179,7 @@ module.exports = {
                                         for (var i = 0, numLogs = logs.length; i < numLogs; ++i) {
                                             if (logs[i].topics[0] === sig) {
                                                 logdata = self.rpc.unmarshal(logs[i].data);
-                                                if (logdata && logdata.constructor === Array && logdata.length) {
+                                                if (logdata && logdata.constructor === Array && logdata.length > 6) {
                                                     tradingFees = tradingFees.plus(abi.unfix(logdata[6]));
 
                                                     // buy (matched sell order)
@@ -47787,7 +48189,7 @@ module.exports = {
                                                     // sell (matched buy order)
                                                     // cash received = price per share * shares sold
                                                     } else {
-                                                        cashFromTrade = cashFromTrade.plus(abi.unfix(logdata[8]).times(abi.unfix(logdata[2])));
+                                                        cashFromTrade = cashFromTrade.plus(abi.unfix(abi.hex(logdata[8], true)).times(abi.unfix(logdata[2])));
                                                     }
                                                 }
                                             }
@@ -47795,7 +48197,7 @@ module.exports = {
                                     }
                                     cb({
                                         hash: txHash,
-                                        unmatchedCash: abi.unfix(result.callReturn[1], "string"),
+                                        unmatchedCash: abi.unfix(abi.hex(result.callReturn[1], true), "string"),
                                         unmatchedShares: abi.unfix(result.callReturn[2], "string"),
                                         sharesBought: abi.string(sharesBought),
                                         cashFromTrade: abi.string(cashFromTrade),
@@ -47861,6 +48263,7 @@ module.exports = {
                         onNextBlock(blockNumber);
                         var tx = clone(self.tx.Trade.short_sell);
                         tx.params = [buyer_trade_id, abi.fix(max_amount, "hex")];
+                        tx.description = max_amount.toString() + " Shares to short sell";
                         if (self.options.debug.trading) {
                             console.log("short_sell tx:", JSON.stringify(tx, null, 2));
                         }
@@ -47893,8 +48296,8 @@ module.exports = {
                                         for (var i = 0, numLogs = logs.length; i < numLogs; ++i) {
                                             if (logs[i].topics[0] === sig) {
                                                 logdata = self.rpc.unmarshal(logs[i].data);
-                                                if (logdata && logdata.constructor === Array && logdata.length) {
-                                                    cashFromTrade = cashFromTrade.plus(abi.unfix(logdata[8]).times(abi.unfix(logdata[1])));
+                                                if (logdata && logdata.constructor === Array && logdata.length > 8) {
+                                                    cashFromTrade = cashFromTrade.plus(abi.unfix(abi.hex(logdata[8], true)).times(abi.unfix(logdata[1])));
                                                     tradingFees = tradingFees.plus(abi.unfix(logdata[5]));
                                                 }
                                             }
@@ -47903,9 +48306,9 @@ module.exports = {
                                     cb({
                                         hash: txHash,
                                         unmatchedShares: abi.unfix(result.callReturn[1], "string"),
-                                        matchedShares: abi.unfix(result.callReturn[2], "string"),
+                                        matchedShares: abi.unfix(abi.hex(result.callReturn[2], true), "string"),
                                         cashFromTrade: abi.string(cashFromTrade),
-                                        price: abi.unfix(result.callReturn[3], "string"),
+                                        price: abi.unfix(abi.hex(result.callReturn[3], true), "string"),
                                         tradingFees: abi.string(tradingFees),
                                         gasFees: result.gasFees,
                                         timestamp: result.timestamp
@@ -47930,7 +48333,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"../utilities":261,"./abacus":241,"async":79,"augur-abi":1,"clone":119,"ethrpc":266}],258:[function(require,module,exports){
+},{"../constants":238,"../utilities":262,"./abacus":242,"async":79,"augur-abi":1,"clone":119,"ethrpc":267}],260:[function(require,module,exports){
 /*
  * Author: priecint
  */
@@ -48323,7 +48726,7 @@ module.exports = {
     }
 };
 
-},{"../constants":237,"./abacus":241,"augur-abi":1,"bignumber.js":82,"clone":119,"ethereumjs-tx":157}],259:[function(require,module,exports){
+},{"../constants":238,"./abacus":242,"augur-abi":1,"bignumber.js":82,"clone":119,"ethereumjs-tx":157}],261:[function(require,module,exports){
 /**
  * ethrpc fire/transact wrappers
  * @author Jack Peterson (jack@tinybike.net)
@@ -48353,45 +48756,7 @@ module.exports = {
     }
 };
 
-},{}],260:[function(require,module,exports){
-/**
- * Testing-only: these methods are whitelisted on production contracts!
- */
-
-"use strict";
-
-var clone = require("clone");
-var abi = require("augur-abi");
-var utils = require("../utilities");
-
-module.exports = {
-
-    setInfo: function (id, description, creator, fee, onSent, onSuccess, onFailed, onConfirmed) {
-        var tx = clone(this.tx.Info.setInfo);
-        var unpacked = utils.unpack(id, utils.labels(this.setInfo), arguments);
-        tx.params = unpacked.params;
-        tx.params[3] = abi.fix(tx.params[3], "hex");
-        return this.transact.apply(this, [tx].concat(unpacked.cb));
-    },
-
-    modifyShares: function (marketID, outcome, amount, onSent, onSuccess, onFailed, onConfirmed) {
-        var tx = clone(this.tx.Markets.modifyShares);
-        var unpacked = utils.unpack(marketID, utils.labels(this.modifyShares), arguments);
-        tx.params = unpacked.params;
-        tx.params[2] = abi.fix(tx.params[2], "hex");
-        return this.transact.apply(this, [tx].concat(unpacked.cb));
-    },
-
-    setTotalRepReported: function (branchId, reportPeriod, repReported, onSent, onSuccess, onFailed, onConfirmed) {
-        var tx = clone(this.tx.ExpiringEvents.setTotalRepReported);
-        var unpacked = utils.unpack(branchId, utils.labels(this.setTotalRepReported), arguments);
-        tx.params = unpacked.params;
-        tx.params[2] = abi.fix(tx.params[2], "hex");
-        return this.transact.apply(this, [tx].concat(unpacked.cb));
-    }
-};
-
-},{"../utilities":261,"augur-abi":1,"clone":119}],261:[function(require,module,exports){
+},{}],262:[function(require,module,exports){
 (function (process,Buffer){
 "use strict";
 
@@ -48566,7 +48931,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./constants":237,"_process":192,"augur-abi":1,"bignumber.js":82,"buffer":116,"clone":119,"crypto":126}],262:[function(require,module,exports){
+},{"./constants":238,"_process":191,"augur-abi":1,"bignumber.js":82,"buffer":116,"clone":119,"crypto":126}],263:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -48596,7 +48961,7 @@ module.exports = {
     }    
 };
 
-},{}],263:[function(require,module,exports){
+},{}],264:[function(require,module,exports){
 (function (process,__dirname){
 "use strict";
 
@@ -48744,7 +49109,7 @@ module.exports = {
     // Create a new branch and get Reputation on it
     setup_new_branch: function (augur, periodLength, parentBranchID, accountList, callback) {
         var self = this;
-        var branchDescription = madlibs.city() + " " + madlibs.noun() + " " + madlibs.noun() + " [" + Math.random().toString(36).substring(4) + "]";
+        var branchDescription = "Branchy McBranchface [" + Math.random().toString(36).substring(4) + "]";
         var tradingFee = "0.01";
         var accounts = clone(accountList);
         if (this.DEBUG) {
@@ -48753,14 +49118,22 @@ module.exports = {
         }
         var sender = augur.from;
         var clientSideAccount;
+        var parentBranchRepBalance = augur.getRepBalance(parentBranchID, sender);
+        console.log("from:", sender);
+        console.log("web.account.address:", augur.web.account.address);
+        console.log("parent branch ID:", parentBranchID);
+        console.log("parent branch rep balance:", parentBranchRepBalance);
         augur.createBranch({
             description: branchDescription,
             periodLength: periodLength,
             parent: parentBranchID,
             minTradingFee: tradingFee,
             oracleOnly: 0,
-            onSent: utils.noop,
+            onSent: function (res) {
+                console.log("createBranch sent:", res);
+            },
             onSuccess: function (res) {
+                console.log("createBranch success:", res);
                 var newBranchID = res.branchID;
                 if (self.DEBUG) console.log(chalk.white.dim("New branch ID:"), chalk.green(newBranchID));
                 var block = augur.rpc.getBlock(res.blockNumber);
@@ -48778,7 +49151,7 @@ module.exports = {
                         }
                         nextAccount();
                     }
-                    if (!augur.web.account.address) {
+                    if (account !== augur.web.account.address) {
                         augur.useAccount(account);
                     }
                     augur.fundNewAccount({
@@ -48817,10 +49190,12 @@ module.exports = {
 
         // markets have matching descriptions, tags, fees, etc.
         branchID = branchID || augur.constants.DEFAULT_BRANCH_ID;
+        var binaryDescription = "Binary test market";
+        var categoricalDescription = "Categorical test market";
+        var scalarDescription = "Scalar test market";
         var streetName = madlibs.streetName();
         var action = madlibs.action();
         var city = madlibs.city();
-        var description = "Will " + city + " " + madlibs.noun() + " " + action + " " + streetName + " " + madlibs.noun() + "?";
         var resolution = "http://" + action + "." + madlibs.noun() + "." + madlibs.tld();
         var tags = [streetName, action, city];
         var extraInfo = streetName + " is a " + madlibs.adjective() + " " + madlibs.noun() + ".  " + madlibs.transportation() + " " + madlibs.usState() + " " + action + " and " + madlibs.noun() + "!";
@@ -48830,15 +49205,21 @@ module.exports = {
         var numCategories = 7;
         var categories = new Array(numCategories);
         for (var i = 0; i < numCategories; ++i) {
-            categories[i] = madlibs.action();
+            categories[i] = "Outcome " + i.toString();
         }
         var markets = {};
 
         // create a binary market
         console.debug('New markets expire at:', expDate, parseInt(new Date().getTime() / 1000, 10), expDate - parseInt(new Date().getTime() / 1000, 10));
+        var active = augur.from;
+        var clientSideAccount;
+        if (augur.web.account.address) {
+            clientSideAccount = clone(augur.web.account);
+            augur.web.account = {};
+        }
         augur.createSingleEventMarket({
             branchId: branchID,
-            description: description + " [" + Math.random().toString(36).substring(4) + "]",
+            description: binaryDescription + " [" + Math.random().toString(36).substring(4) + "]",
             expDate: expDate,
             minValue: 1,
             maxValue: 2,
@@ -48853,7 +49234,7 @@ module.exports = {
                 // create a categorical market
                 augur.createSingleEventMarket({
                     branchId: branchID,
-                    description: description + " [" + Math.random().toString(36).substring(4) + "]~|>" + categories.join('|'),
+                    description: categoricalDescription + " [" + Math.random().toString(36).substring(4) + "]~|>" + categories.join('|'),
                     expDate: expDate,
                     minValue: 1,
                     maxValue: numCategories,
@@ -48868,10 +49249,10 @@ module.exports = {
                         // create a scalar market
                         augur.createSingleEventMarket({
                             branchId: branchID,
-                            description: description + " [" + Math.random().toString(36).substring(4) + "]",
+                            description: scalarDescription + " [" + Math.random().toString(36).substring(4) + "]",
                             expDate: expDate,
-                            minValue: 5,
-                            maxValue: 10,
+                            minValue: -5,
+                            maxValue: 20,
                             numOutcomes: 2,
                             resolution: resolution,
                             takerFee: takerFee,
@@ -48882,7 +49263,13 @@ module.exports = {
                             onSuccess: function (res) {
                                 if (self.DEBUG) console.debug("Scalar market ID:", res.callReturn);
                                 markets.scalar = res.callReturn;
-                                if (self.is_created(markets)) callback(null, markets);
+                                if (self.is_created(markets)) {
+                                    if (clientSideAccount) {
+                                        augur.web.account = clientSideAccount;
+                                    }
+                                    augur.useAccount(active);
+                                    callback(null, markets);
+                                }
                             },
                             onFailed: function (err) {
                                 if (self.DEBUG) console.error("Scalar createSingleEventMarket failed:", err);
@@ -48893,7 +49280,13 @@ module.exports = {
                     onSuccess: function (res) {
                         if (self.DEBUG) console.debug("Categorical market ID:", res.callReturn);
                         markets.categorical = res.callReturn;
-                        if (self.is_created(markets)) callback(null, markets);
+                        if (self.is_created(markets)) {
+                            if (clientSideAccount) {
+                                augur.web.account = clientSideAccount;
+                            }
+                            augur.useAccount(active);
+                            callback(null, markets);
+                        }
                     },
                     onFailed: function (err) {
                         if (self.DEBUG) console.error("Categorical createSingleEventMarket failed:", err);
@@ -48904,7 +49297,13 @@ module.exports = {
             onSuccess: function (res) {
                 if (self.DEBUG) console.debug("Binary market ID:", res.callReturn);
                 markets.binary = res.callReturn;
-                if (self.is_created(markets)) callback(null, markets);
+                if (self.is_created(markets)) {
+                    if (clientSideAccount) {
+                        augur.web.account = clientSideAccount;
+                    }
+                    augur.useAccount(active);
+                    callback(null, markets);
+                }
             },
             onFailed: function (err) {
                 if (self.DEBUG) console.error("Binary createSingleEventMarket failed:", err);
@@ -48942,9 +49341,9 @@ module.exports = {
                         if (self.DEBUG) self.print_residual(periodLength, "[" + type  + "] Placing sell order");
                         augur.sell({
                             amount: amountPerMarket,
-                            price: "0.99",
+                            price: "0.7",
                             market: market,
-                            outcome: 1,
+                            outcome: 2,
                             onSent: function () {},
                             onSuccess: function () {
                                 nextMarket(null);
@@ -48957,7 +49356,7 @@ module.exports = {
             });
         }, function (err) {
             augur.useAccount(taker);
-            var trades = [];
+            var trades = {};
             async.forEachOf(markets, function (market, type, nextMarket) {
                 if (self.DEBUG) self.print_residual(periodLength, "[" + type  + "] Searching for trade...");
                 var marketTrades = augur.get_trade_ids(market);
@@ -48972,58 +49371,111 @@ module.exports = {
                     if (self.DEBUG) self.print_residual(periodLength, "[" + type  + "] Trading");
                     nextTrade(thisTrade);
                 }, function (trade) {
-                    trades.push(trade);
+                    trades[type] = trade;
                     nextMarket(null);
                 });
             }, function (err) {
                 if (self.DEBUG) console.log(chalk.white.dim("Trade IDs:"), trades);
                 augur.rpc.personal("unlockAccount", [taker, password], function (unlocked) {
                     if (unlocked && unlocked.error) return callback(unlocked);
-                    augur.trade({
-                        max_value: Object.keys(markets).length*amountPerMarket,
-                        max_amount: 0,
-                        trade_ids: trades,
-                        sender: taker,
-                        onTradeHash: function (tradeHash) {
-                            if (self.DEBUG) {
-                                self.print_residual(periodLength, "Trade hash: " + tradeHash);
+                    async.forEachOfSeries(markets, function (market, type, nextMarket) {
+                        augur.trade({
+                            max_value: amountPerMarket / 2,
+                            max_amount: 0,
+                            trade_ids: [trades[type]],
+                            sender: taker,
+                            onTradeHash: function (tradeHash) {
+                                if (self.DEBUG) {
+                                    self.print_residual(periodLength, "Trade hash: " + tradeHash);
+                                }
+                            },
+                            onCommitSent: function () {},
+                            onCommitSuccess: function (r) {
+                                if (self.DEBUG) self.print_residual(periodLength, "Trade committed");
+                            },
+                            onCommitFailed: function (e) {
+                                if (clientSideAccount) {
+                                    augur.web.account = clientSideAccount;
+                                }
+                                augur.useAccount(active);
+                                nextMarket(e);
+                            },
+                            onNextBlock: function (block) {
+                                if (self.DEBUG) self.print_residual(periodLength, "Got block " + block);
+                            },
+                            onTradeSent: function () {},
+                            onTradeSuccess: function (r) {
+                                if (self.DEBUG) {
+                                    self.print_residual(periodLength, "Trade complete: " + JSON.stringify(r, null, 2));
+                                }
+                                if (clientSideAccount) {
+                                    augur.web.account = clientSideAccount;
+                                }
+                                augur.useAccount(active);
+                                nextMarket(null);
+                            },
+                            onTradeFailed: function (e) {
+                                if (clientSideAccount) {
+                                    augur.web.account = clientSideAccount;
+                                }
+                                augur.useAccount(active);
+                                nextMarket(e);
                             }
-                        },
-                        onCommitSent: function () {},
-                        onCommitSuccess: function (r) {
-                            if (self.DEBUG) self.print_residual(periodLength, "Trade committed");
-                        },
-                        onCommitFailed: function (e) {
-                            if (clientSideAccount) {
-                                augur.web.account = clientSideAccount;
-                            }
-                            augur.useAccount(active);
-                            callback(e);
-                        },
-                        onNextBlock: function (block) {
-                            if (self.DEBUG) self.print_residual(periodLength, "Got block " + block);
-                        },
-                        onTradeSent: function () {},
-                        onTradeSuccess: function (r) {
-                            if (self.DEBUG) {
-                                self.print_residual(periodLength, "Trade complete: " + JSON.stringify(r, null, 2));
-                            }
-                            if (clientSideAccount) {
-                                augur.web.account = clientSideAccount;
-                            }
-                            augur.useAccount(active);
-                            callback(null);
-                        },
-                        onTradeFailed: function (e) {
-                            if (clientSideAccount) {
-                                augur.web.account = clientSideAccount;
-                            }
-                            augur.useAccount(active);
-                            callback(e);
-                        }
-                    });
+                        });
+                    }, callback);
                 });
             });
+        });
+    },
+
+    make_order_in_each_market: function (augur, amountPerMarket, markets, maker, taker, password, callback) {
+        var self = this;
+        var branch = augur.getBranchID(markets[Object.keys(markets)[0]]);
+        var periodLength = augur.getPeriodLength(branch);
+        var active = augur.from;
+        var clientSideAccount;
+        if (augur.web.account.address) {
+            clientSideAccount = clone(augur.web.account);
+            augur.web.account = {};
+        }
+        if (this.DEBUG) {
+            console.log(chalk.blue.bold("\nTrading in each market..."));
+            console.log(chalk.white.dim("Maker:"), chalk.green(maker));
+            console.log(chalk.white.dim("Taker:"), chalk.green(taker));
+        }
+        async.forEachOf(markets, function (market, type, nextMarket) {
+            augur.rpc.personal("unlockAccount", [maker, password], function (unlocked) {
+                if (unlocked && unlocked.error) return nextMarket(unlocked);
+                augur.useAccount(maker);
+                if (self.DEBUG) self.print_residual(periodLength, "[" + type  + "] Buying complete set");
+                augur.buyCompleteSets({
+                    market: market,
+                    amount: amountPerMarket,
+                    onSent: function () {},
+                    onSuccess: function (r) {
+                        if (self.DEBUG) self.print_residual(periodLength, "[" + type  + "] Placing sell order");
+                        var price = (type === "scalar") ? "12.3" : "0.7";
+                        augur.sell({
+                            amount: amountPerMarket,
+                            price: price,
+                            market: market,
+                            outcome: 2,
+                            onSent: function () {},
+                            onSuccess: function () {
+                                nextMarket(null);
+                            },
+                            onFailed: nextMarket
+                        });
+                    },
+                    onFailed: nextMarket
+                });
+            });
+        }, function (err) {
+            if (clientSideAccount) {
+                augur.web.account = clientSideAccount;
+            }
+            augur.useAccount(active);
+            callback(err);
         });
     },
 
@@ -49097,7 +49549,7 @@ module.exports = {
 
     setup: function (augur, args, rpcinfo) {
         var defaulthost, ipcpath, wsUrl;
-        if (NODE_JS && process.env.AUGURJS_INTEGRATION_TESTS) {
+        if (NODE_JS) {
             defaulthost = process.env.GETH_HTTP || "http://127.0.0.1:8545";
             ipcpath = process.env.GETH_IPC;
             wsUrl = process.env.GETH_WS || "ws://127.0.0.1:8546";
@@ -49109,7 +49561,7 @@ module.exports = {
         augur.rpc.debug.broadcast = process.env.NODE_ENV === "development";
         if (defaulthost) augur.rpc.setLocalNode(defaulthost);
         if (augur.connect({http: rpcinfo || defaulthost, ipc: ipcpath, ws: wsUrl})) {
-            // if ((!require.main && !displayed_connection_info) || augur.options.debug.connect) {
+            if ((!require.main && !displayed_connection_info) || augur.options.debug.connect) {
                 console.log(chalk.cyan.bold("local:   "), chalk.cyan(augur.rpc.nodes.local));
                 console.log(chalk.blue.bold("ws:      "), chalk.blue(augur.rpc.wsUrl));
                 console.log(chalk.magenta.bold("ipc:     "), chalk.magenta(augur.rpc.ipcpath));
@@ -49118,7 +49570,7 @@ module.exports = {
                 console.log(chalk.bold("coinbase:"), chalk.white.dim(augur.coinbase));
                 console.log(chalk.bold("from:    "), chalk.white.dim(augur.from));
                 displayed_connection_info = true;
-            // }
+            }
             augur.rpc.clear();
         }
         return augur;
@@ -49237,7 +49689,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'),"/test")
-},{"../src/constants":237,"../src/modules/reporting":255,"../src/utilities":261,"./madlibs":262,"_process":192,"async":79,"augur-abi":1,"bignumber.js":82,"chalk":117,"clone":119,"fs":113,"madlibs":180,"path":189}],264:[function(require,module,exports){
+},{"../src/constants":238,"../src/modules/reporting":257,"../src/utilities":262,"./madlibs":263,"_process":191,"async":79,"augur-abi":1,"bignumber.js":82,"chalk":117,"clone":119,"fs":113,"madlibs":180,"path":188}],265:[function(require,module,exports){
 /**
  * Basic Ethereum connection tasks.
  * @author Jack Peterson (jack@tinybike.net)
@@ -49248,7 +49700,7 @@ module.exports = {
 var async = require("async");
 var rpc = require("ethrpc");
 var contracts = require("augur-contracts");
-var network_id = "2";
+var network_id = "3";
 
 function noop() {}
 
@@ -49569,9 +50021,9 @@ module.exports = {
 
 };
 
-},{"async":265,"augur-contracts":58,"ethrpc":266}],265:[function(require,module,exports){
+},{"async":266,"augur-contracts":58,"ethrpc":267}],266:[function(require,module,exports){
 arguments[4][79][0].apply(exports,arguments)
-},{"_process":192,"dup":79}],266:[function(require,module,exports){
+},{"_process":191,"dup":79}],267:[function(require,module,exports){
 (function (process){
 /**
  * JSON RPC methods for Ethereum
@@ -49676,12 +50128,22 @@ module.exports = {
 
     errors: errors,
 
+    DEFAULT_HOSTED_NODES: HOSTED_NODES.slice(),
+
+    DEFAULT_HOSTED_WEBSOCKET: HOSTED_WEBSOCKET,
+
     nodes: {
         hosted: HOSTED_NODES.slice(),
         local: null
     },
 
     requests: 1,
+
+    // Hook for transaction callbacks
+    txRelay: null,
+
+    // Do not call txRelay for these methods
+    excludedFromTxRelay: {},
 
     txs: {},
 
@@ -49692,6 +50154,53 @@ module.exports = {
     notifications: {},
 
     gasPrice: 20000000000,
+
+    registerTxRelay: function (txRelay) {
+        this.txRelay = txRelay;
+    },
+
+    unregisterTxRelay: function () {
+        this.txRelay = null;
+    },
+
+    wrapTxRelayCallback: function (status, payload, callback) {
+        var self = this;
+        return function (response) {
+            if (isFunction(callback)) callback(response);
+            if (payload.method && !self.excludedFromTxRelay[payload.method]) {
+                self.txRelay({
+                    type: payload.label || payload.method,
+                    status: status,
+                    data: payload,
+                    response: response
+                });
+            }
+        };
+    },
+
+    excludeFromTxRelay: function (method) {
+        if (method) {
+            if (method.constructor === Array && method.length) {
+                for (var i = 0, numMethods = method.length; i < numMethods; ++i) {
+                    this.excludedFromTxRelay[method[i]] = true;
+                }
+            } else {
+                this.excludedFromTxRelay[method] = true;
+            }
+        }
+    },
+
+    includeInTxRelay: function (method) {
+        if (method) {
+            if (method.constructor === Array && method.length) {
+                for (var i = 0, numMethods = method.length; i < numMethods; ++i) {
+                    this.excludedFromTxRelay[method[i]] = false;
+                }
+            } else {
+                this.excludedFromTxRelay[method] = false;
+            }
+        }
+    },
 
     unmarshal: function (string, returns, stride, init) {
         var elements, array, position;
@@ -50152,7 +50661,7 @@ module.exports = {
 
         if (this.debug.broadcast) {
             console.log("[ethrpc] broadcast: " + JSON.stringify(command, null, 2));
-            console.log(" - HTTP: " + JSON.stringify(this.nodes, null, 2));
+            console.log(" - HTTP: " + JSON.stringify(this.nodes));
             console.log(" - WS:   " + this.wsUrl);
             console.log(" - IPC:  " + this.ipcpath);
         }
@@ -50320,8 +50829,8 @@ module.exports = {
 
     // reset to default Ethereum nodes
     reset: function (deleteData) {
-        this.nodes.hosted = HOSTED_NODES.slice();
-        this.wsUrl = process.env.GETH_WEBSOCKET_URL || HOSTED_WEBSOCKET;
+        this.nodes.hosted = this.DEFAULT_HOSTED_NODES.slice();
+        this.wsUrl = process.env.GETH_WEBSOCKET_URL || this.DEFAULT_HOSTED_WEBSOCKET;
         if (deleteData) this.clear();
     },
 
@@ -50416,9 +50925,9 @@ module.exports = {
     },
 
     sendEther: function (to, value, from, onSent, onSuccess, onFailed) {
-        if (to && to.constructor === Object && to.value) {
+        if (to && to.constructor === Object) {
             value = to.value;
-            if (to.from) from = to.from;
+            from = to.from;
             if (to.onSent) onSent = to.onSent;
             if (to.onSuccess) onSuccess = to.onSuccess;
             if (to.onFailed) onFailed = to.onFailed;
@@ -50724,9 +51233,9 @@ module.exports = {
             from: tx.from,
             to: tx.to,
             data: abi.encode(tx),
-            gas: tx.gas || this.DEFAULT_GAS
+            gas: tx.gas || (this.block && this.block.gasLimit) || this.DEFAULT_GAS,
+            gasPrice: tx.gasPrice || this.gasPrice
         };
-        if (tx.gasPrice) packaged.gasPrice = tx.gasPrice;
         if (tx.timeout) packaged.timeout = tx.timeout;
         if (tx.value) packaged.value = tx.value;
         if (tx.returns) packaged.returns = tx.returns;
@@ -51148,7 +51657,7 @@ module.exports = {
 
             // send the transaction hash and return value back
             // to the client, using the onSent callback
-            onSent({txHash: txHash, callReturn: callReturn});
+            onSent({hash: txHash, txHash: txHash, callReturn: callReturn});
 
             self.verifyTxSubmitted(payload, txHash, callReturn, onSent, onSuccess, onFailed, function (err) {
                 if (err) return onFailed(err);
@@ -51425,35 +51934,42 @@ module.exports = {
         if (!isFunction(onSent)) return this.transactSync(payload);
 
         // asynchronous / non-blocking transact sequence
-        onSuccess = (isFunction(onSuccess)) ? onSuccess : noop;
-        onFailed = (isFunction(onFailed)) ? onFailed : noop;
+        var cb = (isFunction(this.txRelay)) ? {
+            sent: this.wrapTxRelayCallback("sent", payload, onSent),
+            success: this.wrapTxRelayCallback("success", payload, onSuccess),
+            failed: this.wrapTxRelayCallback("failed", payload, onFailed)
+        } : {
+            sent: onSent,
+            success: (isFunction(onSuccess)) ? onSuccess : noop,
+            failed: (isFunction(onFailed)) ? onFailed : noop
+        };
         if (payload.mutable || payload.returns === "null") {
-            return this.transactAsync(payload, null, onSent, onSuccess, onFailed);
+            return this.transactAsync(payload, null, cb.sent, cb.success, cb.failed);
         }
         this.fire(payload, function (callReturn) {
             if (self.debug.tx) console.debug("callReturn:", callReturn);
             if (callReturn === undefined || callReturn === null) {
-                return onFailed(errors.NULL_CALL_RETURN);
+                return cb.failed(errors.NULL_CALL_RETURN);
             } else if (callReturn.error) {
-                return onFailed(callReturn);
+                return cb.failed(callReturn);
             }
-            self.transactAsync(payload, callReturn, onSent, onSuccess, onFailed);
+            self.transactAsync(payload, callReturn, cb.sent, cb.success, cb.failed);
         });
     }
 };
 
 }).call(this,require('_process'))
-},{"_process":192,"async":267,"augur-abi":1,"augur-contracts":58,"bignumber.js":268,"browser-request":269,"clone":270,"js-sha3":271,"net":113,"request":87,"sync-request":87,"websocket":87}],267:[function(require,module,exports){
+},{"_process":191,"async":268,"augur-abi":1,"augur-contracts":58,"bignumber.js":269,"browser-request":270,"clone":271,"js-sha3":272,"net":113,"request":87,"sync-request":87,"websocket":87}],268:[function(require,module,exports){
 arguments[4][79][0].apply(exports,arguments)
-},{"_process":192,"dup":79}],268:[function(require,module,exports){
+},{"_process":191,"dup":79}],269:[function(require,module,exports){
 arguments[4][2][0].apply(exports,arguments)
-},{"dup":2}],269:[function(require,module,exports){
+},{"dup":2}],270:[function(require,module,exports){
 arguments[4][86][0].apply(exports,arguments)
-},{"dup":86}],270:[function(require,module,exports){
+},{"dup":86}],271:[function(require,module,exports){
 arguments[4][59][0].apply(exports,arguments)
-},{"buffer":116,"dup":59}],271:[function(require,module,exports){
+},{"buffer":116,"dup":59}],272:[function(require,module,exports){
 arguments[4][38][0].apply(exports,arguments)
-},{"dup":38}],272:[function(require,module,exports){
+},{"dup":38}],273:[function(require,module,exports){
 (function (process,Buffer){
 /**
  * keythereum: create/import/export ethereum keys
@@ -51468,7 +51984,7 @@ var path = (NODE_JS) ? require("path") : null;
 var fs = (NODE_JS) ? require("fs") : null;
 var crypto = require("crypto");
 var sjcl = require("sjcl");
-var uuid = require("node-uuid");
+var uuid = require("uuid");
 var validator = require("validator");
 var ecdsa = new (require("elliptic").ec)("secp256k1");
 var pubToAddress = require("ethereumjs-util").pubToAddress;
@@ -52084,7 +52600,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"./lib/keccak":273,"./lib/scrypt":274,"_process":192,"buffer":116,"crypto":126,"elliptic":278,"ethereumjs-util":295,"fs":113,"node-uuid":304,"path":189,"sjcl":306,"validator":307}],273:[function(require,module,exports){
+},{"./lib/keccak":274,"./lib/scrypt":275,"_process":191,"buffer":116,"crypto":126,"elliptic":279,"ethereumjs-util":296,"fs":113,"path":188,"sjcl":306,"uuid":308,"validator":309}],274:[function(require,module,exports){
 /* keccak.js
  * A Javascript implementation of the Keccak SHA-3 candidate from Bertoni,
  * Daemen, Peeters and van Assche. This version is not optimized with any of 
@@ -52278,7 +52794,7 @@ module.exports = (function () {
     };
 }());
 
-},{}],274:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 (function (process,__dirname){
 // https://github.com/tonyg/js-scrypt
 module.exports = function (requested_total_memory) {
@@ -63999,7 +64515,7 @@ module.exports = function (requested_total_memory) {
 };
 
 }).call(this,require('_process'),"/../keythereum/lib")
-},{"_process":192,"fs":113,"path":189}],275:[function(require,module,exports){
+},{"_process":191,"fs":113,"path":188}],276:[function(require,module,exports){
 (function (module, exports) {
 
 'use strict';
@@ -66448,9 +66964,66 @@ Mont.prototype.invm = function invm(a) {
 
 })(typeof module === 'undefined' || module, this);
 
-},{}],276:[function(require,module,exports){
-arguments[4][5][0].apply(exports,arguments)
-},{"dup":5}],277:[function(require,module,exports){
+},{}],277:[function(require,module,exports){
+var r;
+
+module.exports = function rand(len) {
+  if (!r)
+    r = new Rand(null);
+
+  return r.generate(len);
+};
+
+function Rand(rand) {
+  this.rand = rand;
+}
+module.exports.Rand = Rand;
+
+Rand.prototype.generate = function generate(len) {
+  return this._rand(len);
+};
+
+if (typeof window === 'object') {
+  if (window.crypto && window.crypto.getRandomValues) {
+    // Modern browsers
+    Rand.prototype._rand = function _rand(n) {
+      var arr = new Uint8Array(n);
+      window.crypto.getRandomValues(arr);
+      return arr;
+    };
+  } else if (window.msCrypto && window.msCrypto.getRandomValues) {
+    // IE
+    Rand.prototype._rand = function _rand(n) {
+      var arr = new Uint8Array(n);
+      window.msCrypto.getRandomValues(arr);
+      return arr;
+    };
+  } else {
+    // Old junk
+    Rand.prototype._rand = function() {
+      throw new Error('Not implemented yet');
+    };
+  }
+} else {
+  // Node.js or Web worker
+  try {
+    var crypto = require('crypto');
+
+    Rand.prototype._rand = function _rand(n) {
+      return crypto.randomBytes(n);
+    };
+  } catch (e) {
+    // Emulate crypto API using randy
+    Rand.prototype._rand = function _rand(n) {
+      var res = new Uint8Array(n);
+      for (var i = 0; i < res.length; i++)
+        res[i] = this.rand.getByte();
+      return res;
+    };
+  }
+}
+
+},{"crypto":87}],278:[function(require,module,exports){
 (function (Buffer){
 const Sha3 = require('js-sha3')
 
@@ -66476,9 +67049,9 @@ module.exports = {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":116,"js-sha3":303}],278:[function(require,module,exports){
+},{"buffer":116,"js-sha3":304}],279:[function(require,module,exports){
 arguments[4][11][0].apply(exports,arguments)
-},{"../package.json":294,"./elliptic/curve":281,"./elliptic/curves":284,"./elliptic/ec":285,"./elliptic/eddsa":288,"./elliptic/hmac-drbg":291,"./elliptic/utils":293,"brorand":276,"dup":11}],279:[function(require,module,exports){
+},{"../package.json":295,"./elliptic/curve":282,"./elliptic/curves":285,"./elliptic/ec":286,"./elliptic/eddsa":289,"./elliptic/hmac-drbg":292,"./elliptic/utils":294,"brorand":277,"dup":11}],280:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -66831,7 +67404,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":278,"bn.js":275}],280:[function(require,module,exports){
+},{"../../elliptic":279,"bn.js":276}],281:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -67239,9 +67812,9 @@ Point.prototype.eq = function eq(other) {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":278,"../curve":281,"bn.js":275,"inherits":302}],281:[function(require,module,exports){
+},{"../../elliptic":279,"../curve":282,"bn.js":276,"inherits":303}],282:[function(require,module,exports){
 arguments[4][14][0].apply(exports,arguments)
-},{"./base":279,"./edwards":280,"./mont":282,"./short":283,"dup":14}],282:[function(require,module,exports){
+},{"./base":280,"./edwards":281,"./mont":283,"./short":284,"dup":14}],283:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -67419,7 +67992,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":278,"../curve":281,"bn.js":275,"inherits":302}],283:[function(require,module,exports){
+},{"../../elliptic":279,"../curve":282,"bn.js":276,"inherits":303}],284:[function(require,module,exports){
 'use strict';
 
 var curve = require('../curve');
@@ -68328,7 +68901,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":278,"../curve":281,"bn.js":275,"inherits":302}],284:[function(require,module,exports){
+},{"../../elliptic":279,"../curve":282,"bn.js":276,"inherits":303}],285:[function(require,module,exports){
 'use strict';
 
 var curves = exports;
@@ -68487,7 +69060,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":278,"./precomputed/secp256k1":292,"hash.js":296}],285:[function(require,module,exports){
+},{"../elliptic":279,"./precomputed/secp256k1":293,"hash.js":297}],286:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -68699,7 +69272,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
   throw new Error('Unable to find valid recovery factor');
 };
 
-},{"../../elliptic":278,"./key":286,"./signature":287,"bn.js":275}],286:[function(require,module,exports){
+},{"../../elliptic":279,"./key":287,"./signature":288,"bn.js":276}],287:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -68808,7 +69381,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"bn.js":275}],287:[function(require,module,exports){
+},{"bn.js":276}],288:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -68880,9 +69453,9 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":278,"bn.js":275}],288:[function(require,module,exports){
+},{"../../elliptic":279,"bn.js":276}],289:[function(require,module,exports){
 arguments[4][21][0].apply(exports,arguments)
-},{"../../elliptic":278,"./key":289,"./signature":290,"dup":21,"hash.js":296}],289:[function(require,module,exports){
+},{"../../elliptic":279,"./key":290,"./signature":291,"dup":21,"hash.js":297}],290:[function(require,module,exports){
 'use strict';
 
 var elliptic = require('../../elliptic');
@@ -68980,7 +69553,7 @@ KeyPair.prototype.getPublic = function getPublic(enc) {
 
 module.exports = KeyPair;
 
-},{"../../elliptic":278}],290:[function(require,module,exports){
+},{"../../elliptic":279}],291:[function(require,module,exports){
 'use strict';
 
 var bn = require('bn.js');
@@ -69048,11 +69621,11 @@ Signature.prototype.toHex = function toHex() {
 
 module.exports = Signature;
 
-},{"../../elliptic":278,"bn.js":275}],291:[function(require,module,exports){
+},{"../../elliptic":279,"bn.js":276}],292:[function(require,module,exports){
 arguments[4][24][0].apply(exports,arguments)
-},{"../elliptic":278,"dup":24,"hash.js":296}],292:[function(require,module,exports){
+},{"../elliptic":279,"dup":24,"hash.js":297}],293:[function(require,module,exports){
 arguments[4][25][0].apply(exports,arguments)
-},{"dup":25}],293:[function(require,module,exports){
+},{"dup":25}],294:[function(require,module,exports){
 'use strict';
 
 var utils = exports;
@@ -69226,7 +69799,7 @@ function intFromLE(bytes) {
 utils.intFromLE = intFromLE;
 
 
-},{"bn.js":275}],294:[function(require,module,exports){
+},{"bn.js":276}],295:[function(require,module,exports){
 module.exports={
   "_args": [
     [
@@ -69327,7 +69900,7 @@ module.exports={
   "version": "5.1.0"
 }
 
-},{}],295:[function(require,module,exports){
+},{}],296:[function(require,module,exports){
 (function (Buffer){
 const SHA3 = require('sha3')
 const ec = require('elliptic').ec('secp256k1')
@@ -69675,272 +70248,23 @@ function padToEven(a){
 }
 
 }).call(this,require("buffer").Buffer)
-},{"assert":78,"bn.js":275,"buffer":116,"elliptic":278,"rlp":305,"sha3":277}],296:[function(require,module,exports){
+},{"assert":78,"bn.js":276,"buffer":116,"elliptic":279,"rlp":305,"sha3":278}],297:[function(require,module,exports){
 arguments[4][31][0].apply(exports,arguments)
-},{"./hash/common":297,"./hash/hmac":298,"./hash/ripemd":299,"./hash/sha":300,"./hash/utils":301,"dup":31}],297:[function(require,module,exports){
+},{"./hash/common":298,"./hash/hmac":299,"./hash/ripemd":300,"./hash/sha":301,"./hash/utils":302,"dup":31}],298:[function(require,module,exports){
 arguments[4][32][0].apply(exports,arguments)
-},{"../hash":296,"dup":32}],298:[function(require,module,exports){
+},{"../hash":297,"dup":32}],299:[function(require,module,exports){
 arguments[4][33][0].apply(exports,arguments)
-},{"../hash":296,"dup":33}],299:[function(require,module,exports){
+},{"../hash":297,"dup":33}],300:[function(require,module,exports){
 arguments[4][34][0].apply(exports,arguments)
-},{"../hash":296,"dup":34}],300:[function(require,module,exports){
+},{"../hash":297,"dup":34}],301:[function(require,module,exports){
 arguments[4][35][0].apply(exports,arguments)
-},{"../hash":296,"dup":35}],301:[function(require,module,exports){
+},{"../hash":297,"dup":35}],302:[function(require,module,exports){
 arguments[4][36][0].apply(exports,arguments)
-},{"dup":36,"inherits":302}],302:[function(require,module,exports){
+},{"dup":36,"inherits":303}],303:[function(require,module,exports){
 arguments[4][37][0].apply(exports,arguments)
-},{"dup":37}],303:[function(require,module,exports){
+},{"dup":37}],304:[function(require,module,exports){
 arguments[4][38][0].apply(exports,arguments)
-},{"dup":38}],304:[function(require,module,exports){
-//     uuid.js
-//
-//     Copyright (c) 2010-2012 Robert Kieffer
-//     MIT License - http://opensource.org/licenses/mit-license.php
-
-(function() {
-  var _global = this;
-
-  // Unique ID creation requires a high quality random # generator.  We feature
-  // detect to determine the best RNG source, normalizing to a function that
-  // returns 128-bits of randomness, since that's what's usually required
-  var _rng;
-
-  // Node.js crypto-based RNG - http://nodejs.org/docs/v0.6.2/api/crypto.html
-  //
-  // Moderately fast, high quality
-  if (typeof(_global.require) == 'function') {
-    try {
-      var _rb = _global.require('crypto').randomBytes;
-      _rng = _rb && function() {return _rb(16);};
-    } catch(e) {}
-  }
-
-  if (!_rng && _global.crypto && crypto.getRandomValues) {
-    // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
-    //
-    // Moderately fast, high quality
-    var _rnds8 = new Uint8Array(16);
-    _rng = function whatwgRNG() {
-      crypto.getRandomValues(_rnds8);
-      return _rnds8;
-    };
-  }
-
-  if (!_rng) {
-    // Math.random()-based (RNG)
-    //
-    // If all else fails, use Math.random().  It's fast, but is of unspecified
-    // quality.
-    var  _rnds = new Array(16);
-    _rng = function() {
-      for (var i = 0, r; i < 16; i++) {
-        if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
-        _rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
-      }
-
-      return _rnds;
-    };
-  }
-
-  // Buffer class to use
-  var BufferClass = typeof(_global.Buffer) == 'function' ? _global.Buffer : Array;
-
-  // Maps for number <-> hex string conversion
-  var _byteToHex = [];
-  var _hexToByte = {};
-  for (var i = 0; i < 256; i++) {
-    _byteToHex[i] = (i + 0x100).toString(16).substr(1);
-    _hexToByte[_byteToHex[i]] = i;
-  }
-
-  // **`parse()` - Parse a UUID into it's component bytes**
-  function parse(s, buf, offset) {
-    var i = (buf && offset) || 0, ii = 0;
-
-    buf = buf || [];
-    s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
-      if (ii < 16) { // Don't overflow!
-        buf[i + ii++] = _hexToByte[oct];
-      }
-    });
-
-    // Zero out remaining bytes if string was short
-    while (ii < 16) {
-      buf[i + ii++] = 0;
-    }
-
-    return buf;
-  }
-
-  // **`unparse()` - Convert UUID byte array (ala parse()) into a string**
-  function unparse(buf, offset) {
-    var i = offset || 0, bth = _byteToHex;
-    return  bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] + '-' +
-            bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]] +
-            bth[buf[i++]] + bth[buf[i++]];
-  }
-
-  // **`v1()` - Generate time-based UUID**
-  //
-  // Inspired by https://github.com/LiosK/UUID.js
-  // and http://docs.python.org/library/uuid.html
-
-  // random #'s we need to init node and clockseq
-  var _seedBytes = _rng();
-
-  // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-  var _nodeId = [
-    _seedBytes[0] | 0x01,
-    _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
-  ];
-
-  // Per 4.2.2, randomize (14 bit) clockseq
-  var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
-
-  // Previous uuid creation time
-  var _lastMSecs = 0, _lastNSecs = 0;
-
-  // See https://github.com/broofa/node-uuid for API details
-  function v1(options, buf, offset) {
-    var i = buf && offset || 0;
-    var b = buf || [];
-
-    options = options || {};
-
-    var clockseq = options.clockseq != null ? options.clockseq : _clockseq;
-
-    // UUID timestamps are 100 nano-second units since the Gregorian epoch,
-    // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
-    // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
-    // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-    var msecs = options.msecs != null ? options.msecs : new Date().getTime();
-
-    // Per 4.2.1.2, use count of uuid's generated during the current clock
-    // cycle to simulate higher resolution clock
-    var nsecs = options.nsecs != null ? options.nsecs : _lastNSecs + 1;
-
-    // Time since last uuid creation (in msecs)
-    var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
-
-    // Per 4.2.1.2, Bump clockseq on clock regression
-    if (dt < 0 && options.clockseq == null) {
-      clockseq = clockseq + 1 & 0x3fff;
-    }
-
-    // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
-    // time interval
-    if ((dt < 0 || msecs > _lastMSecs) && options.nsecs == null) {
-      nsecs = 0;
-    }
-
-    // Per 4.2.1.2 Throw error if too many uuids are requested
-    if (nsecs >= 10000) {
-      throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
-    }
-
-    _lastMSecs = msecs;
-    _lastNSecs = nsecs;
-    _clockseq = clockseq;
-
-    // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
-    msecs += 12219292800000;
-
-    // `time_low`
-    var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
-    b[i++] = tl >>> 24 & 0xff;
-    b[i++] = tl >>> 16 & 0xff;
-    b[i++] = tl >>> 8 & 0xff;
-    b[i++] = tl & 0xff;
-
-    // `time_mid`
-    var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
-    b[i++] = tmh >>> 8 & 0xff;
-    b[i++] = tmh & 0xff;
-
-    // `time_high_and_version`
-    b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
-    b[i++] = tmh >>> 16 & 0xff;
-
-    // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
-    b[i++] = clockseq >>> 8 | 0x80;
-
-    // `clock_seq_low`
-    b[i++] = clockseq & 0xff;
-
-    // `node`
-    var node = options.node || _nodeId;
-    for (var n = 0; n < 6; n++) {
-      b[i + n] = node[n];
-    }
-
-    return buf ? buf : unparse(b);
-  }
-
-  // **`v4()` - Generate random UUID**
-
-  // See https://github.com/broofa/node-uuid for API details
-  function v4(options, buf, offset) {
-    // Deprecated - 'format' argument, as supported in v1.2
-    var i = buf && offset || 0;
-
-    if (typeof(options) == 'string') {
-      buf = options == 'binary' ? new BufferClass(16) : null;
-      options = null;
-    }
-    options = options || {};
-
-    var rnds = options.random || (options.rng || _rng)();
-
-    // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-    rnds[6] = (rnds[6] & 0x0f) | 0x40;
-    rnds[8] = (rnds[8] & 0x3f) | 0x80;
-
-    // Copy bytes to buffer, if provided
-    if (buf) {
-      for (var ii = 0; ii < 16; ii++) {
-        buf[i + ii] = rnds[ii];
-      }
-    }
-
-    return buf || unparse(rnds);
-  }
-
-  // Export public API
-  var uuid = v4;
-  uuid.v1 = v1;
-  uuid.v4 = v4;
-  uuid.parse = parse;
-  uuid.unparse = unparse;
-  uuid.BufferClass = BufferClass;
-
-  if (typeof(module) != 'undefined' && module.exports) {
-    // Publish as node.js module
-    module.exports = uuid;
-  } else  if (typeof define === 'function' && define.amd) {
-    // Publish as AMD module
-    define(function() {return uuid;});
- 
-
-  } else {
-    // Publish as global (in browsers)
-    var _previousRoot = _global.uuid;
-
-    // **`noConflict()` - (browser only) to reset global 'uuid' var**
-    uuid.noConflict = function() {
-      _global.uuid = _previousRoot;
-      return uuid;
-    };
-
-    _global.uuid = uuid;
-  }
-}).call(this);
-
-},{}],305:[function(require,module,exports){
+},{"dup":38}],305:[function(require,module,exports){
 (function (Buffer){
 const assert = require('assert')
 /**
@@ -70232,6 +70556,10 @@ b){var c={},d;for(d=0;d<b.length;d++)void 0!==a[b[d]]&&(c[b[d]]=a[b[d]]);return 
 "undefined"!==typeof module&&module.exports&&(module.exports=sjcl);"function"===typeof define&&define([],function(){return sjcl});
 
 },{"crypto":126}],307:[function(require,module,exports){
+arguments[4][231][0].apply(exports,arguments)
+},{"dup":231}],308:[function(require,module,exports){
+arguments[4][232][0].apply(exports,arguments)
+},{"./lib/rng":307,"dup":232}],309:[function(require,module,exports){
 /*!
  * Copyright (c) 2015 Chris O'Hara <cohara87@gmail.com>
  *

@@ -18,7 +18,7 @@ passfile="${symlink}/.password"
 bootnodes=""
 optargs=""
 
-if [ "${network}" = "2" ]; then
+if [ "${network}" = "3" ]; then
     optargs="--testnet"
     # address="0x15f6400a88fb320822b689607d425272bea2175f"
     address="0x7c0d52faab596c08f484e3478aebc6205f3f5d8c"
@@ -39,4 +39,4 @@ if [ -L $symlink ]; then
 fi
 ln -s "$HOME/.ethereum-${network}" $symlink
 
-geth $optargs --shh --ws --wsapi "eth,net,web3,admin,personal,miner,txpool,shh" --wsport 8546 --wsorigins "*" --cache 2048 --networkid $network --datadir $symlink --rpc --rpcapi "eth,net,web3,admin,personal,miner,txpool,shh" --ipcapi "admin,eth,debug,miner,net,txpool,personal,web3,shh" --rpccorsdomain "*" --maxpeers $maxpeers --etherbase $address --unlock $address --password $passfile console
+geth $optargs --shh --ws --wsapi "eth,net,web3,admin,personal,miner,txpool,shh" --wsport 8546 --wsorigins "*" --cache 2048 --networkid $network --rpc --rpcapi "eth,net,web3,admin,personal,miner,txpool,shh" --ipcapi "admin,eth,debug,miner,net,txpool,personal,web3,shh" --rpccorsdomain "*" --maxpeers $maxpeers --etherbase $address --unlock $address --password $passfile console
