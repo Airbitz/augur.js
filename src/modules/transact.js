@@ -7,22 +7,25 @@
 
 module.exports = {
 
-    fire: function (tx, callback, wrapper, aux) {
-        if (this.web && this.web.account && this.web.account.address) {
-            tx.from = this.web.account.address;
-        } else {
-            tx.from = tx.from || this.from || this.coinbase;
-        }
-        return this.rpc.fire(tx, callback, wrapper, aux);
-    },
-
-    transact: function (tx, onSent, onSuccess, onFailed) {
-        if (this.web && this.web.account && this.web.account.address) {
-            tx.from = this.web.account.address;
-            tx.invocation = {invoke: this.web.invoke, context: this.web};
-        } else {
-            tx.from = tx.from || this.from || this.coinbase;
-        }
-        return this.rpc.transact(tx, onSent, onSuccess, onFailed);
+  fire: function (tx, callback, wrapper, aux) {
+    if (this.accounts && this.accounts.account && this.accounts.account.address) {
+      tx.from = this.accounts.account.address;
+    } else {
+      tx.from = tx.from || this.from || this.coinbase;
     }
+    return this.rpc.fire(tx, callback, wrapper, aux);
+  },
+
+  transact: function (tx, onSent, onSuccess, onFailed) {
+    var self = this;
+    if (this.accounts && this.accounts.account && this.accounts.account.address && this.accounts.account.privateKey) {
+      tx.from = this.accounts.account.address;
+      tx.invoke = function (payload, onSent, onSuccess, onFailed) {
+        return self.rpc.packageAndSubmitRawTransaction(payload, self.accounts.account.address, self.accounts.account.privateKey, onSent, onSuccess, onFailed);
+      };
+    } else {
+      tx.from = tx.from || this.from || this.coinbase;
+    }
+    return this.rpc.transact(tx, onSent, onSuccess, onFailed);
+  }
 };

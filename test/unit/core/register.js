@@ -12,229 +12,160 @@ var augur = require("../../../src");
 var constants = require("../../../src/constants");
 var utils = require("../../../src/utilities");
 
-describe("register", function () {
-
-    var tx, api, getLogs;
-
-    before(function () {
-        api = augur.api;
-        tx = augur.tx;
-        getLogs = augur.rpc.getLogs;
-        augur.api = new require("augur-contracts").Tx("2");
-        augur.tx = augur.api.functions;
+describe("register.parseLastBlockNumber", function() {
+  var test = function (t) {
+    it(t.description, function () {
+      t.assertions(augur.parseLastBlockNumber(t.logs));
     });
-
-    after(function () {
-        augur.api = api;
-        augur.tx = tx;
-        augur.rpc.getLogs = getLogs;
+  };
+  test({
+    description: "1 register log",
+    logs: [{
+      blockNumber: 1
+    }],
+    assertions: function (output) {
+      assert.strictEqual(output, 1);
+    }
+  });
+  test({
+    description: "2 register logs",
+    logs: [{
+      blockNumber: 1
+    }, {
+      blockNumber: 2
+    }],
+    assertions: function (output) {
+      assert.strictEqual(output, 2);
+    }
+  });
+});
+describe("register.getRegisterBlockNumber", function() {
+  var getLogs = augur.getLogs;
+  var finished;
+  afterEach(function() {
+    augur.getLogs = getLogs;
+  });
+  var test = function (t) {
+    it(t.description + ' async', function (done) {
+      augur.getLogs = t.getLogs;
+      finished = done;
+      augur.getRegisterBlockNumber(t.account, t.options, t.callback);
     });
-
-    describe("parseLastTime: parse last time from session logs", function () {
-        var test = function (t) {
-            it(t.description, function () {
-                t.assertions(augur.parseLastTime(t.logs));
-            });
-        };
-        test({
-            description: "1 session log",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000002"
-                ]
-            }],
-            assertions: function (output) {
-                assert.strictEqual(output.getTime(), 1473976053000);
-            }
-        });
-        test({
-            description: "2 session logs",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000002"
-                ]
-            }, {
-                data: "0x0000000000000000000000000000000000000000000000000000000057db1716",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000002"
-                ]
-            }],
-            assertions: function (output) {
-                assert.strictEqual(output.getTime(), 1473976086000);
-            }
-        });
+    it(t.description + 'sync', function(done) {
+      augur.getLogs = t.getLogs;
+      finished = done;
+      var assertions = t.callback;
+      var options = t.options;
+      if (t.options && t.options.constructor === Function) {
+        assertions = t.options;
+        options = null;
+      }
+      assertions(augur.getRegisterBlockNumber(t.account, options));
     });
+  };
+  test({
+    description: "no registers",
+    account: "0xbob",
+    logs: [],
+    getLogs: function(label, params, callback) {
+      if (!callback) return [];
+      callback(null, []);
+    },
+    callback: function (err, blockNumber) {
+      // in this case callback for both sync and async we need to test different values. if blockNumber is undefined then we are assuming this is from the sync test, if it is not undefined then it's coming from the async test.
+      if (blockNumber === undefined) {
+        // sync
+        assert.isNull(err);
+        assert.isUndefined(blockNumber);
+      } else {
+        // async
+        assert.isNull(err);
+        assert.isNull(blockNumber);
+      }
+      finished();
+    }
+  });
+  test({
+    description: "1 register",
+    account: "0xb0b",
+    logs: [{
+      blockNumber: 2
+    }],
+    getLogs: function(label, params, callback) {
+      if (!callback) return [{
+        blockNumber: 2
+      }];
+      callback(null, [{
+        blockNumber: 2
+      }]);
+    },
+    options: function (err, blockNumber) {
+      if (blockNumber === undefined) {
+        // sync
+        assert.deepEqual(err, 2);
+        assert.isUndefined(blockNumber);
+      } else {
+        // async
+        assert.isNull(err);
+        assert.deepEqual(blockNumber, 2);
+      }
+      finished();
+    }
+  });
+  test({
+    description: "2 registers",
+    account: "0xb0b",
+    logs: [{
+      blockNumber: 1
+    }, {
+      blockNumber: 2
+    }],
+    options: {},
+    getLogs: function(label, params, callback) {
+      if (!callback) return [{
+        blockNumber: 1
+      }, {
+        blockNumber: 2
+      }];
+      callback(null, [{
+        blockNumber: 1
+      }, {
+        blockNumber: 2
+      }]);
+    },
+    callback: function (err, blockNumber) {
+      if (blockNumber === undefined) {
+        // sync
+        assert.deepEqual(err, 2);
+        assert.isUndefined(blockNumber);
+      } else {
+        // async
+        assert.isNull(err);
+        assert.deepEqual(blockNumber, 2);
+      }
+      finished();
+    }
+  });
+  test({
+    description: "error from getLogs",
+    account: "0xb0b",
+    logs: 'in this case, there will be an error',
+    options: {},
+    getLogs: function(label, params, callback) {
+      if (!callback) return { error: 999, message: 'Uh-Oh!' };
+      callback({ error: 999, message: 'Uh-Oh!' });
+    },
+    callback: function (err, blockNumber) {
+      if (err === null) {
+        // sync
+        assert.isNull(err);
+      } else {
+        // async
+        assert.deepEqual(err, { error: 999, message: 'Uh-Oh!' });
+      }
+      assert.isUndefined(blockNumber);
+      finished();
+    }
+  });
 
-    describe("getRegisterTime: look up user's most recent register timestamp", function () {
-        var test = function (t) {
-            it(t.description, function (done) {
-                augur.rpc.getLogs = function (filter, callback) {
-                    if (!callback) return t.logs;
-                    callback(t.logs);
-                };
-                augur.getRegisterTime(t.account, t.options, function (err, timestamp) {
-                    assert.isNull(err);
-                    t.assertions({
-                        async: timestamp,
-                        sync: augur.getRegisterTime(t.account, t.options)
-                    });
-                    done();
-                });
-            });
-        };
-        test({
-            description: "no registers",
-            account: "0xbob",
-            logs: [],
-            assertions: function (output) {
-                assert.isObject(output);
-                assert.isNull(output.sync);
-                assert.isNull(output.async);
-            }
-        });
-        test({
-            description: "1 register",
-            account: "0xb0b",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }],
-            assertions: function (output) {
-                assert.isObject(output);
-                assert.strictEqual(output.sync.constructor, Date);
-                assert.strictEqual(output.async.constructor, Date);
-                assert.strictEqual(output.sync.getTime(), output.async.getTime());
-                assert.strictEqual(output.async.getTime(), 1473976053000);
-            }
-        });
-        test({
-            description: "2 registers",
-            account: "0xb0b",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }, {
-                data: "0x0000000000000000000000000000000000000000000000000000000057db1716",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }],
-            assertions: function (output) {
-                assert.isObject(output);
-                assert.strictEqual(output.sync.constructor, Date);
-                assert.strictEqual(output.async.constructor, Date);
-                assert.strictEqual(output.sync.getTime(), output.async.getTime());
-                assert.strictEqual(output.async.getTime(), 1473976086000);
-            }
-        });
-    });
-
-    describe("getRegisterLogs", function () {
-        var test = function (t) {
-            it(t.description, function (done) {
-                augur.rpc.getLogs = function (filter, callback) {
-                    if (!callback) return t.logs;
-                    callback(t.logs);
-                };
-                augur.getRegisterLogs(t.account, t.options, function (err, timestamp) {
-                    assert.isNull(err);
-                    t.assertions({
-                        async: timestamp,
-                        sync: augur.getRegisterLogs(t.account, t.options)
-                    });
-                    done();
-                });
-            });
-        };
-        test({
-            description: "1 session log",
-            account: "0xbob",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }],
-            assertions: function (output) {
-                assert.isObject(output);
-                assert.isArray(output.sync);
-                assert.isArray(output.async);
-                assert.deepEqual(output.sync, output.async);
-                var expected = [{
-                    data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                    topics: [
-                        "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                        "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                        "0x0000000000000000000000000000000000000000000000000000000000000001"
-                    ]
-                }];
-                assert.strictEqual(output.sync.length, expected.length);
-                assert.strictEqual(output.async.length, expected.length);
-                assert.deepEqual(output.async, expected);
-            }
-        });
-        test({
-            description: "2 session logs",
-            account: "0xbob",
-            logs: [{
-                data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }, {
-                data: "0x0000000000000000000000000000000000000000000000000000000057db1716",
-                topics: [
-                    "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                    "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                    "0x0000000000000000000000000000000000000000000000000000000000000001"
-                ]
-            }],
-            assertions: function (output) {
-                assert.isObject(output);
-                assert.isArray(output.sync);
-                assert.isArray(output.async);
-                assert.deepEqual(output.sync, output.async);
-                var expected = [{
-                    data: "0x0000000000000000000000000000000000000000000000000000000057db16f5",
-                    topics: [
-                        "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                        "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                        "0x0000000000000000000000000000000000000000000000000000000000000001"
-                    ]
-                }, {
-                    data: "0x0000000000000000000000000000000000000000000000000000000057db1716",
-                    topics: [
-                        "0x19a49d2acfeb2c56bc742081b752ef527725fe0253f511d34d5364668b4475fe",
-                        "0x0000000000000000000000000000000000000000000000000000000000000b0b",
-                        "0x0000000000000000000000000000000000000000000000000000000000000001"
-                    ]
-                }];
-                assert.strictEqual(output.sync.length, expected.length);
-                assert.strictEqual(output.async.length, expected.length);
-                assert.deepEqual(output.async, expected);
-            }
-        });
-    });
 });

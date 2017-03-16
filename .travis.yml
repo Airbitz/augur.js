@@ -10,10 +10,7 @@ env:
   - CXX=g++-4.8
 
 node_js:
-  - "7"
-  - "6"
-  - "5"
-  - "4"
+  - "6.5"
 
 addons:
   apt:
@@ -28,4 +25,4 @@ before_script:
 
 script:
   - npm run lint
-  - travis_wait 60 npm run coverage
+  - npm run coverage

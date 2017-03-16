@@ -1,333 +1,832 @@
-/**
- * augur.js tests
- * @author Jack Peterson (jack@tinybike.net)
- */
-
 "use strict";
 
-var crypto = require("crypto");
-var assert = require("chai").assert;
-var chalk = require("chalk");
-var clone = require("clone");
+var assert = require('chai').assert;
+var augur = require('../../../src');
+var errors = require("ethrpc").errors;
 var keys = require("keythereum");
-var EthTx = require("ethereumjs-tx");
-var EthUtil = require("ethereumjs-util");
-var abi = require("augur-abi");
-var utils = require("../../../src/utilities");
 var constants = require("../../../src/constants");
-var tools = require("../../tools");
-var random = require("../../random");
-var augur = require("../../../src");
+var utils = require("../../../src/utilities");
+var abi = require('augur-abi');
+var clearCallCounts = require('../../tools').clearCallCounts;
+var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
 
-// generate random private key
-var privateKey = crypto.randomBytes(32);
-var address = keys.privateKeyToAddress(privateKey);
+var accounts = [{
+  address: undefined,
+  password: 'helloWorld',
+  keystore: undefined,
+  privateKey: undefined,
+  derivedKey: undefined
+}, {
+  address: undefined,
+  password: 'password',
+  keystore: undefined,
+  privateKey: undefined,
+  derivedKey: undefined
+}];
 
-// generate random names and passwords
-var name = utils.sha256(new Date().toString());
-var password = utils.sha256(Math.random().toString(36).substring(4));
+describe("accounts.register", function() {
+  // 9 tests total
+  var create = keys.create;
+  var deriveKey = keys.deriveKey;
+  var KDF = constants.KDF;
+  afterEach(function() {
+    augur.accounts.account = {};
+    keys.create = create;
+    keys.deriveKey = deriveKey;
+    constants.KDF = KDF;
+  });
+  var test = function(t) {
+    it(t.description, function(done) {
+      keys.create = t.create || create;
+      keys.deriveKey = t.deriveKey || deriveKey;
+      constants.KDF = t.KDF || KDF;
 
-var loginID;
-var generatedKeystore;
-
-var name2 = utils.sha256(new Date().toString()).slice(10) + "@" +
-    utils.sha256(new Date().toString()).slice(10) + ".com";
-var password2 = utils.sha256(Math.random().toString(36).substring(4)).slice(10);
-var loginID2;
-
-function checkAccount(augur, account, noWebAccountCheck) {
-    assert.notProperty(account, "error");
-    assert.isString(account.address);
-    assert.isObject(account.keystore);
-    assert.strictEqual(account.address.length, 42);
-        if (!noWebAccountCheck) {
-            assert.isTrue(Buffer.isBuffer(augur.web.account.privateKey));
-            assert.isString(augur.web.account.address);
-            assert.isObject(augur.web.account.keystore);
-            assert.strictEqual(
-                augur.web.account.privateKey.toString("hex").length,
-                constants.KEYSIZE*2
-            );
-            assert.strictEqual(augur.web.account.address.length, 42);
-            assert.strictEqual(account.address, augur.web.account.address);
-            assert.strictEqual(
-                JSON.stringify(account.keystore),
-                JSON.stringify(augur.web.account.keystore)
-            );
-        }
-    assert.strictEqual(account.address.length, 42);
-}
-
-afterEach(function () { augur.web.logout(); });
-
-describe("Register", function () {
-    it("register account 1: " + name + " / " + password, function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.register(name, password, function (result) {
-            checkAccount(augur, result, true);
-            loginID = result.loginID;
-            var rec = result.keystore;
-                        generatedKeystore = result.keystore;
-            assert.notProperty(rec, "error");
-            assert(rec.crypto.ciphertext);
-            assert(rec.crypto.cipherparams.iv);
-            assert(rec.crypto.kdfparams.salt);
-            assert.strictEqual(
-                rec.crypto.cipherparams.iv.length,
-                constants.IVSIZE*2
-            );
-            assert.strictEqual(
-                rec.crypto.kdfparams.salt.length,
-                constants.KEYSIZE*2
-            );
-            assert.strictEqual(
-                rec.crypto.ciphertext.length,
-                constants.KEYSIZE*2
-            );
-            done();
-        });
+      augur.accounts.register(t.password, function(result) {
+        t.assertions(result);
+        done();
+      });
     });
-    it("register account 2: " + name2 + " / " + password2, function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.register(name2, password2, function (result) {
-            checkAccount(augur, result, true);
-            loginID2 = result.loginID;
-            var rec = result.keystore;
-            assert(rec.crypto.ciphertext);
-            assert(rec.crypto.cipherparams.iv);
-            assert(rec.crypto.kdfparams.salt);
-            assert.strictEqual(
-                rec.crypto.cipherparams.iv.length,
-                constants.IVSIZE*2
-            );
-            assert.strictEqual(
-                rec.crypto.kdfparams.salt.length,
-                constants.KEYSIZE*2
-            );
-            assert.strictEqual(
-                rec.crypto.ciphertext.length,
-                constants.KEYSIZE*2
-            );
-            done();
-        });
-    });
+  };
+  test({
+    description: 'should return an error if the password is < 6 characters long',
+    password: 'pass',
+    assertions: function(result) {
+      assert.deepEqual(result, errors.PASSWORD_TOO_SHORT);
+    }
+  });
+  test({
+    description: 'should return an error if the password is undefined',
+    password: undefined,
+    assertions: function(result) {
+      assert.deepEqual(result, errors.PASSWORD_TOO_SHORT);
+    }
+  });
+  test({
+    description: 'should return an error if there is an issue creating the private key',
+    password: 'somevalidpassword',
+    create: function(params, cb) {
+      cb({error: 999, message: 'Uh-Oh!'});
+    },
+    assertions: function(result) {
+      assert.deepEqual(result, {error: 999, message: 'Uh-Oh!'});
+    }
+  });
+  test({
+    description: 'should return an error if there is an issue deriving the secret key',
+    password: 'somevalidpassword',
+    deriveKey: function(password, salt, options, cb) {
+      cb({ error: 999, message: 'Uh-Oh!' });
+    },
+    assertions: function(result) {
+      assert.deepEqual(result, {error: 999, message: 'Uh-Oh!'});
+    }
+  });
+  test({
+    description: 'should register an account given a valid password - account 1',
+    password: accounts[0].password,
+    assertions: function(result) {
+      assert.isString(result.address);
+      assert.isObject(result.keystore);
+      assert(Buffer.isBuffer(result.privateKey));
+      assert(Buffer.isBuffer(result.derivedKey));
+
+      assert.deepEqual(result, augur.accounts.account);
+
+      accounts[0].address = result.address;
+      accounts[0].privateKey = result.privateKey;
+      accounts[0].keystore = result.keystore;
+      accounts[0].derivedKey = result.derivedKey;
+    }
+  });
+  test({
+    description: 'should register an account given a valid password - account 2',
+    password: accounts[1].password,
+    assertions: function(result) {
+      assert.isString(result.address);
+      assert.isObject(result.keystore);
+      assert(Buffer.isBuffer(result.privateKey));
+      assert(Buffer.isBuffer(result.derivedKey));
+
+      assert.deepEqual(result, augur.accounts.account);
+
+      accounts[1].address = result.address;
+      accounts[1].privateKey = result.privateKey;
+      accounts[1].keystore = result.keystore;
+      accounts[1].derivedKey = result.derivedKey;
+    }
+  });
+  test({
+    description: 'should register an account given a valid password, should handle pbkdf2 KDF',
+    password: 'thisisavalidpassword',
+    KDF: 'pbkdf2',
+    assertions: function(result) {
+      assert.isString(result.address);
+      assert.isObject(result.keystore);
+      assert(Buffer.isBuffer(result.privateKey));
+      assert(Buffer.isBuffer(result.derivedKey));
+      assert.deepEqual(result, augur.accounts.account);
+    }
+  });
+  test({
+    description: 'should register an account given a valid password, should handle scrypt KDF',
+    password: 'thisisavalidpassword',
+    KDF: 'scrypt',
+    assertions: function(result) {
+      assert.isString(result.address);
+      assert.isObject(result.keystore);
+      assert(Buffer.isBuffer(result.privateKey));
+      assert(Buffer.isBuffer(result.derivedKey));
+      assert.deepEqual(result, augur.accounts.account);
+    }
+  });
+  test({
+    description: 'should register an account given a valid password but derived key returns a hex string',
+    password: 'thisisavalidpassword',
+    deriveKey: function(password, salt, options, cb) {
+      // we are going to use our mock function to call the original function. However we need to apply keys as the this inside of the original function as it's not attached the the original keys object anymore. We do this to be able to pass a hex string version of derivedKey. This is to check the if statement that converts the derivedKey to a buffer if it isn't already.
+      deriveKey.apply(keys, [password, salt, options, function(derivedKey) {
+        cb(derivedKey.toString('hex'));
+      }]);
+    },
+    assertions: function(result) {
+      assert.isString(result.address);
+      assert.isObject(result.keystore);
+      assert(Buffer.isBuffer(result.privateKey));
+      assert(Buffer.isBuffer(result.derivedKey));
+      assert.deepEqual(result, augur.accounts.account);
+    }
+  });
 });
+describe("accounts.fundNewAccountFromFaucet", function() {
+  // 7 tests total
+  var balance = augur.rpc.balance;
+  var fundNewAccount = augur.fundNewAccount;
+  var fastforward = augur.rpc.fastforward;
+  var finished;
+  var callCounts = {
+    balance: 0,
+    fastforward: 0
+  };
+  afterEach(function() {
+    clearCallCounts(callCounts);
+    augur.rpc.balance = balance;
+    augur.fundNewAccount = fundNewAccount;
+    augur.rpc.fastforward = fastforward;
+  });
+  var test = function(t) {
+    it(t.description, function(done) {
+      augur.rpc.balance = t.balance || balance;
+      augur.fundNewAccount = t.fundNewAccount || fundNewAccount;
+      augur.rpc.fastforward = t.fastforward || fastforward;
 
-describe("Import Account", function () {
-    it("Import Account should login the account given name, password, and keystore", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.importAccount(name, password, generatedKeystore, function (user) {
-                assert.notProperty(user, "error");
-                assert.isTrue(Buffer.isBuffer(augur.web.account.privateKey));
-                assert.isString(user.address);
-                assert.isString(user.loginID);
-                assert.isString(user.name);
-                assert.isObject(user.keystore);
-                assert.strictEqual(
-                        augur.web.account.privateKey.toString("hex").length,
-                        constants.KEYSIZE*2
-                );
-                assert.strictEqual(user.address.length, 42);
-                done();
-        });
+      finished = done;
+      // before each test, call accounts module but replace request with our mock, then run the function exported from accounts with augur set as our this. finally call fundNewAccountFromFaucet to test.
+      proxyquire('../../../src/accounts', {
+        'request': t.mockRequest
+      }).call(augur).fundNewAccountFromFaucet(t.registeredAddress, t.branch, t.onSent, t.onSuccess, t.onFailed);
+      // augur.accounts.fundNewAccountFromFaucet(t.registeredAddress, t.branch, t.onSent, t.onSuccess, t.onFailed);
     });
+  };
+  test({
+    description: 'Should return the registeredAddress to onFailed if registeredAddress is null',
+    registeredAddress: null,
+    branch: '101010',
+    onFailed: function(err) {
+      assert.isNull(err);
+      assert.deepEqual(callCounts, {
+        balance: 0,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(new Error('this should never be hit in this example!'), null, null);
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'Should return the registeredAddress to onFailed if registeredAddress is undefined',
+    registeredAddress: undefined,
+    branch: '101010',
+    onFailed: function(err) {
+      assert.isUndefined(err);
+      assert.deepEqual(callCounts, {
+        balance: 0,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(new Error('this should never be hit in this example!'), null, null);
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'Should return the registeredAddress to onFailed if registeredAddress is not a string',
+    registeredAddress: {},
+    branch: '101010',
+    onFailed: function(err) {
+      assert.deepEqual(err, {});
+      assert.deepEqual(callCounts, {
+        balance: 0,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(new Error('this should never be hit in this example!'), null, null);
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'If the request to the URL returns an error, pass the error to onFailed',
+    registeredAddress: '0x1',
+    branch: '101010',
+    onFailed: function(err) {
+      assert.deepEqual(err, new Error('Invalid URI "' + constants.FAUCET + '0x0000000000000000000000000000000000000001'));
+      assert.deepEqual(callCounts, {
+        balance: 0,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(new Error('Invalid URI "' + constants.FAUCET + '0x0000000000000000000000000000000000000001'), null, 'some responseBody, this doesnt matter for our test.');
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'If the request to the URL returns a status not equal to 200',
+    registeredAddress: '0x1',
+    branch: '101010',
+    onFailed: function(err) {
+      assert.deepEqual(err, 404);
+      assert.deepEqual(callCounts, {
+        balance: 0,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(null, { statusCode: 404 }, 'some responseBody, this doesnt matter for our test.');
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'If the request to the URL returns a status of 200, and augur.rpc.balance returns a number greater than 0 we call fundNewAccount',
+    registeredAddress: '0x1',
+    balance: function(address, cb) {
+      callCounts.balance++;
+      assert.deepEqual(address, '0x1');
+      cb('1000');
+    },
+    fundNewAccount: function(arg) {
+      assert.deepEqual(arg, {
+        branch: constants.DEFAULT_BRANCH_ID,
+        onSent: utils.noop,
+        onSuccess: utils.noop,
+        onFailed: utils.noop
+      });
+      assert.deepEqual(callCounts, {
+        balance: 1,
+        fastforward: 0
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(null, { statusCode: 200 }, 'some responseBody, this doesnt matter for our test.');
+    		};
+    	}
+    }
+  });
+  test({
+    description: 'Should retry to fund account by fastforwarding through the blocks until we hit the most recent block and balance returns a value greater than 0',
+    registeredAddress: '0x1',
+    branch: '101010',
+    onSent: utils.pass,
+    onSuccess: utils.pass,
+    onFailed: utils.pass,
+    balance: function(address, cb) {
+      callCounts.balance++;
+      assert.deepEqual(address, '0x1');
+      switch(callCounts.balance) {
+      case 5:
+        cb('1000');
+        break;
+      default:
+        cb('0');
+        break;
+      }
+    },
+    fastforward: function(blocks, cb) {
+      callCounts.fastforward++;
+      switch(callCounts.fastforward) {
+      case 4:
+        cb('101010');
+        break;
+      default:
+        cb('101009');
+        break;
+      }
+    },
+    fundNewAccount: function(arg) {
+      assert.deepEqual(arg, {
+        branch: '101010',
+        onSent: utils.pass,
+        onSuccess: utils.pass,
+        onFailed: utils.pass
+      });
+      assert.deepEqual(callCounts, {
+        balance: 5,
+        fastforward: 4
+      });
+      finished();
+    },
+    mockRequest: {
+    	defaults: function() {
+    		// defaults is called when accounts is called. it prepares and returns the http request function, so mock this behavior.
+    		return function(url, cb) {
+    			// acts as our request() call in accounts
+          // cb(err, response, body);
+    			cb(null, { statusCode: 200 }, 'some responseBody, this doesnt matter for our test.');
+    		};
+    	}
+    }
+  });
 });
+describe("accounts.fundNewAccountFromAddress", function() {
+  // 3 tests total
+  var sendEther = augur.rpc.sendEther;
+  var fundNewAccount = augur.fundNewAccount;
+  afterEach(function() {
+    augur.rpc.sendEther = sendEther;
+    augur.fundNewAccount = fundNewAccount;
+  });
+  var test = function(t) {
+    it(t.description, function() {
+      augur.rpc.sendEther = t.sendEther;
+      augur.fundNewAccount = t.fundNewAccount;
 
-describe("Login", function () {
-    it("login and decrypt the stored private key", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login(loginID, password, function (user) {
-            assert.notProperty(user, "error");
-            assert.isTrue(Buffer.isBuffer(augur.web.account.privateKey));
-            assert.isString(user.address);
-            assert.isObject(user.keystore);
-            assert.strictEqual(
-                augur.web.account.privateKey.toString("hex").length,
-                constants.KEYSIZE*2
-            );
-            assert.strictEqual(user.address.length, 42);
-            done();
-        });
+      augur.accounts.fundNewAccountFromAddress(t.fromAddress, t.amount, t.registeredAddress, t.branch, t.onSent, t.onSuccess, t.onFailed);
     });
-    it("login twice as the same user", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login(loginID, password, function (user) {
-            assert.notProperty(user, "error");
-            assert.isTrue(Buffer.isBuffer(augur.web.account.privateKey));
-            assert.isString(user.address);
-            assert.isObject(user.keystore);
-            assert.strictEqual(
-                augur.web.account.privateKey.toString("hex").length,
-                constants.KEYSIZE*2
-            );
-            assert.strictEqual(user.address.length, 42);
-            augur.web.login(loginID, password, function (same_user) {
-                assert(!same_user.error);
-                assert.strictEqual(user.address, same_user.address);
-                done();
-            });
-        });
-    });
-    it("fail with error 403 when given an incorrect loginID", function (done) {
-        this.timeout(tools.TIMEOUT);
-        var badLoginID = utils.sha256(new Date().toString());
-        augur.web.login(badLoginID, password, function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
-    it("fail with error 403 when given a blank loginID", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login("", password, function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
-    it("fail with error 403 when given a blank password", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login(loginID, "", function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
-    it("fail with error 403 when given a blank loginID and a blank password", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login("", "", function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
-    it("fail with error 403 when given an incorrect password", function (done) {
-        this.timeout(tools.TIMEOUT);
-        var bad_password = utils.sha256(Math.random().toString(36).substring(4));
-        augur.web.login(loginID, bad_password, function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
-    it("fail with error 403 when given an incorrect loginID and an incorrect password", function (done) {
-        this.timeout(tools.TIMEOUT);
-        var bad_loginID = utils.sha256(new Date().toString());
-        var bad_password = utils.sha256(Math.random().toString(36).substring(4));
-        augur.web.login(bad_loginID, bad_password, function (user) {
-            assert.strictEqual(user.error, 403);
-            done();
-        });
-    });
+  };
+  test({
+    description: 'Should handle an error from rpc.sendEther',
+    fromAddress: '0x1',
+    amount: '10',
+    registeredAddress: '0x2',
+    branch: '101010',
+    onSent: function() {},
+    onSuccess: function() {},
+    onFailed: function(err) {
+      assert.deepEqual(err, { error: 999, message: 'Uh-Oh!' });
+    },
+    sendEther: function(tx) {
+      assert.equal(tx.to, '0x2');
+      assert.equal(tx.value, '10');
+      assert.equal(tx.from, '0x1');
+      assert.deepEqual(tx.onSent, utils.noop);
+      assert.isFunction(tx.onSuccess);
+      assert.isFunction(tx.onFailed);
+      tx.onFailed({ error: 999, message: 'Uh-Oh!' });
+    },
+    fundNewAccount: function(tx) {
+      // shouldn't be called.
+      assert.isFalse(true);
+    }
+  });
+  test({
+    description: 'Should pass args to sendEther and then call fundNewAccount on success',
+    fromAddress: '0x1',
+    amount: '10',
+    registeredAddress: '0x2',
+    branch: '101010',
+    onSent: undefined,
+    onSuccess: undefined,
+    onFailed: undefined,
+    sendEther: function(tx) {
+      assert.equal(tx.to, '0x2');
+      assert.equal(tx.value, '10');
+      assert.equal(tx.from, '0x1');
+      assert.deepEqual(tx.onSent, utils.noop);
+      assert.isFunction(tx.onSuccess);
+      assert.isFunction(tx.onFailed);
+      tx.onSuccess({ callReturn: '1', txHash: '0x3'});
+    },
+    fundNewAccount: function(tx) {
+      assert.deepEqual(tx, {
+        branch: '101010',
+        onSent: utils.noop,
+        onSuccess: utils.noop,
+        onFailed: utils.noop
+      });
+    }
+  });
+  test({
+    description: 'Should pass args to sendEther and then call fundNewAccount on success, if no branch passed, should default to default banch',
+    fromAddress: '0x1',
+    amount: '10',
+    registeredAddress: '0x2',
+    branch: undefined,
+    onSent: undefined,
+    onSuccess: undefined,
+    onFailed: undefined,
+    sendEther: function(tx) {
+      assert.equal(tx.to, '0x2');
+      assert.equal(tx.value, '10');
+      assert.equal(tx.from, '0x1');
+      assert.deepEqual(tx.onSent, utils.noop);
+      assert.isFunction(tx.onSuccess);
+      assert.isFunction(tx.onFailed);
+      tx.onSuccess({ callReturn: '1', txHash: '0x3'});
+    },
+    fundNewAccount: function(tx) {
+      assert.deepEqual(tx, {
+        branch: constants.DEFAULT_BRANCH_ID,
+        onSent: utils.noop,
+        onSuccess: utils.noop,
+        onFailed: utils.noop
+      });
+    }
+  });
 });
-
-describe("Logout", function () {
-    it("logout and unset the account object", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login(loginID, password, function (user) {
-            assert.notProperty(user, "error");
-            assert.strictEqual(user.loginID, loginID);
-            for (var i = 0; i < 2; ++i) {
-                augur.web.logout();
-                assert.notProperty(augur.web.account, "loginID");
-                assert.notProperty(augur.web.account, "address");
-                assert.notProperty(augur.web.account, "privateKey");
-            }
-            done();
-        });
+describe("accounts.setAccountObject", function() {
+  // 2 tests total
+  augur.accounts.account = {};
+  afterEach(function() {
+    augur.accounts.account = {};
+  });
+  var test = function(t) {
+    it(t.description, function() {
+      var account = t.prepareAccount(accounts);
+      augur.accounts.setAccountObject(account);
+      t.assertions();
     });
+  };
+  test({
+    description: 'Should set the account object to the passed in account',
+    prepareAccount: function(accounts) {
+      return accounts[0];
+    },
+    assertions: function(out) {
+      assert.deepEqual(augur.accounts.account, {
+        address: accounts[0].address,
+        keystore: accounts[0].keystore,
+        privateKey: accounts[0].privateKey,
+        derivedKey: accounts[0].derivedKey
+      });
+    }
+  });
+  test({
+    description: 'Should set the account object to the passed in account and handle a privateKey and derivedKey passed as hex strings',
+    prepareAccount: function(accounts) {
+      return {
+        address: accounts[1].address,
+        keystore: accounts[1].keystore,
+        privateKey: accounts[1].privateKey.toString('hex'),
+        derivedKey: accounts[1].derivedKey.toString('hex')
+      };
+    },
+    assertions: function(out) {
+      assert.deepEqual(augur.accounts.account, {
+        address: accounts[1].address,
+        keystore: accounts[1].keystore,
+        privateKey: accounts[1].privateKey,
+        derivedKey: accounts[1].derivedKey
+      });
+    }
+  });
 });
+describe("accounts.importAccount", function() {
+  // 4 tests total
+  var recover = keys.recover;
+  var deriveKey = keys.deriveKey;
+  var keystore = {};
+  var finished;
+  afterEach(function() {
+    augur.accounts.account = {};
+    keys.recover = recover;
+    keys.deriveKey = deriveKey;
+  });
+  var test = function(t) {
+    it(t.description, function(done) {
+      keys.recover = t.recover || recover;
+      keys.deriveKey = t.deriveKey || deriveKey;
+      keystore = t.prepareKeystore(accounts);
+      finished = done;
+      var out = augur.accounts.importAccount(t.password, keystore, t.cb);
 
-describe("Change Account Name", function () {
-    it("Should be able to update the account object", function (done) {
-        this.timeout(tools.TIMEOUT);
-        augur.web.login(loginID, password, function (user) {
-            var privateKey = augur.web.account.privateKey;
-            augur.web.changeAccountName("testingName", function (updatedUser) {
-                assert.deepEqual(user.keystore, updatedUser.keystore);
-                assert.strictEqual(updatedUser.name, "testingName");
-                assert.strictEqual(user.address, updatedUser.address);
-                assert.strictEqual(privateKey.toString("hex"), augur.web.account.privateKey.toString("hex"));
-                done();
-            });
-        });
+      t.assertions(out);
     });
+  };
+  test({
+    description: 'Should handle importing an account',
+    password: accounts[0].password,
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    cb: function(account) {
+      assert.deepEqual(account, {
+        privateKey: accounts[0].privateKey,
+        address: abi.format_address(accounts[0].address),
+        keystore: accounts[0].keystore,
+        derivedKey: accounts[0].derivedKey
+      });
+      assert.deepEqual(augur.accounts.account, account);
+      finished();
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should handle no cb and blank password by returning an error',
+    password: '',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    cb: undefined,
+    assertions: function(out) {
+      assert.deepEqual(out, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    }
+  });
+  test({
+    description: 'Should handle an issue recovering the privateKey by returning an error',
+    password: accounts[0].password,
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    recover: function(password, keystore, cb) {
+      cb({ error: 'Uh-Oh!' });
+    },
+    cb: function(account) {
+      assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  // this test doesn't apply anymore, but we should consider adding an error check on deriveKey just incase...
+  // test({
+  //   description: 'Should handle an issue deriving the derivedKey by returning an error',
+  //   password: accounts[0].password,
+  //   prepareKeystore: function(accounts) {
+  //     return accounts[0].keystore;
+  //   },
+  //   recover: function(password, keystore, cb) {
+  //     // because recover calls deriveKey we need to mock it for this test as well and just return the privateKey it would return anyway...
+  //     cb(accounts[0].privateKey);
+  //   },
+  //   deriveKey: function(password, salt, iv, cb) {
+  //     cb({ error: 'Uh-Oh!' });
+  //   },
+  //   cb: function(account) {
+  //     assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+  //     assert.deepEqual(augur.accounts.account, {});
+  //     finished();
+  //   },
+  //   assertions: function(out) {
+  //     assert.isUndefined(out);
+  //   }
+  // });
 });
+describe("accounts.login", function() {
+  // 7 tests total
+  var deriveKey = keys.deriveKey;
+  var getMAC = keys.getMAC;
+  var decrypt = keys.decrypt;
+  var finished;
+  afterEach(function() {
+    augur.accounts.account = {};
+    keys.deriveKey = deriveKey;
+    keys.getMAC = getMAC;
+    keys.decrypt = decrypt;
+  });
+  var test = function(t) {
+    it(t.description, function(done) {
+      keys.deriveKey = t.deriveKey || deriveKey;
+      keys.getMAC = t.getMAC || getMAC;
+      keys.decrypt = t.decrypt || decrypt;
+      var keystore = t.prepareKeystore(accounts);
+      finished = done;
 
-describe("Transaction signing", function () {
-
-    // sign tx with private key
-    it("sign raw transaction using private key", function () {
-        var tx = new EthTx({
-            nonce: "00",
-            gasPrice: "09184e72a000",
-            gasLimit: "2710",
-            to: abi.format_address("0000000000000000000000000000000000000001"),
-            value: "00",
-            data: "7f7465737432000000000000000000000000000000000000000000000000000000600057"
-        });
-        tx.sign(privateKey);
-        var signed = "f8ba8230308c3039313834653732613030308432373130940000000000000000"+
-                     "000000000000000000000001823030b848376637343635373337343332303030"+
-                     "3030303030303030";
-
-        // RLP serialization
-        var serializedTx = tx.serialize().toString("hex");
-        assert.strictEqual(serializedTx.slice(0, 144), signed);
-        assert.strictEqual(serializedTx.length, 376);
+      var out = augur.accounts.login(keystore, t.password, t.cb);
+      t.assertions(out);
     });
-
-    // create a new contract
-    it("transaction to create a new contract", function () {
-        var tx = new EthTx();
-        tx.nonce = 0;
-        tx.gasPrice = 100;
-        tx.gasLimit = 1000;
-        tx.value = 0;
-        tx.data = "7f4e616d65526567000000000000000000000000000000000000000000000000"+
-                  "003057307f4e616d655265670000000000000000000000000000000000000000"+
-                  "0000000000573360455760415160566000396000f20036602259604556330e0f"+
-                  "600f5933ff33560f601e5960003356576000335700604158600035560f602b59"+
-                  "0033560f60365960003356573360003557600035335700";
-        tx.sign(privateKey);
-        var signed = "80648203e88080b9012e37663465363136643635353236353637303030303030"+
-                     "3030303030303030303030303030303030303030303030303030303030303030"+
-                     "3030303030303030303030303330353733303766346536313664363535323635"+
-                     "3637303030303030303030303030303030303030303030303030303030303030"+
-                     "30303030303030303030303030303030303030303537333336303435353736";
-        var serializedTx = tx.serialize().toString("hex");
-        assert.strictEqual(serializedTx.slice(6, 324), signed);
-        assert(serializedTx.length === 764 || serializedTx.length === 762);
+  };
+  test({
+    description: 'Should return an error on blank password',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: '',
+    cb: function(account) {
+      assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should return an error on undefined password, no callback',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: undefined,
+    cb: undefined,
+    assertions: function(out) {
+      assert.deepEqual(out, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    }
+  });
+  test({
+    description: 'Should return an error on undefined loginID',
+    prepareKeystore: function(accounts) {
+      return undefined;
+    },
+    password: accounts[0].password,
+    cb: function(account) {
+      assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should return an error if keys.deriveKey returns an error object',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: accounts[0].password,
+    cb: function(account) {
+      assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    deriveKey: function(password, salt, options, cb) {
+      cb({ error: 'DeriveKey failed!' });
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should return an error if keys.getMAC does not match the ketstore.crypto.mac value',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: accounts[0].password,
+    cb: function(account) {
+      assert.deepEqual(account, augur.errors.BAD_CREDENTIALS);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    getMAC: function(derivedKey, storedKey) {
+      return '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef';
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should return an error if we fail to generate the privateKey and derivedKey will return a hex string instead of buffer',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: accounts[0].password,
+    cb: function(account) {
+      var expected = augur.errors.BAD_CREDENTIALS;
+      expected.bubble = new Error('Uh-Oh!');
+      assert.deepEqual(account, expected);
+      assert.deepEqual(augur.accounts.account, {});
+      finished();
+    },
+    deriveKey: function(password, salt, options, cb) {
+      cb(accounts[0].derivedKey.toString('hex'));
+    },
+    decrypt: function(ciphertext, key, iv, algo) {
+      throw new Error('Uh-Oh!');
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+  test({
+    description: 'Should successfully login if given a valid loginID and password',
+    prepareKeystore: function(accounts) {
+      return accounts[0].keystore;
+    },
+    password: accounts[0].password,
+    cb: function(account) {
+      assert.deepEqual(augur.accounts.account, account);
+      assert.deepEqual(account.loginID, accounts[0].loginID);
+      assert.deepEqual(account.address, accounts[0].address);
+      assert.deepEqual(account.privateKey, accounts[0].privateKey);
+      assert.deepEqual(account.derivedKey, accounts[0].derivedKey);
+      assert.deepEqual(account.keystore, accounts[0].keystore);
+      finished();
+    },
+    assertions: function(out) {
+      assert.isUndefined(out);
+    }
+  });
+});
+describe("accounts.loginWithMasterKey", function() {
+  // 1 test total
+  var privateKey = '';
+  afterEach(function() {
+    augur.accounts.account = {};
+  });
+  var test = function(t) {
+    it(t.description, function() {
+      privateKey = t.preparePrivateKey(accounts);
+      augur.accounts.loginWithMasterKey(privateKey, t.assertions);
     });
-
-    // up-front cost calculation:
-    // fee = data length in bytes * 5
-    //     + 500 Default transaction fee
-    //     + gasAmount * gasPrice
-    it("calculate up-front transaction cost", function () {
-        var tx = new EthTx();
-        tx.nonce = 0;
-        tx.gasPrice = 100;
-        tx.gasLimit = 1000;
-        tx.value = 0;
-        tx.data = "7f4e616d65526567000000000000000000000000000000000000000000000000"+
-                  "003057307f4e616d655265670000000000000000000000000000000000000000"+
-                  "0000000000573360455760415160566000396000f20036602259604556330e0f"+
-                  "600f5933ff33560f601e5960003356576000335700604158600035560f602b59"+
-                  "0033560f60365960003356573360003557600035335700";
-        tx.sign(privateKey);
-        assert.strictEqual(tx.getUpfrontCost().toString(), "100000");
+  };
+  test({
+    description: 'Should handle logging into an account using a privateKey hex string',
+    preparePrivateKey: function(accounts) {
+      return accounts[0].privateKey.toString('hex');
+    },
+    assertions: function(account) {
+      assert.deepEqual(account, {
+        address: abi.format_address(keys.privateKeyToAddress(privateKey)),
+        privateKey: new Buffer(privateKey, "hex"),
+        derivedKey: new Buffer(abi.unfork(utils.sha256(new Buffer(privateKey, "hex"))), "hex")
+      });
+      assert.deepEqual(account, augur.accounts.account);
+    }
+  });
+});
+describe("accounts.logout", function() {
+  // 1 test total
+  var clear = augur.rpc.clear;
+  var clearCC = 0;
+  afterEach(function() {
+    augur.rpc.clear = clear;
+  });
+  var test = function(t) {
+    it(t.description, function() {
+      clearCC = 0;
+      augur.rpc.clear = t.clear;
+      augur.accounts.account = t.account;
+      augur.accounts.logout();
+      t.assertions();
     });
-
-    // decode incoming tx using rlp: rlp.decode(itx)
-    // (also need to check sender's account to see if they have at least amount of the fee)
-    it("should verify sender's signature", function () {
-        var rawTx = {
-            nonce: "0x00",
-            gasPrice: "0x09184e72a000",
-            gasLimit: "0x2710",
-            to: "0x0000000000000000000000000000000000000000",
-            value: "0x00",
-            data: "0x7f7465737432000000000000000000000000000000000000000000000000000000600057"
-        };
-        var tx2 = new EthTx(rawTx);
-        tx2.sign(privateKey);
-        assert.strictEqual(abi.hex(tx2.getSenderAddress()), address);
-        assert.isTrue(tx2.verifySignature());
-    });
+  };
+  test({
+    description: 'Should clear out augur.accounts.account and should call rpc.clear to clear the current account out of rpc.',
+    account: { name: 'accountName', address: '0x1' },
+    clear: function() {
+      clearCC++;
+    },
+    assertions: function() {
+      assert.deepEqual(augur.accounts.account, {});
+      assert.deepEqual(clearCC, 1);
+    }
+  });
 });
