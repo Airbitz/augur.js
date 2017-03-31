@@ -7,8 +7,6 @@ global.join = require("path").join;
 global.fs = require("fs");
 global.BigNumber = require("bignumber.js");
 global.assert = require("chai").assert;
-global.EthTx = require("ethereumjs-tx");
-global.EthUtil = require("ethereumjs-util");
 global.contracts = require("augur-contracts");
 global.chalk = require("chalk");
 global.abi = require("augur-abi");
@@ -33,7 +31,7 @@ try {
 global.balances = (global.balance = function (account, branch) {
   account = account || augur.from;
   var balances = {
-    cash: augur.getCashBalance(account),
+    cash: augur.Cash.balance(account),
     reputation: augur.Reporting.getRepBalance(branch || augur.constants.DEFAULT_BRANCH_ID, account),
     ether: abi.unfix(augur.rpc.balance(account), "string")
   };

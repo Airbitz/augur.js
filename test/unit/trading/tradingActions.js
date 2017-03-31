@@ -6,7 +6,7 @@
 
 var assert = require("chai").assert;
 var abi = require("augur-abi");
-var augur = require("../../../src");
+var augur = new (require("../../../src"))();
 var constants = require("../../../src/constants");
 var utils = require("../../../src/utilities");
 var BigNumber = require('bignumber.js');
@@ -249,17 +249,17 @@ describe("tradeActions.getTxGasEth", function() {
   test({
     description: 'Should handle getting the gas cost for a transaction with no gas value passed in the transaction.',
     tx: { value: '10' },
-    gasPrice: '0.01',
+    gasPrice: '0x2540be400',
     assertions: function(data) {
-      assert.equal(data.toFixed(), '0.002534125086747592');
+      assert.equal(data.toFixed(), '0.03135');
     }
   });
   test({
     description: 'Should handle getting the gas cost for a transaction with a gas value passed in the transaction.',
     tx: { value: '25', gas: 4500200 },
-    gasPrice: '0.003',
+    gasPrice: '0x4a817c800',
     assertions: function(data) {
-      assert.equal(data.toFixed(), '0.931241417617555053');
+      assert.equal(data.toFixed(), '0.090004');
     }
   });
 });
@@ -901,15 +901,15 @@ describe("getTradingActions", function () {
   var txOriginal;
   var calculateTradeTotals;
   before("getTradingActions", function () {
-    txOriginal = augur.tx;
+    txOriginal = augur.api.functions;
     calculateTradeTotals = augur.calculateTradeTotals;
-    augur.tx = new require("augur-contracts").Tx(constants.DEFAULT_NETWORK_ID).functions;
+    augur.api.functions = new require("augur-contracts").Tx(constants.DEFAULT_NETWORK_ID).functions;
     augur.calculateTradeTotals = function (type, numShares, limitPrice, tradeActions) {
       return tradeActions;
     };
   });
   after("getTradingActions", function () {
-    augur.tx = txOriginal;
+    augur.api.functions = txOriginal;
   });
   describe("buy actions", function () {
     runTestCase({

@@ -49,7 +49,7 @@ BigNumber.config({
 function Augur() {
   var i, len, fn;
 
-  this.version = "3.14.4";
+  this.version = "3.15.3";
 
   this.options = {
     debug: {
@@ -89,11 +89,9 @@ function Augur() {
       }
     }
   }
-  this.createBatch = require("./batch").bind(this);
   this.accounts = this.Accounts();
   this.filters = this.Filters();
   this.chat = this.Chat();
-  this.augurNode = this.AugurNode();
   if (this.options.debug.tools) this.tools = require("../test/tools");
   this.sync();
 }
@@ -101,6 +99,5 @@ function Augur() {
 Augur.prototype.Accounts = require("./accounts");
 Augur.prototype.Filters = require("./filters");
 Augur.prototype.Chat = require("./chat");
-Augur.prototype.AugurNode = require("./augurNode");
 
-module.exports = new Augur();
+module.exports = Augur;

@@ -14,7 +14,7 @@ var augurpath = "../../../src/index";
 var constants = require("../../../src/constants");
 var tools = require("../../tools");
 
-var augur = tools.setup(tools.reset(augurpath), process.argv.slice(2));
+var augur = tools.setup(require(augurpath));
 
 var amount = "1";
 var branchID = augur.constants.DEFAULT_BRANCH_ID;
@@ -69,27 +69,8 @@ var runtests = function (method, test) {
 };
 
 var testMarketInfo = function (market, info) {
-  var r;
-  assert(info.constructor === Array || info.constructor === Object);
-  if (info.constructor === Array) {
-    assert.isAbove(info.length, 43);
-    info = augur.rpc.encodeResult(info);
-    assert.strictEqual(parseInt(info[7]), parseInt(branchID));
-    r = augur.parseMarketInfo(info);
-    if (r.numEvents > 1) {
-      var txList = new Array(r.numEvents);
-      for (var i = 0; i < r.numEvents; ++i) {
-        txList[i] = tools.copy(augur.tx.getDescription);
-        txList[i].params = r.events[i].id;
-      }
-      var response = augur.rpc.batch(txList);
-      for (i = 0; i < response.length; ++i) {
-        r.events[i].description = response[i];
-      }
-    }
-  } else {
-    r = info;
-  }
+  var r = info;
+  assert(info.constructor === Object);
   assert.isObject(r);
   assert.property(r, "network");
   assert(r.network === "7" || r.network === "10101" || r.network === constants.DEFAULT_NETWORK_ID);
@@ -130,7 +111,7 @@ var testMarketInfo = function (market, info) {
 };
 
 before(function () {
-  augur = tools.setup(tools.reset(augurpath), process.argv.slice(2));
+  augur = tools.setup(require(augurpath));
 });
 describe("getMarketInfo", function () {
   var test = function (t, params) {

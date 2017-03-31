@@ -15,7 +15,7 @@ var constants = require("../../../src/constants");
 var augurpath = "../../../src/index";
 var tools = require("../../tools");
 
-var augur = tools.setup(tools.reset(augurpath), process.argv.slice(2));
+var augur = tools.setup(require(augurpath));
 var amount = "1";
 var branchID = augur.constants.DEFAULT_BRANCH_ID;
 var accounts = tools.get_test_accounts(augur, tools.MAX_TEST_ACCOUNTS);
@@ -66,19 +66,6 @@ var runtests = function (method, test) {
       var output = augur[method].apply(augur, params);
       test(errorCheck(output, done));
     });
-    if (augur.tx.Markets[method] && !augur.rpc.wsUrl) {
-      it("batch", function (done) {
-        this.timeout(tools.TIMEOUT);
-        var batch = augur.createBatch();
-        batch.add(method, params, function (output) {
-          test(errorCheck(output));
-        });
-        batch.add(method, params, function (output) {
-          test(errorCheck(output, done));
-        });
-        batch.execute();
-      });
-    }
   });
 };
 describe("getNumEvents", function () {
